@@ -1,9 +1,9 @@
 import React from 'react';
 import WelcomeScreen from './welcome-screen';
 
-const App = () => {
+const App = (props) => {
   return (
-    <WelcomeScreen/>
+    <WelcomeScreen {...props}/>
   );
 };
 
