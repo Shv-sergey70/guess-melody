@@ -4,7 +4,10 @@ import App from './components/app';
 
 const init = () => {
   ReactDom.render(
-      <App/>,
+      <App
+        time={5}
+        attempts={3}
+      />,
       document.querySelector(`#root`)
   );
 };
