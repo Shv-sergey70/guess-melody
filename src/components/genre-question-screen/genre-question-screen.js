@@ -66,7 +66,7 @@ const GenreQuestionScreen = ({question, onAnswer, screenIndex}) => {
 };
 
 const genreQuestionPropTypes = PropTypes.exact({
-  type: PropTypes.oneOf([`genre`]).isRequired(),
+  type: PropTypes.oneOf([`genre`]).isRequired,
   genre: PropTypes.string.isRequired,
   answers: PropTypes.arrayOf(
       PropTypes.exact({

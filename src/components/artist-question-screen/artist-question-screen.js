@@ -62,7 +62,7 @@ const ArtistQuestionScreen = ({question, onAnswer, screenIndex}) => {
 };
 
 const artistQuestionPropTypes = PropTypes.exact({
-  type: PropTypes.oneOf([`artist`]).isRequired(),
+  type: PropTypes.oneOf([`artist`]).isRequired,
   song: PropTypes.exact({
     artist: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired
@@ -76,7 +76,7 @@ const artistQuestionPropTypes = PropTypes.exact({
 }).isRequired;
 
 ArtistQuestionScreen.propTypes = {
-  question: PropTypes.exact(artistQuestionPropTypes).isRequired,
+  question: artistQuestionPropTypes,
   onAnswer: PropTypes.func.isRequired,
   screenIndex: PropTypes.number.isRequired
 };
