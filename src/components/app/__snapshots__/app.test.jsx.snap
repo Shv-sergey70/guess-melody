@@ -3,7 +3,7 @@
 exports[`App correctly renders 1`] = `
 <WelcomeScreen
   attempts={3}
-  onWelcomeButtonClick={[MockFunction]}
+  onWelcomeButtonClick={[Function]}
   time={5}
 />
 `;
