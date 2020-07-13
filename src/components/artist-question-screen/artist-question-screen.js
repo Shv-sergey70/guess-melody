@@ -2,13 +2,16 @@ import React from 'react';
 import PropTypes from "prop-types";
 
 const ArtistQuestionScreen = ({question, onAnswer, screenIndex}) => {
-  const content = question.answers.map(({picture, artist}) => {
+  const content = question.answers.map(({picture, artist}, i) => {
+    const ind = i + 1;
+    const id = `answer-${ind}`;
+
     return (
       <div className="artist" key={`${screenIndex} - ${artist}`}>
         <input className="artist__input visually-hidden"
-          type="radio" name="answer" value="artist-1" id="answer-1"
-          onClick={onAnswer}/>
-        <label className="artist__name" htmlFor="answer-1">
+          type="radio" name="answer" value={artist} id={id}
+          onClick={(evt) => onAnswer(evt.target.value)}/>
+        <label className="artist__name" htmlFor={id}>
           <img className="artist__picture" src={picture} alt={artist}/>
           {artist}
         </label>

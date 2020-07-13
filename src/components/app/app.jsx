@@ -58,7 +58,7 @@ class App extends PureComponent {
     }));
   }
 
-  answerClickHandler() {
+  answerClickHandler() { // has `answers` parameter
     this.setState(({question}, {questions}) => ({
       question: App._getNextQuestionNumber(question, questions.length)
     }));

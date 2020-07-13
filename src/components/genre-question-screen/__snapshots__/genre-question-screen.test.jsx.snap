@@ -87,6 +87,7 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
     </h2>
     <form
       className="game__tracks"
+      onSubmit={[Function]}
     >
       <div
         className="track"
@@ -105,9 +106,11 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
             id="answer-1"
             name="answer"
+            onChange={[Function]}
             type="checkbox"
             value="answer-1"
           />
@@ -136,9 +139,11 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
             id="answer-2"
             name="answer"
+            onChange={[Function]}
             type="checkbox"
             value="answer-2"
           />
@@ -167,9 +172,11 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
             id="answer-3"
             name="answer"
+            onChange={[Function]}
             type="checkbox"
             value="answer-3"
           />
@@ -198,9 +205,11 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
           className="game__answer"
         >
           <input
+            checked={false}
             className="game__input visually-hidden"
             id="answer-4"
             name="answer"
+            onChange={[Function]}
             type="checkbox"
             value="answer-4"
           />
@@ -214,7 +223,6 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
       </div>
       <button
         className="game__submit button"
-        onClick={[MockFunction]}
         type="submit"
       >
         Ответить

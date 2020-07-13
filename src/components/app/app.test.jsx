@@ -10,6 +10,7 @@ test(`App correctly renders`, () => {
       <App
         time={5}
         attempts={3}
+        questions={[]}
         onWelcomeButtonClick={jest.fn()}
       />);
 
