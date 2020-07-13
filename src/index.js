@@ -2,15 +2,17 @@ import React from 'react';
 import ReactDom from 'react-dom';
 import App from './components/app/app';
 
-const init = () => {
+import questions from './mocks/questions';
+
+const init = (gameQuestions) => {
   ReactDom.render(
       <App
         time={5}
         attempts={3}
-        onWelcomeButtonClick={() => {}}
+        questions={gameQuestions}
       />,
       document.querySelector(`#root`)
   );
 };
 
-init();
+init(questions);
