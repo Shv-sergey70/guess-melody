@@ -1,7 +1,9 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-class GenreQuestionScreen extends Component {
+import AudioPlayer from '../audio-player/audio-player';
+
+class GenreQuestionScreen extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -11,29 +13,35 @@ class GenreQuestionScreen extends Component {
         'answer-2': false,
         'answer-3': false,
         'answer-4': false
-      }
+      },
+      activePlayer: -1
     };
 
     this._itemSelectHandler = this._itemSelectHandler.bind(this);
+    this._handleFormSubmit = this._handleFormSubmit.bind(this);
+    this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
   }
 
   render() {
-    const {question, onAnswer, screenIndex} = this.props;
+    const {question, screenIndex} = this.props;
 
     const {answers, genre} = question;
 
-    const {activeItems} = this.state;
+    const {activeItems, activePlayer} = this.state;
 
     const content = answers.map(({src}, i) => {
       const ind = i + 1;
       const id = `answer-${ind}`;
+      const isActivePlayer = activePlayer === ind;
 
       return (
         <div className="track" key={`${screenIndex} - ${src}`}>
-          <button className="track__button track__button--play" type="button"/>
-          <div className="track__status">
-            <audio/>
-          </div>
+          <AudioPlayer
+            src={src}
+            isPlaying={isActivePlayer}
+            onPlayButtonClick={() => {
+              this._handlePlayButtonClick(ind);
+            }} />
           <div className="game__answer">
             <input
               className="game__input visually-hidden"
@@ -79,11 +87,7 @@ class GenreQuestionScreen extends Component {
           <h2 className="game__title">Выберите {genre} треки</h2>
           <form
             className="game__tracks"
-            onSubmit={(evt) => {
-              evt.preventDefault();
-
-              onAnswer(activeItems);
-            }}>
+            onSubmit={this._handleFormSubmit}>
             {content}
 
             <button
@@ -102,6 +106,21 @@ class GenreQuestionScreen extends Component {
     activeItems[evt.target.value] = evt.target.checked;
 
     this.setState({activeItems});
+  }
+
+  _handleFormSubmit(evt) {
+    evt.preventDefault();
+
+    const {onAnswer} = this.props;
+    const {activeItems} = this.state;
+
+    onAnswer(activeItems);
+  }
+
+  _handlePlayButtonClick(playerIndex) {
+    this.setState(({activePlayer}) => ({
+      activePlayer: activePlayer === playerIndex ? -1 : playerIndex
+    }));
   }
 }
 
