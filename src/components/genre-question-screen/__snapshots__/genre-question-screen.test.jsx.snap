@@ -93,15 +93,11 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
         className="track"
         key="3 - test/track1.mp3"
       >
-        <button
-          className="track__button track__button--play"
-          type="button"
+        <AudioPlayer
+          isPlaying={false}
+          onPlayButtonClick={[Function]}
+          src="test/track1.mp3"
         />
-        <div
-          className="track__status"
-        >
-          <audio />
-        </div>
         <div
           className="game__answer"
         >
@@ -126,15 +122,11 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
         className="track"
         key="3 - test/track2.mp3"
       >
-        <button
-          className="track__button track__button--play"
-          type="button"
+        <AudioPlayer
+          isPlaying={false}
+          onPlayButtonClick={[Function]}
+          src="test/track2.mp3"
         />
-        <div
-          className="track__status"
-        >
-          <audio />
-        </div>
         <div
           className="game__answer"
         >
@@ -159,15 +151,11 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
         className="track"
         key="3 - test/track3.mp3"
       >
-        <button
-          className="track__button track__button--play"
-          type="button"
+        <AudioPlayer
+          isPlaying={false}
+          onPlayButtonClick={[Function]}
+          src="test/track3.mp3"
         />
-        <div
-          className="track__status"
-        >
-          <audio />
-        </div>
         <div
           className="game__answer"
         >
@@ -192,15 +180,11 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
         className="track"
         key="3 - test/track4.mp3"
       >
-        <button
-          className="track__button track__button--play"
-          type="button"
+        <AudioPlayer
+          isPlaying={false}
+          onPlayButtonClick={[Function]}
+          src="test/track4.mp3"
         />
-        <div
-          className="track__status"
-        >
-          <audio />
-        </div>
         <div
           className="game__answer"
         >

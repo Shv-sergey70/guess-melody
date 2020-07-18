@@ -47,12 +47,13 @@ export default class AudioPlayer extends PureComponent {
   }
 
   componentDidUpdate() {
+    const {current: audio} = this._audioRef;
     const {isPlaying} = this.props;
 
     if (isPlaying) {
-      this._audioRef.current.play();
+      audio.play();
     } else {
-      this._audioRef.current.pause();
+      audio.pause();
     }
   }
 

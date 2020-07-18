@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AudioPlayer correctly renders 1`] = `
+<AudioPlayer
+  isPlaying={false}
+  onPlayButtonClick={[MockFunction]}
+  src="/my/custom/way/to/music.mp3"
+>
+  <button
+    className="track__button track__button--play"
+    disabled={true}
+    onClick={[Function]}
+    type="button"
+  />
+  <div
+    className="track__status"
+  >
+    <audio
+      src="/my/custom/way/to/music.mp3"
+    />
+  </div>
+</AudioPlayer>
+`;
