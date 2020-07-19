@@ -2,6 +2,8 @@ import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
 import AudioPlayer from "../audio-player/audio-player";
 import MistakesList from "../mistakes-list/mistakes-list";
+import {ActionCreator} from "../../reducer/reducer";
+import {connect} from "react-redux";
 
 class ArtistQuestionScreen extends PureComponent {
   constructor(props) {
@@ -12,10 +14,11 @@ class ArtistQuestionScreen extends PureComponent {
     };
 
     this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
+    this._handleOnAnswerClick = this._handleOnAnswerClick.bind(this);
   }
 
   render() {
-    const {question: {song, answers}, onAnswer, screenIndex} = this.props;
+    const {question: {song, answers}, screenIndex} = this.props;
     const {isPlaying} = this.state;
 
     const content = answers.map(({picture, artist}, i) => {
@@ -26,7 +29,7 @@ class ArtistQuestionScreen extends PureComponent {
         <div className="artist" key={`${screenIndex} - ${artist}`}>
           <input className="artist__input visually-hidden"
             type="radio" name="answer" value={artist} id={id}
-            onClick={(evt) => onAnswer(evt.target.value)}/>
+            onClick={this._handleOnAnswerClick}/>
           <label className="artist__name" htmlFor={id}>
             <img className="artist__picture" src={picture} alt={artist}/>
             {artist}
@@ -82,6 +85,12 @@ class ArtistQuestionScreen extends PureComponent {
       isPlaying: !isPlaying
     }));
   }
+
+  _handleOnAnswerClick(evt) {
+    const {onAnswer, question, mistakesCount, attempts} = this.props;
+
+    onAnswer(evt.target.value, question, mistakesCount, attempts);
+  }
 }
 
 const artistQuestionPropTypes = PropTypes.exact({
@@ -101,7 +110,22 @@ const artistQuestionPropTypes = PropTypes.exact({
 ArtistQuestionScreen.propTypes = {
   question: artistQuestionPropTypes,
   onAnswer: PropTypes.func.isRequired,
-  screenIndex: PropTypes.number.isRequired
+  screenIndex: PropTypes.number.isRequired,
+  mistakesCount: PropTypes.number.isRequired,
+  attempts: PropTypes.number.isRequired
 };
 
-export default ArtistQuestionScreen;
+const mapStateToProps = ({step, mistakes}) => ({
+  screenIndex: step,
+  mistakesCount: mistakes
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onAnswer: (answer, question, mistakesCount, maxMistakesCount) => {
+    dispatch(ActionCreator.incrementMistakes(answer, question, mistakesCount, maxMistakesCount));
+    dispatch(ActionCreator.incrementStep());
+  }
+});
+
+export {ArtistQuestionScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(ArtistQuestionScreen);

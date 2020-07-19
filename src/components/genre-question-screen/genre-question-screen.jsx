@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import AudioPlayer from '../audio-player/audio-player';
 import MistakesList from "../mistakes-list/mistakes-list";
+import {ActionCreator} from "../../reducer/reducer";
+import {connect} from "react-redux";
 
 class GenreQuestionScreen extends PureComponent {
   constructor(props) {
@@ -108,10 +110,10 @@ class GenreQuestionScreen extends PureComponent {
   _handleFormSubmit(evt) {
     evt.preventDefault();
 
-    const {onAnswer} = this.props;
+    const {onAnswer, question, mistakesCount, attempts} = this.props;
     const {activeItems} = this.state;
 
-    onAnswer(activeItems);
+    onAnswer(Object.values(activeItems), question, mistakesCount, attempts);
   }
 
   _handlePlayButtonClick(playerIndex) {
@@ -135,7 +137,24 @@ const genreQuestionPropTypes = PropTypes.exact({
 GenreQuestionScreen.propTypes = {
   question: genreQuestionPropTypes,
   onAnswer: PropTypes.func.isRequired,
-  screenIndex: PropTypes.number.isRequired
+  screenIndex: PropTypes.number.isRequired,
+  mistakesCount: PropTypes.number.isRequired,
+  attempts: PropTypes.number.isRequired
 };
 
-export default GenreQuestionScreen;
+const mapStateToProps = ({step, mistakes}) => ({
+  screenIndex: step,
+  mistakesCount: mistakes
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onAnswer: (answer, question, mistakesCount, maxMistakesCount) => {
+    dispatch(ActionCreator.incrementMistakes(answer, question, mistakesCount, maxMistakesCount));
+    dispatch(ActionCreator.incrementStep());
+  }
+});
+
+export {GenreQuestionScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(GenreQuestionScreen);
+
+

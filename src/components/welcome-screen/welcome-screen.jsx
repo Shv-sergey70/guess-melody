@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {ActionCreator} from "../../reducer/reducer";
+import {connect} from "react-redux";
 
 const WelcomeScreen = (props) => {
   const {
@@ -31,4 +33,9 @@ WelcomeScreen.propTypes = {
   onWelcomeButtonClick: PropTypes.func.isRequired
 };
 
-export default WelcomeScreen;
+const mapDispatchToProps = (dispatch) => ({
+  onWelcomeButtonClick: () => dispatch(ActionCreator.incrementStep())
+});
+
+export {WelcomeScreen};
+export default connect(null, mapDispatchToProps)(WelcomeScreen);
