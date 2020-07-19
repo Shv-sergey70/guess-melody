@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
 import AudioPlayer from "../audio-player/audio-player";
+import MistakesList from "../mistakes-list/mistakes-list";
 
 class ArtistQuestionScreen extends PureComponent {
   constructor(props) {
@@ -53,11 +54,7 @@ class ArtistQuestionScreen extends PureComponent {
             <span className="timer__secs">00</span>
           </div>
 
-          <div className="game__mistakes">
-            <div className="wrong"/>
-            <div className="wrong"/>
-            <div className="wrong"/>
-          </div>
+          <MistakesList/>
         </header>
 
         <section className="game__screen">
