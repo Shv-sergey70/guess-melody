@@ -2,7 +2,8 @@ import {ActionCreator, reducer, isGenreAnswerCorrect, isArtistAnswerCorrect} fro
 
 const initialState = {
   mistakes: 0,
-  step: -1
+  step: -1,
+  time: 300
 };
 
 describe(`Reducer works correctly`, () => {
@@ -19,20 +20,14 @@ describe(`Reducer works correctly`, () => {
       expect(reducer(initialState, {
         type: `INCREMENT_STEP`,
         payload: 1
-      })).toEqual({
-        mistakes: 0,
-        step: 0
-      });
+      })).toEqual(Object.assign({}, initialState, {step: 0}));
     });
 
     test(`If payload equals 0 shouldn't change step state`, () => {
       expect(reducer(initialState, {
         type: `INCREMENT_STEP`,
         payload: 0
-      })).toEqual({
-        mistakes: 0,
-        step: -1
-      });
+      })).toEqual(initialState);
     });
   });
 
@@ -41,20 +36,14 @@ describe(`Reducer works correctly`, () => {
       expect(reducer(initialState, {
         type: `INCREMENT_MISTAKES`,
         payload: 1
-      })).toEqual({
-        mistakes: 1,
-        step: -1
-      });
+      })).toEqual(Object.assign({}, initialState, {mistakes: 1}));
     });
 
     test(`If payload equals 0 shouldn't change mistakes state`, () => {
       expect(reducer(initialState, {
         type: `INCREMENT_MISTAKES`,
         payload: 0
-      })).toEqual({
-        mistakes: 0,
-        step: -1
-      });
+      })).toEqual(initialState);
     });
   });
 
@@ -68,13 +57,31 @@ describe(`Reducer works correctly`, () => {
       })).toEqual(initialState);
     });
   });
+
+  describe(`Reducer with DECREMENT_TIME action correctly works`, () => {
+    test(`With payload 1, should decrement time state for 1`, () => {
+      expect(reducer(initialState, {
+        type: `DECREMENT_TIME`,
+        payload: 1
+      })).toEqual(Object.assign({}, initialState, {time: 299}));
+    });
+
+    test(`With payload 0, should return initial state`, () => {
+      expect(reducer(initialState, {
+        type: `DECREMENT_TIME`,
+        payload: 0
+      })).toEqual(initialState);
+    });
+  });
 });
 
 describe(`ActionCreator correctly works`, () => {
-  test(`incrementStep returns correct object`, () => {
-    expect(ActionCreator.incrementStep()).toEqual({
-      type: `INCREMENT_STEP`,
-      payload: 1
+  describe(`incrementStep correctly works`, () => {
+    test(`Returns correct object`, () => {
+      expect(ActionCreator.incrementStep()).toEqual({
+        type: `INCREMENT_STEP`,
+        payload: 1
+      });
     });
   });
 
@@ -127,6 +134,15 @@ describe(`ActionCreator correctly works`, () => {
         }
       }, 2, 3)).toEqual({
         type: `RESET`
+      });
+    });
+  });
+
+  describe(`decrementTime correctly works`, () => {
+    test(`Returns correct object`, () => {
+      expect(ActionCreator.decrementTime()).toEqual({
+        type: `DECREMENT_TIME`,
+        payload: 1
       });
     });
   });

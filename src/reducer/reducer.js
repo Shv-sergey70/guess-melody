@@ -34,12 +34,20 @@ const ActionCreator = {
       type: `INCREMENT_MISTAKES`,
       payload: isCorrectAnswer ? 0 : 1
     };
+  },
+
+  decrementTime() {
+    return {
+      type: `DECREMENT_TIME`,
+      payload: 1
+    };
   }
 };
 
 const initialState = {
   mistakes: 0,
-  step: -1
+  step: -1,
+  time: 300
 };
 
 const reducer = (state = initialState, action) => {
@@ -54,6 +62,10 @@ const reducer = (state = initialState, action) => {
       });
     case `RESET`:
       return Object.assign({}, initialState);
+    case `DECREMENT_TIME`:
+      return Object.assign({}, state, {
+        time: state.time - action.payload
+      });
   }
 
   return state;

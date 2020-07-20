@@ -4,6 +4,7 @@ import AudioPlayer from "../audio-player/audio-player";
 import MistakesList from "../mistakes-list/mistakes-list";
 import {ActionCreator} from "../../reducer/reducer";
 import {connect} from "react-redux";
+import Timer from "../timer/timer";
 
 class ArtistQuestionScreen extends PureComponent {
   constructor(props) {
@@ -51,11 +52,7 @@ class ArtistQuestionScreen extends PureComponent {
               style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
           </svg>
 
-          <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
-            <span className="timer__mins">05</span>
-            <span className="timer__dots">:</span>
-            <span className="timer__secs">00</span>
-          </div>
+          <Timer/>
 
           <MistakesList/>
         </header>
@@ -122,8 +119,8 @@ const mapStateToProps = ({step, mistakes}) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onAnswer: (answer, question, mistakesCount, maxMistakesCount) => {
-    dispatch(ActionCreator.incrementMistakes(answer, question, mistakesCount, maxMistakesCount));
     dispatch(ActionCreator.incrementStep());
+    dispatch(ActionCreator.incrementMistakes(answer, question, mistakesCount, maxMistakesCount));
   }
 });
 
