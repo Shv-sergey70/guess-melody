@@ -2,6 +2,10 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
 import AudioPlayer from '../audio-player/audio-player';
+import MistakesList from "../mistakes-list/mistakes-list";
+import {ActionCreator} from "../../reducer/reducer";
+import {connect} from "react-redux";
+import Timer from "../timer/timer";
 
 class GenreQuestionScreen extends PureComponent {
   constructor(props) {
@@ -70,17 +74,9 @@ class GenreQuestionScreen extends PureComponent {
               style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
           </svg>
 
-          <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
-            <span className="timer__mins">05</span>
-            <span className="timer__dots">:</span>
-            <span className="timer__secs">00</span>
-          </div>
+          <Timer/>
 
-          <div className="game__mistakes">
-            <div className="wrong"/>
-            <div className="wrong"/>
-            <div className="wrong"/>
-          </div>
+          <MistakesList/>
         </header>
 
         <section className="game__screen">
@@ -111,10 +107,10 @@ class GenreQuestionScreen extends PureComponent {
   _handleFormSubmit(evt) {
     evt.preventDefault();
 
-    const {onAnswer} = this.props;
+    const {onAnswer, question, mistakesCount, attempts} = this.props;
     const {activeItems} = this.state;
 
-    onAnswer(activeItems);
+    onAnswer(Object.values(activeItems), question, mistakesCount, attempts);
   }
 
   _handlePlayButtonClick(playerIndex) {
@@ -138,7 +134,24 @@ const genreQuestionPropTypes = PropTypes.exact({
 GenreQuestionScreen.propTypes = {
   question: genreQuestionPropTypes,
   onAnswer: PropTypes.func.isRequired,
-  screenIndex: PropTypes.number.isRequired
+  screenIndex: PropTypes.number.isRequired,
+  mistakesCount: PropTypes.number.isRequired,
+  attempts: PropTypes.number.isRequired
 };
 
-export default GenreQuestionScreen;
+const mapStateToProps = ({step, mistakes}) => ({
+  screenIndex: step,
+  mistakesCount: mistakes
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  onAnswer: (answer, question, mistakesCount, maxMistakesCount) => {
+    dispatch(ActionCreator.incrementStep());
+    dispatch(ActionCreator.incrementMistakes(answer, question, mistakesCount, maxMistakesCount));
+  }
+});
+
+export {GenreQuestionScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(GenreQuestionScreen);
+
+

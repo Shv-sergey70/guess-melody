@@ -1,5 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {ActionCreator} from "../../reducer/reducer";
+import {connect} from "react-redux";
 
 const WelcomeScreen = (props) => {
   const {
@@ -17,7 +19,7 @@ const WelcomeScreen = (props) => {
       <h2 className="welcome__rules-title">Правила игры</h2>
       <p className="welcome__text">Правила просты:</p>
       <ul className="welcome__rules-list">
-        <li>За {time} минут нужно ответить на все вопросы.</li>
+        <li>За {Math.floor(time / 60)} минут нужно ответить на все вопросы.</li>
         <li>Можно допустить {attempts} ошибки.</li>
       </ul>
       <p className="welcome__text">Удачи!</p>
@@ -31,4 +33,10 @@ WelcomeScreen.propTypes = {
   onWelcomeButtonClick: PropTypes.func.isRequired
 };
 
-export default WelcomeScreen;
+const mapStateToProps = ({time}) => ({time});
+const mapDispatchToProps = (dispatch) => ({
+  onWelcomeButtonClick: () => dispatch(ActionCreator.incrementStep())
+});
+
+export {WelcomeScreen};
+export default connect(mapStateToProps, mapDispatchToProps)(WelcomeScreen);

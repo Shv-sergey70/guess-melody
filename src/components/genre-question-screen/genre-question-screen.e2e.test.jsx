@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import GenreQuestionScreen from "./genre-question-screen";
+import {GenreQuestionScreen} from "./genre-question-screen";
 
 configure({adapter: new Adapter()});
 
@@ -38,12 +38,16 @@ const getChangeEventMock = (value, checked) => ({
 test(`GenreQuestionScreen correct answer response`, () => {
   const onAnswer = jest.fn();
   const preventDefault = jest.fn();
+  const mistakesCount = 2;
+  const attempts = 3;
 
   const genreQuestionScreen = shallow(
       <GenreQuestionScreen
         question={question}
         screenIndex={3}
         onAnswer={onAnswer}
+        mistakesCount={mistakesCount}
+        attempts={attempts}
       />);
 
   genreQuestionScreen.find(`#answer-1`).simulate(`change`, getChangeEventMock(`answer-1`, true));
@@ -54,12 +58,7 @@ test(`GenreQuestionScreen correct answer response`, () => {
   genreQuestionScreen.find(`.game__tracks`).simulate(`submit`, {preventDefault});
 
   expect(onAnswer).toHaveBeenCalledTimes(1);
-  expect(onAnswer).toHaveBeenCalledWith({
-    'answer-1': false,
-    'answer-2': true,
-    'answer-3': true,
-    'answer-4': false
-  });
+  expect(onAnswer).toHaveBeenCalledWith([false, true, true, false], question, mistakesCount, attempts);
 
   expect(preventDefault).toHaveBeenCalledTimes(1);
 });
