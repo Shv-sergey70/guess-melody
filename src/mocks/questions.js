@@ -16,7 +16,7 @@ const questions = [
         genre: `rock`
       },
       {
-        src: `./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3`,
+        src: `./tracks/Orquesta.mp3`,
         genre: `classic`
       }
     ]
