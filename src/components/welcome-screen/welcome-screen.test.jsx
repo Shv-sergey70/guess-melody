@@ -8,7 +8,7 @@ configure({adapter: new Adapter()});
 test(`WelcomeScreen correctly renders`, () => {
   const tree = shallow(
       <WelcomeScreen
-        time={5}
+        time={300}
         attempts={3}
         onWelcomeButtonClick={jest.fn()}
       />);

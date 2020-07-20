@@ -55,7 +55,7 @@ describe(`App correctly renders`, () => {
   test(`Welcome screen`, () => {
     const tree = shallow(
         <App
-          time={5}
+          time={300}
           attempts={3}
           questions={questions}
           currentStep={-1}
@@ -67,7 +67,7 @@ describe(`App correctly renders`, () => {
   test(`Genre-question screen`, () => {
     const tree = shallow(
         <App
-          time={5}
+          time={300}
           attempts={3}
           questions={questions}
           currentStep={0}
@@ -79,7 +79,19 @@ describe(`App correctly renders`, () => {
   test(`Artist-question screen`, () => {
     const tree = shallow(
         <App
-          time={5}
+          time={300}
+          attempts={3}
+          questions={questions}
+          currentStep={1}
+        />);
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  test(`Losing screen`, () => {
+    const tree = shallow(
+        <App
+          time={0}
           attempts={3}
           questions={questions}
           currentStep={1}

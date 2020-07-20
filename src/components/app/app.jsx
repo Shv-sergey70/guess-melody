@@ -4,12 +4,17 @@ import WelcomeScreen from '../welcome-screen/welcome-screen';
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
 import {connect} from "react-redux";
+import LosingScreen from "../losing-screen/losing-screen";
 
 const App = ({currentStep, questions, time, attempts}) => {
   if (currentStep === -1) {
     return (
-      <WelcomeScreen time={time} attempts={attempts} />
+      <WelcomeScreen attempts={attempts} />
     );
+  }
+
+  if (time === 0) {
+    return <LosingScreen/>;
   }
 
   switch (questions[currentStep].type) {
@@ -37,8 +42,9 @@ App.propTypes = {
   currentStep: PropTypes.number.isRequired
 };
 
-const mapStateToProps = ({step}) => ({
-  currentStep: step
+const mapStateToProps = ({step, time}) => ({
+  currentStep: step,
+  time
 });
 
 export {App};

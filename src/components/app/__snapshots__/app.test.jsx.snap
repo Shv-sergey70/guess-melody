@@ -59,9 +59,10 @@ exports[`App correctly renders Genre-question screen 1`] = `
 />
 `;
 
+exports[`App correctly renders Losing screen 1`] = `<Connect(LosingScreen) />`;
+
 exports[`App correctly renders Welcome screen 1`] = `
 <Connect(WelcomeScreen)
   attempts={3}
-  time={5}
 />
 `;

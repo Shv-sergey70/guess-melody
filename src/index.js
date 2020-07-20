@@ -11,7 +11,6 @@ const init = (gameQuestions) => {
   ReactDom.render(
       <Provider store={createStore(reducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())}>
         <App
-          time={5}
           attempts={3}
           questions={gameQuestions} />
       </Provider>,

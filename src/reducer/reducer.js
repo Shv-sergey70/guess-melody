@@ -41,6 +41,12 @@ const ActionCreator = {
       type: `DECREMENT_TIME`,
       payload: 1
     };
+  },
+
+  resetState() {
+    return {
+      type: `RESET`
+    };
   }
 };
 

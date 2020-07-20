@@ -51,7 +51,8 @@ describe(`Reducer works correctly`, () => {
     test(`Should set initial state`, () => {
       expect(reducer({
         step: 200,
-        mistakes: 150
+        mistakes: 150,
+        time: 800
       }, {
         type: `RESET`
       })).toEqual(initialState);
@@ -143,6 +144,14 @@ describe(`ActionCreator correctly works`, () => {
       expect(ActionCreator.decrementTime()).toEqual({
         type: `DECREMENT_TIME`,
         payload: 1
+      });
+    });
+  });
+
+  describe(`resetState correctly works`, () => {
+    test(`Returns correct object`, () => {
+      expect(ActionCreator.resetState()).toEqual({
+        type: `RESET`
       });
     });
   });

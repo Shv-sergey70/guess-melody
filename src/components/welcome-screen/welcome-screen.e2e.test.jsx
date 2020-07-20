@@ -10,7 +10,7 @@ test(`WelcomeScreen welcome button success click`, () => {
 
   const welcomeScreen = shallow(
       <WelcomeScreen
-        time={5}
+        time={300}
         attempts={3}
         onWelcomeButtonClick={onWelcomeButtonClick}
       />);
