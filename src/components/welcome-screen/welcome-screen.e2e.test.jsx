@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import WelcomeScreen from "./welcome-screen";
+import {WelcomeScreen} from "./welcome-screen";
 
 configure({adapter: new Adapter()});
 
@@ -10,7 +10,7 @@ test(`WelcomeScreen welcome button success click`, () => {
 
   const welcomeScreen = shallow(
       <WelcomeScreen
-        time={5}
+        time={300}
         attempts={3}
         onWelcomeButtonClick={onWelcomeButtonClick}
       />);

@@ -1,75 +1,51 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import WelcomeScreen from '../welcome-screen/welcome-screen';
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
+import {connect} from "react-redux";
+import LosingScreen from "../losing-screen/losing-screen";
 
-class App extends PureComponent {
-  static _getNextQuestionNumber(currentQuestion, totalQuestions) {
-    return currentQuestion >= totalQuestions - 1 ? -1 : currentQuestion + 1;
+const App = ({currentStep, questions, time, attempts}) => {
+  if (currentStep === -1) {
+    return (
+      <WelcomeScreen attempts={attempts} />
+    );
   }
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      question: -1
-    };
-
-    this.welcomeButtonClickHandler = this.welcomeButtonClickHandler.bind(this);
-    this.answerClickHandler = this.answerClickHandler.bind(this);
+  if (time === 0) {
+    return <LosingScreen/>;
   }
 
-  render() {
-    const {question} = this.state;
-    const {
-      questions,
-      time,
-      attempts
-    } = this.props;
-
-    if (question === -1) {
+  switch (questions[currentStep].type) {
+    case `genre`:
       return (
-        <WelcomeScreen time={time} attempts={attempts} onWelcomeButtonClick={this.welcomeButtonClickHandler}/>
+        <GenreQuestionScreen
+          question={questions[currentStep]}
+          attempts={attempts} />
       );
-    }
-
-    switch (questions[question].type) {
-      case `genre`:
-        return (
-          <GenreQuestionScreen
-            question={questions[question]}
-            onAnswer={this.answerClickHandler}
-            screenIndex={question} />
-        );
-      case `artist`:
-        return <ArtistQuestionScreen
-          question={questions[question]}
-          onAnswer={this.answerClickHandler}
-          screenIndex={question} />;
-    }
-
-    return null;
+    case `artist`:
+      return (
+        <ArtistQuestionScreen
+          question={questions[currentStep]}
+          attempts={attempts} />
+      );
   }
 
-  welcomeButtonClickHandler() {
-    this.setState(({question}) => ({
-      question: question + 1
-    }));
-  }
-
-  answerClickHandler() { // has `answers` parameter
-    this.setState(({question}, {questions}) => ({
-      question: App._getNextQuestionNumber(question, questions.length)
-    }));
-  }
-}
+  return null;
+};
 
 App.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object),
   time: PropTypes.number.isRequired,
   attempts: PropTypes.number.isRequired,
+  currentStep: PropTypes.number.isRequired
 };
 
+const mapStateToProps = ({step, time}) => ({
+  currentStep: step,
+  time
+});
 
-export default App;
+export {App};
+export default connect(mapStateToProps)(App);

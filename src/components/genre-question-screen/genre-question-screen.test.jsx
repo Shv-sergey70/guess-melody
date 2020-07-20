@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import GenreQuestionScreen from "./genre-question-screen";
+import {GenreQuestionScreen} from "./genre-question-screen";
 
 configure({adapter: new Adapter()});
 
@@ -33,7 +33,9 @@ test(`GenreQuestionScreen correctly renders`, () => {
       <GenreQuestionScreen
         question={question}
         screenIndex={3}
-        onAnswer={jest.fn()} />
+        onAnswer={jest.fn()}
+        mistakesCount={1}
+        attempts={3} />
   );
 
   expect(tree).toMatchSnapshot();

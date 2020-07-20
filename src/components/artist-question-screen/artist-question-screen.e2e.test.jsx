@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import ArtistQuestionScreen from "./artist-question-screen";
+import {ArtistQuestionScreen} from "./artist-question-screen";
 
 configure({adapter: new Adapter()});
 
@@ -29,13 +29,18 @@ const question = {
 
 test(`ArtistQuestionScreen correct answer response`, () => {
   const onAnswer = jest.fn();
+  const mistakesCount = 2;
+  const attempts = 3;
 
   const artistQuestionScreen = shallow(
       <ArtistQuestionScreen
         question={question}
         screenIndex={3}
         onAnswer={onAnswer}
+        mistakesCount={mistakesCount}
+        attempts={attempts}
       />);
+
   const correctAnswer = `Artur Latte`;
 
   artistQuestionScreen.find(`#answer-3`).simulate(`click`, {
@@ -45,5 +50,5 @@ test(`ArtistQuestionScreen correct answer response`, () => {
   });
 
   expect(onAnswer).toHaveBeenCalledTimes(1);
-  expect(onAnswer).toHaveBeenCalledWith(correctAnswer);
+  expect(onAnswer).toHaveBeenCalledWith(correctAnswer, question, mistakesCount, attempts);
 });

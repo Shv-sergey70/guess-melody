@@ -1,9 +1,68 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App correctly renders 1`] = `
-<WelcomeScreen
+exports[`App correctly renders Artist-question screen 1`] = `
+<Connect(ArtistQuestionScreen)
   attempts={3}
-  onWelcomeButtonClick={[Function]}
-  time={5}
+  question={
+    Object {
+      "answers": Array [
+        Object {
+          "artist": "Billie Eilish",
+          "picture": "/img/default-artist.png",
+        },
+        Object {
+          "artist": "Imagine Dragons",
+          "picture": "/img/default-artist.png",
+        },
+        Object {
+          "artist": "Artur Latte",
+          "picture": "/img/default-artist.png",
+        },
+      ],
+      "song": Object {
+        "artist": "Artur Latte",
+        "src": "./tracks/Raim_Artur_Latte.mp3",
+      },
+      "type": "artist",
+    }
+  }
+/>
+`;
+
+exports[`App correctly renders Genre-question screen 1`] = `
+<Connect(GenreQuestionScreen)
+  attempts={3}
+  question={
+    Object {
+      "answers": Array [
+        Object {
+          "genre": "pop",
+          "src": "./tracks/Anivar_Summer.mp3",
+        },
+        Object {
+          "genre": "jazz",
+          "src": "./tracks/Billie_Eilish_ilomilo.mp3",
+        },
+        Object {
+          "genre": "rock",
+          "src": "./tracks/Cj_L_Black_Rain.mp3",
+        },
+        Object {
+          "genre": "classic",
+          "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
+        },
+      ],
+      "genre": "rock",
+      "type": "genre",
+    }
+  }
+/>
+`;
+
+exports[`App correctly renders Losing screen 1`] = `<Connect(LosingScreen) />`;
+
+exports[`App correctly renders Welcome screen 1`] = `
+<Connect(WelcomeScreen)
+  attempts={3}
 />
 `;
