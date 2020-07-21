@@ -1,6 +1,5 @@
 import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
-import AudioPlayer from "../audio-player/audio-player";
 import MistakesList from "../mistakes-list/mistakes-list";
 import {ActionCreator} from "../../reducer/reducer";
 import {connect} from "react-redux";
@@ -10,17 +9,12 @@ class ArtistQuestionScreen extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isPlaying: false
-    };
-
     this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
     this._handleOnAnswerClick = this._handleOnAnswerClick.bind(this);
   }
 
   render() {
-    const {question: {song, answers}, screenIndex} = this.props;
-    const {isPlaying} = this.state;
+    const {question: {song, answers}, screenIndex, renderAudioPlayer} = this.props;
 
     const content = answers.map(({picture, artist}, i) => {
       const ind = i + 1;
@@ -61,11 +55,7 @@ class ArtistQuestionScreen extends PureComponent {
           <h2 className="game__title">Кто исполняет эту песню?</h2>
           <div className="game__track">
             <div className="track">
-              <AudioPlayer
-                src={song.src}
-                isPlaying={isPlaying}
-                onPlayButtonClick={this._handlePlayButtonClick}
-              />
+              {renderAudioPlayer(song.src, 0)}
             </div>
           </div>
 
@@ -109,7 +99,8 @@ ArtistQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   screenIndex: PropTypes.number.isRequired,
   mistakesCount: PropTypes.number.isRequired,
-  attempts: PropTypes.number.isRequired
+  attempts: PropTypes.number.isRequired,
+  renderAudioPlayer: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({step, mistakes}) => ({

@@ -1,22 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AudioPlayer correctly renders 1`] = `
+exports[`AudioPlayer correctly renders Play button is disabled and has play class 1`] = `
 <AudioPlayer
+  isLoading={true}
   isPlaying={false}
   onPlayButtonClick={[MockFunction]}
-  src="/my/custom/way/to/music.mp3"
 >
   <button
     className="track__button track__button--play"
     disabled={true}
-    onClick={[Function]}
+    onClick={[MockFunction]}
     type="button"
   />
   <div
     className="track__status"
   >
     <audio
-      src="/my/custom/way/to/music.mp3"
+      src="my/custom/way/to/music.mp3"
+    />
+  </div>
+</AudioPlayer>
+`;
+
+exports[`AudioPlayer correctly renders Play button is enabled and has pause class 1`] = `
+<AudioPlayer
+  isLoading={false}
+  isPlaying={true}
+  onPlayButtonClick={[MockFunction]}
+>
+  <button
+    className="track__button track__button--pause"
+    disabled={false}
+    onClick={[MockFunction]}
+    type="button"
+  />
+  <div
+    className="track__status"
+  >
+    <audio
+      src="my/custom/way/to/music.mp3"
     />
   </div>
 </AudioPlayer>

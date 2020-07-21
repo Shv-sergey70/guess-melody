@@ -40,6 +40,7 @@ test(`GenreQuestionScreen correct answer response`, () => {
   const preventDefault = jest.fn();
   const mistakesCount = 2;
   const attempts = 3;
+  const renderAudioPlayer = jest.fn();
 
   const genreQuestionScreen = shallow(
       <GenreQuestionScreen
@@ -48,12 +49,13 @@ test(`GenreQuestionScreen correct answer response`, () => {
         onAnswer={onAnswer}
         mistakesCount={mistakesCount}
         attempts={attempts}
-      />);
+        renderAudioPlayer={renderAudioPlayer} />
+  );
 
-  genreQuestionScreen.find(`#answer-1`).simulate(`change`, getChangeEventMock(`answer-1`, true));
-  genreQuestionScreen.find(`#answer-3`).simulate(`change`, getChangeEventMock(`answer-3`, true));
-  genreQuestionScreen.find(`#answer-1`).simulate(`change`, getChangeEventMock(`answer-1`, false));
-  genreQuestionScreen.find(`#answer-2`).simulate(`change`, getChangeEventMock(`answer-2`, true));
+  genreQuestionScreen.find(`#answer-0`).simulate(`change`, getChangeEventMock(0, true));
+  genreQuestionScreen.find(`#answer-2`).simulate(`change`, getChangeEventMock(2, true));
+  genreQuestionScreen.find(`#answer-0`).simulate(`change`, getChangeEventMock(0, false));
+  genreQuestionScreen.find(`#answer-1`).simulate(`change`, getChangeEventMock(1, true));
 
   genreQuestionScreen.find(`.game__tracks`).simulate(`submit`, {preventDefault});
 

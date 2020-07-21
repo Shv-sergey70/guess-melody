@@ -39,6 +39,7 @@ test(`ArtistQuestionScreen correct answer response`, () => {
         onAnswer={onAnswer}
         mistakesCount={mistakesCount}
         attempts={attempts}
+        renderAudioPlayer={(src, id) => <audio src={src} id={id} />}
       />);
 
   const correctAnswer = `Artur Latte`;

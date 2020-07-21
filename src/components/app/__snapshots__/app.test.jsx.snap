@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App correctly renders Artist-question screen 1`] = `
-<Connect(ArtistQuestionScreen)
+<WithActivePlayer
   attempts={3}
   question={
     Object {
@@ -30,7 +30,7 @@ exports[`App correctly renders Artist-question screen 1`] = `
 `;
 
 exports[`App correctly renders Genre-question screen 1`] = `
-<Connect(GenreQuestionScreen)
+<WithActivePlayer
   attempts={3}
   question={
     Object {

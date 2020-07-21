@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 
-import AudioPlayer from '../audio-player/audio-player';
 import MistakesList from "../mistakes-list/mistakes-list";
 import {ActionCreator} from "../../reducer/reducer";
 import {connect} from "react-redux";
@@ -12,13 +11,7 @@ class GenreQuestionScreen extends PureComponent {
     super(props);
 
     this.state = {
-      activeItems: {
-        'answer-1': false,
-        'answer-2': false,
-        'answer-3': false,
-        'answer-4': false
-      },
-      activePlayer: -1
+      activeItems: [false, false, false, false]
     };
 
     this._itemSelectHandler = this._itemSelectHandler.bind(this);
@@ -27,34 +20,27 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   render() {
-    const {question, screenIndex} = this.props;
+    const {question, screenIndex, renderAudioPlayer} = this.props;
 
     const {answers, genre} = question;
 
-    const {activeItems, activePlayer} = this.state;
+    const {activeItems} = this.state;
 
-    const content = answers.map(({src}, i) => {
-      const ind = i + 1;
+    const content = answers.map(({src}, ind) => {
       const id = `answer-${ind}`;
-      const isActivePlayer = activePlayer === ind;
 
       return (
         <div className="track" key={`${screenIndex} - ${src}`}>
-          <AudioPlayer
-            src={src}
-            isPlaying={isActivePlayer}
-            onPlayButtonClick={() => {
-              this._handlePlayButtonClick(ind);
-            }} />
+          {renderAudioPlayer(src, ind)}
           <div className="game__answer">
             <input
               className="game__input visually-hidden"
               type="checkbox"
               name="answer"
-              value={id}
+              value={ind}
               id={id}
               onChange={this._itemSelectHandler}
-              checked={activeItems[id]}/>
+              checked={activeItems[ind]}/>
             <label className="game__check" htmlFor={id}>Отметить</label>
           </div>
         </div>
@@ -98,7 +84,7 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   _itemSelectHandler(evt) {
-    const activeItems = Object.assign({}, this.state.activeItems);
+    const activeItems = this.state.activeItems.slice();
     activeItems[evt.target.value] = evt.target.checked;
 
     this.setState({activeItems});
@@ -110,7 +96,7 @@ class GenreQuestionScreen extends PureComponent {
     const {onAnswer, question, mistakesCount, attempts} = this.props;
     const {activeItems} = this.state;
 
-    onAnswer(Object.values(activeItems), question, mistakesCount, attempts);
+    onAnswer(activeItems, question, mistakesCount, attempts);
   }
 
   _handlePlayButtonClick(playerIndex) {
@@ -136,7 +122,8 @@ GenreQuestionScreen.propTypes = {
   onAnswer: PropTypes.func.isRequired,
   screenIndex: PropTypes.number.isRequired,
   mistakesCount: PropTypes.number.isRequired,
-  attempts: PropTypes.number.isRequired
+  attempts: PropTypes.number.isRequired,
+  renderAudioPlayer: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({step, mistakes}) => ({

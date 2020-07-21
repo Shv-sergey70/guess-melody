@@ -5,6 +5,10 @@ import ArtistQuestionScreen from "../artist-question-screen/artist-question-scre
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
 import {connect} from "react-redux";
 import LosingScreen from "../losing-screen/losing-screen";
+import withActivePlayer from "../../hocs/with-active-player/with-active-player";
+
+const GenreQuestionScreenWrapped = withActivePlayer(GenreQuestionScreen);
+const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
 const App = ({currentStep, questions, time, attempts}) => {
   if (currentStep === -1) {
@@ -20,13 +24,13 @@ const App = ({currentStep, questions, time, attempts}) => {
   switch (questions[currentStep].type) {
     case `genre`:
       return (
-        <GenreQuestionScreen
+        <GenreQuestionScreenWrapped
           question={questions[currentStep]}
           attempts={attempts} />
       );
     case `artist`:
       return (
-        <ArtistQuestionScreen
+        <ArtistQuestionScreenWrapped
           question={questions[currentStep]}
           attempts={attempts} />
       );

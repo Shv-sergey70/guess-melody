@@ -34,7 +34,9 @@ test(`ArtistQuestionScreen correctly renders`, () => {
         screenIndex={3}
         onAnswer={jest.fn()}
         mistakesCount={2}
-        attempts={3} />
+        attempts={3}
+        renderAudioPlayer={(src, id) => <audio src={src} id={id} />}
+      />
   );
 
   expect(tree).toMatchSnapshot();

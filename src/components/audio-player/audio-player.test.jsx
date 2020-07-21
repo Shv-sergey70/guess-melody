@@ -5,13 +5,32 @@ import AudioPlayer from "./audio-player";
 
 configure({adapter: new Adapter()});
 
-test(`AudioPlayer correctly renders`, () => {
-  const tree = mount(
-      <AudioPlayer
-        src="/my/custom/way/to/music.mp3"
-        isPlaying={false}
-        onPlayButtonClick={jest.fn()} />
-  );
+describe(`AudioPlayer correctly renders`, () => {
+  const pathToMusic = `my/custom/way/to/music.mp3`;
 
-  expect(tree).toMatchSnapshot();
+  test(`Play button is disabled and has play class`, () => {
+    const tree = mount(
+        <AudioPlayer
+          isPlaying={false}
+          isLoading={true}
+          onPlayButtonClick={jest.fn()}>
+          <audio src={pathToMusic}/>
+        </AudioPlayer>
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  test(`Play button is enabled and has pause class`, () => {
+    const tree = mount(
+        <AudioPlayer
+          isPlaying={true}
+          isLoading={false}
+          onPlayButtonClick={jest.fn()}>
+          <audio src={pathToMusic}/>
+        </AudioPlayer>
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
 });
