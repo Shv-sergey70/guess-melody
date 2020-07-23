@@ -36,29 +36,32 @@ const getChangeEventMock = (value, checked) => ({
 });
 
 test(`GenreQuestionScreen correct answer response`, () => {
-  const onAnswer = jest.fn();
   const preventDefault = jest.fn();
-  const mistakesCount = 2;
-  const attempts = 3;
+  const renderAudioPlayer = jest.fn();
+  const changeAnswer = jest.fn();
+  const submitAnswers = jest.fn();
 
   const genreQuestionScreen = shallow(
       <GenreQuestionScreen
         question={question}
         screenIndex={3}
-        onAnswer={onAnswer}
-        mistakesCount={mistakesCount}
-        attempts={attempts}
-      />);
+        renderAudioPlayer={renderAudioPlayer}
+        answers={[false, false, false, false]}
+        changeAnswer={changeAnswer}
+        submitAnswers={submitAnswers} />
+  );
 
-  genreQuestionScreen.find(`#answer-1`).simulate(`change`, getChangeEventMock(`answer-1`, true));
-  genreQuestionScreen.find(`#answer-3`).simulate(`change`, getChangeEventMock(`answer-3`, true));
-  genreQuestionScreen.find(`#answer-1`).simulate(`change`, getChangeEventMock(`answer-1`, false));
-  genreQuestionScreen.find(`#answer-2`).simulate(`change`, getChangeEventMock(`answer-2`, true));
+  genreQuestionScreen.find(`#answer-0`).simulate(`change`, getChangeEventMock(0, true));
+  expect(changeAnswer).toHaveBeenNthCalledWith(1, 0);
+  genreQuestionScreen.find(`#answer-2`).simulate(`change`, getChangeEventMock(2, true));
+  expect(changeAnswer).toHaveBeenNthCalledWith(2, 2);
+  genreQuestionScreen.find(`#answer-0`).simulate(`change`, getChangeEventMock(0, false));
+  expect(changeAnswer).toHaveBeenNthCalledWith(3, 0);
+  genreQuestionScreen.find(`#answer-1`).simulate(`change`, getChangeEventMock(1, true));
+  expect(changeAnswer).toHaveBeenNthCalledWith(4, 1);
 
   genreQuestionScreen.find(`.game__tracks`).simulate(`submit`, {preventDefault});
 
-  expect(onAnswer).toHaveBeenCalledTimes(1);
-  expect(onAnswer).toHaveBeenCalledWith([false, true, true, false], question, mistakesCount, attempts);
-
+  expect(submitAnswers).toHaveBeenCalledTimes(1);
   expect(preventDefault).toHaveBeenCalledTimes(1);
 });

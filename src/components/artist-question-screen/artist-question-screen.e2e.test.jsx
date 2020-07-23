@@ -29,16 +29,13 @@ const question = {
 
 test(`ArtistQuestionScreen correct answer response`, () => {
   const onAnswer = jest.fn();
-  const mistakesCount = 2;
-  const attempts = 3;
 
   const artistQuestionScreen = shallow(
       <ArtistQuestionScreen
         question={question}
         screenIndex={3}
         onAnswer={onAnswer}
-        mistakesCount={mistakesCount}
-        attempts={attempts}
+        renderAudioPlayer={(src, id) => <audio src={src} id={id} />}
       />);
 
   const correctAnswer = `Artur Latte`;
@@ -50,5 +47,5 @@ test(`ArtistQuestionScreen correct answer response`, () => {
   });
 
   expect(onAnswer).toHaveBeenCalledTimes(1);
-  expect(onAnswer).toHaveBeenCalledWith(correctAnswer, question, mistakesCount, attempts);
+  expect(onAnswer).toHaveBeenCalledWith(correctAnswer, question);
 });

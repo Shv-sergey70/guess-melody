@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App correctly renders Artist-question screen 1`] = `
-<Connect(ArtistQuestionScreen)
-  attempts={3}
+<WithActivePlayer
   question={
     Object {
       "answers": Array [
@@ -30,8 +29,8 @@ exports[`App correctly renders Artist-question screen 1`] = `
 `;
 
 exports[`App correctly renders Genre-question screen 1`] = `
-<Connect(GenreQuestionScreen)
-  attempts={3}
+<WithUserAnswers
+  onAnswer={[MockFunction]}
   question={
     Object {
       "answers": Array [

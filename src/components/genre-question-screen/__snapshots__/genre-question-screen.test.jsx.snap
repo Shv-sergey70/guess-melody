@@ -62,9 +62,8 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
         className="track"
         key="3 - test/track1.mp3"
       >
-        <AudioPlayer
-          isPlaying={false}
-          onPlayButtonClick={[Function]}
+        <audio
+          id={0}
           src="test/track1.mp3"
         />
         <div
@@ -73,11 +72,39 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
           <input
             checked={false}
             className="game__input visually-hidden"
+            id="answer-0"
+            name="answer"
+            onChange={[Function]}
+            type="checkbox"
+            value={0}
+          />
+          <label
+            className="game__check"
+            htmlFor="answer-0"
+          >
+            Отметить
+          </label>
+        </div>
+      </div>
+      <div
+        className="track"
+        key="3 - test/track2.mp3"
+      >
+        <audio
+          id={1}
+          src="test/track2.mp3"
+        />
+        <div
+          className="game__answer"
+        >
+          <input
+            checked={true}
+            className="game__input visually-hidden"
             id="answer-1"
             name="answer"
             onChange={[Function]}
             type="checkbox"
-            value="answer-1"
+            value={1}
           />
           <label
             className="game__check"
@@ -89,12 +116,11 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
       </div>
       <div
         className="track"
-        key="3 - test/track2.mp3"
+        key="3 - test/track3.mp3"
       >
-        <AudioPlayer
-          isPlaying={false}
-          onPlayButtonClick={[Function]}
-          src="test/track2.mp3"
+        <audio
+          id={2}
+          src="test/track3.mp3"
         />
         <div
           className="game__answer"
@@ -106,7 +132,7 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
             name="answer"
             onChange={[Function]}
             type="checkbox"
-            value="answer-2"
+            value={2}
           />
           <label
             className="game__check"
@@ -118,57 +144,27 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
       </div>
       <div
         className="track"
-        key="3 - test/track3.mp3"
-      >
-        <AudioPlayer
-          isPlaying={false}
-          onPlayButtonClick={[Function]}
-          src="test/track3.mp3"
-        />
-        <div
-          className="game__answer"
-        >
-          <input
-            checked={false}
-            className="game__input visually-hidden"
-            id="answer-3"
-            name="answer"
-            onChange={[Function]}
-            type="checkbox"
-            value="answer-3"
-          />
-          <label
-            className="game__check"
-            htmlFor="answer-3"
-          >
-            Отметить
-          </label>
-        </div>
-      </div>
-      <div
-        className="track"
         key="3 - test/track4.mp3"
       >
-        <AudioPlayer
-          isPlaying={false}
-          onPlayButtonClick={[Function]}
+        <audio
+          id={3}
           src="test/track4.mp3"
         />
         <div
           className="game__answer"
         >
           <input
-            checked={false}
+            checked={true}
             className="game__input visually-hidden"
-            id="answer-4"
+            id="answer-3"
             name="answer"
             onChange={[Function]}
             type="checkbox"
-            value="answer-4"
+            value={3}
           />
           <label
             className="game__check"
-            htmlFor="answer-4"
+            htmlFor="answer-3"
           >
             Отметить
           </label>

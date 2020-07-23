@@ -1,9 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {genreQuestion} from '../../types/types';
 
-import AudioPlayer from '../audio-player/audio-player';
 import MistakesList from "../mistakes-list/mistakes-list";
-import {ActionCreator} from "../../reducer/reducer";
 import {connect} from "react-redux";
 import Timer from "../timer/timer";
 
@@ -11,50 +10,30 @@ class GenreQuestionScreen extends PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeItems: {
-        'answer-1': false,
-        'answer-2': false,
-        'answer-3': false,
-        'answer-4': false
-      },
-      activePlayer: -1
-    };
-
     this._itemSelectHandler = this._itemSelectHandler.bind(this);
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
-    this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
   }
 
   render() {
-    const {question, screenIndex} = this.props;
+    const {question, screenIndex, renderAudioPlayer, answers: activeItems} = this.props;
 
     const {answers, genre} = question;
 
-    const {activeItems, activePlayer} = this.state;
-
-    const content = answers.map(({src}, i) => {
-      const ind = i + 1;
+    const content = answers.map(({src}, ind) => {
       const id = `answer-${ind}`;
-      const isActivePlayer = activePlayer === ind;
 
       return (
         <div className="track" key={`${screenIndex} - ${src}`}>
-          <AudioPlayer
-            src={src}
-            isPlaying={isActivePlayer}
-            onPlayButtonClick={() => {
-              this._handlePlayButtonClick(ind);
-            }} />
+          {renderAudioPlayer(src, ind)}
           <div className="game__answer">
             <input
               className="game__input visually-hidden"
               type="checkbox"
               name="answer"
-              value={id}
+              value={ind}
               id={id}
               onChange={this._itemSelectHandler}
-              checked={activeItems[id]}/>
+              checked={activeItems[ind]}/>
             <label className="game__check" htmlFor={id}>Отметить</label>
           </div>
         </div>
@@ -98,60 +77,34 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   _itemSelectHandler(evt) {
-    const activeItems = Object.assign({}, this.state.activeItems);
-    activeItems[evt.target.value] = evt.target.checked;
+    const {changeAnswer} = this.props;
 
-    this.setState({activeItems});
+    changeAnswer(evt.target.value);
   }
 
   _handleFormSubmit(evt) {
     evt.preventDefault();
 
-    const {onAnswer, question, mistakesCount, attempts} = this.props;
-    const {activeItems} = this.state;
+    const {submitAnswers} = this.props;
 
-    onAnswer(Object.values(activeItems), question, mistakesCount, attempts);
-  }
-
-  _handlePlayButtonClick(playerIndex) {
-    this.setState(({activePlayer}) => ({
-      activePlayer: activePlayer === playerIndex ? -1 : playerIndex
-    }));
+    submitAnswers();
   }
 }
 
-const genreQuestionPropTypes = PropTypes.exact({
-  type: PropTypes.oneOf([`genre`]).isRequired,
-  genre: PropTypes.string.isRequired,
-  answers: PropTypes.arrayOf(
-      PropTypes.exact({
-        src: PropTypes.string.isRequired,
-        genre: PropTypes.string.isRequired
-      }).isRequired
-  ).isRequired
-}).isRequired;
-
 GenreQuestionScreen.propTypes = {
-  question: genreQuestionPropTypes,
-  onAnswer: PropTypes.func.isRequired,
+  question: genreQuestion,
   screenIndex: PropTypes.number.isRequired,
-  mistakesCount: PropTypes.number.isRequired,
-  attempts: PropTypes.number.isRequired
+  renderAudioPlayer: PropTypes.func.isRequired,
+  answers: PropTypes.arrayOf(PropTypes.bool).isRequired,
+  changeAnswer: PropTypes.func.isRequired,
+  submitAnswers: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({step, mistakes}) => ({
-  screenIndex: step,
-  mistakesCount: mistakes
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  onAnswer: (answer, question, mistakesCount, maxMistakesCount) => {
-    dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistakes(answer, question, mistakesCount, maxMistakesCount));
-  }
+const mapStateToProps = ({step}) => ({
+  screenIndex: step
 });
 
 export {GenreQuestionScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(GenreQuestionScreen);
+export default connect(mapStateToProps)(GenreQuestionScreen);
 
 

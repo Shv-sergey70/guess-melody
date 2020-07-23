@@ -58,9 +58,8 @@ exports[`ArtistQuestionScreen correctly renders 1`] = `
       <div
         className="track"
       >
-        <AudioPlayer
-          isPlaying={false}
-          onPlayButtonClick={[Function]}
+        <audio
+          id={0}
           src="test/track1.mp3"
         />
       </div>

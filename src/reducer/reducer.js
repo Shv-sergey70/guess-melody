@@ -10,7 +10,7 @@ const ActionCreator = {
     payload: 1
   }),
 
-  incrementMistakes: (userAnswer, question, mistakesCount, maxMistakesCount) => {
+  incrementMistakes: (userAnswer, question) => {
     let isCorrectAnswer = false;
 
     switch (question.type) {
@@ -22,12 +22,6 @@ const ActionCreator = {
         isCorrectAnswer = isGenreAnswerCorrect(userAnswer, question);
 
         break;
-    }
-
-    if (!isCorrectAnswer && mistakesCount + 1 >= maxMistakesCount) {
-      return {
-        type: `RESET`
-      };
     }
 
     return {
