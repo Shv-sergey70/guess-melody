@@ -2,7 +2,6 @@
 
 exports[`App correctly renders Artist-question screen 1`] = `
 <WithActivePlayer
-  attempts={3}
   question={
     Object {
       "answers": Array [
@@ -30,8 +29,8 @@ exports[`App correctly renders Artist-question screen 1`] = `
 `;
 
 exports[`App correctly renders Genre-question screen 1`] = `
-<WithActivePlayer
-  attempts={3}
+<WithUserAnswers
+  onAnswer={[MockFunction]}
   question={
     Object {
       "answers": Array [

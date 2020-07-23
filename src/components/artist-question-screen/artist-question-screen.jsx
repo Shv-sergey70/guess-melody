@@ -9,7 +9,6 @@ class ArtistQuestionScreen extends PureComponent {
   constructor(props) {
     super(props);
 
-    this._handlePlayButtonClick = this._handlePlayButtonClick.bind(this);
     this._handleOnAnswerClick = this._handleOnAnswerClick.bind(this);
   }
 
@@ -67,16 +66,10 @@ class ArtistQuestionScreen extends PureComponent {
     );
   }
 
-  _handlePlayButtonClick() {
-    this.setState(({isPlaying}) => ({
-      isPlaying: !isPlaying
-    }));
-  }
-
   _handleOnAnswerClick(evt) {
-    const {onAnswer, question, mistakesCount, attempts} = this.props;
+    const {onAnswer, question} = this.props;
 
-    onAnswer(evt.target.value, question, mistakesCount, attempts);
+    onAnswer(evt.target.value, question);
   }
 }
 
@@ -98,20 +91,17 @@ ArtistQuestionScreen.propTypes = {
   question: artistQuestionPropTypes,
   onAnswer: PropTypes.func.isRequired,
   screenIndex: PropTypes.number.isRequired,
-  mistakesCount: PropTypes.number.isRequired,
-  attempts: PropTypes.number.isRequired,
   renderAudioPlayer: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({step, mistakes}) => ({
+const mapStateToProps = ({step}) => ({
   screenIndex: step,
-  mistakesCount: mistakes
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onAnswer: (answer, question, mistakesCount, maxMistakesCount) => {
+  onAnswer: (answer, question) => {
     dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistakes(answer, question, mistakesCount, maxMistakesCount));
+    dispatch(ActionCreator.incrementMistakes(answer, question));
   }
 });
 

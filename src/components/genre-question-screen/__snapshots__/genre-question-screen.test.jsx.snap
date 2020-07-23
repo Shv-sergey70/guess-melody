@@ -98,7 +98,7 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
           className="game__answer"
         >
           <input
-            checked={false}
+            checked={true}
             className="game__input visually-hidden"
             id="answer-1"
             name="answer"
@@ -154,7 +154,7 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
           className="game__answer"
         >
           <input
-            checked={false}
+            checked={true}
             className="game__input visually-hidden"
             id="answer-3"
             name="answer"

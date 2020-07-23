@@ -126,17 +126,6 @@ describe(`ActionCreator correctly works`, () => {
         payload: 1
       });
     });
-
-    test(`Wrong answer, no more attempts - incrementMistake should return RESET`, () => {
-      expect(ActionCreator.incrementMistakes(`Artur`, {
-        type: `artist`,
-        song: {
-          artist: `Artur Latte`
-        }
-      }, 2, 3)).toEqual({
-        type: `RESET`
-      });
-    });
   });
 
   describe(`decrementTime correctly works`, () => {

@@ -33,10 +33,10 @@ test(`GenreQuestionScreen correctly renders`, () => {
       <GenreQuestionScreen
         question={question}
         screenIndex={3}
-        onAnswer={jest.fn()}
-        mistakesCount={1}
-        attempts={3}
-        renderAudioPlayer={(src, id) => <audio src={src} id={id}/>} />
+        renderAudioPlayer={(src, id) => <audio src={src} id={id}/>}
+        answers={[false, true, false, true]}
+        changeAnswer={jest.fn()}
+        submitAnswers={jest.fn()} />
   );
 
   expect(tree).toMatchSnapshot();

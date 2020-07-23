@@ -59,7 +59,8 @@ describe(`App correctly renders`, () => {
           attempts={3}
           questions={questions}
           currentStep={-1}
-        />);
+          onAnswer={jest.fn()} />
+    );
 
     expect(tree).toMatchSnapshot();
   });
@@ -71,7 +72,8 @@ describe(`App correctly renders`, () => {
           attempts={3}
           questions={questions}
           currentStep={0}
-        />);
+          onAnswer={jest.fn()} />
+    );
 
     expect(tree).toMatchSnapshot();
   });
@@ -83,7 +85,8 @@ describe(`App correctly renders`, () => {
           attempts={3}
           questions={questions}
           currentStep={1}
-        />);
+          onAnswer={jest.fn()} />
+    );
 
     expect(tree).toMatchSnapshot();
   });
@@ -95,7 +98,8 @@ describe(`App correctly renders`, () => {
           attempts={3}
           questions={questions}
           currentStep={1}
-        />);
+          onAnswer={jest.fn()} />
+    );
 
     expect(tree).toMatchSnapshot();
   });

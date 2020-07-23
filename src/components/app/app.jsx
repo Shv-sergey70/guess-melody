@@ -6,11 +6,13 @@ import GenreQuestionScreen from "../genre-question-screen/genre-question-screen"
 import {connect} from "react-redux";
 import LosingScreen from "../losing-screen/losing-screen";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player";
+import withUserAnswers from "../../hocs/with-user-answers/with-user-answers";
+import {ActionCreator} from "../../reducer/reducer";
 
-const GenreQuestionScreenWrapped = withActivePlayer(GenreQuestionScreen);
+const GenreQuestionScreenWrapped = withUserAnswers(withActivePlayer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
-const App = ({currentStep, questions, time, attempts}) => {
+const App = ({currentStep, questions, time, attempts, onAnswer}) => {
   if (currentStep === -1) {
     return (
       <WelcomeScreen attempts={attempts} />
@@ -26,13 +28,12 @@ const App = ({currentStep, questions, time, attempts}) => {
       return (
         <GenreQuestionScreenWrapped
           question={questions[currentStep]}
-          attempts={attempts} />
+          onAnswer={onAnswer} />
       );
     case `artist`:
       return (
         <ArtistQuestionScreenWrapped
-          question={questions[currentStep]}
-          attempts={attempts} />
+          question={questions[currentStep]} />
       );
   }
 
@@ -43,7 +44,8 @@ App.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object),
   time: PropTypes.number.isRequired,
   attempts: PropTypes.number.isRequired,
-  currentStep: PropTypes.number.isRequired
+  currentStep: PropTypes.number.isRequired,
+  onAnswer: PropTypes.func.isRequired
 };
 
 const mapStateToProps = ({step, time}) => ({
@@ -51,5 +53,12 @@ const mapStateToProps = ({step, time}) => ({
   time
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onAnswer: (answer, question) => {
+    dispatch(ActionCreator.incrementStep());
+    dispatch(ActionCreator.incrementMistakes(answer, question));
+  }
+});
+
 export {App};
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
