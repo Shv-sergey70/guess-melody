@@ -48,9 +48,10 @@ App.propTypes = {
   onAnswer: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({step, time}) => ({
+const mapStateToProps = ({step, time, questions}) => ({
   currentStep: step,
-  time
+  time,
+  questions
 });
 
 const mapDispatchToProps = (dispatch) => ({
