@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LosingScreenTime renders correctly 1`] = `
+exports[`LosingScreen renders correctly 1`] = `
 <section
   className="result"
 >
@@ -14,16 +14,9 @@ exports[`LosingScreenTime renders correctly 1`] = `
       width="186"
     />
   </div>
-  <h2
-    className="result__title"
-  >
-    Увы и ах!
+  <h2>
+    My custom text
   </h2>
-  <p
-    className="result__total result__total--fail"
-  >
-    Время вышло! Вы не успели отгадать все мелодии
-  </p>
   <button
     className="replay"
     onClick={[MockFunction]}

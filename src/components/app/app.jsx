@@ -4,8 +4,7 @@ import WelcomeScreen from '../welcome-screen/welcome-screen';
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
 import {connect} from "react-redux";
-import LosingScreenTime from "../losing-screen-time/losing-screen-time";
-import LosingScreenAttempt from "../losing-screen-attempts/losing-screen-attempts";
+import LosingScreen from "../losing-screen/losing-screen";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import withUserAnswers from "../../hocs/with-user-answers/with-user-answers";
 import {ActionCreator} from "../../reducer/game/game";
@@ -23,11 +22,22 @@ const App = ({currentStep, questions, time, attempts, onAnswer, mistakesCount}) 
   }
 
   if (time === 0) {
-    return <LosingScreenTime/>;
+    return (
+      <LosingScreen>
+        <h2 className="result__title">Увы и ах!</h2>
+        <p className="result__total result__total--fail">Время вышло! Вы не успели отгадать все мелодии</p>
+      </LosingScreen>
+    );
   }
 
   if (mistakesCount >= attempts) {
-    return <LosingScreenAttempt/>;
+    return (
+      <LosingScreen>
+        <h2 className="result__title">Какая жалость!</h2>
+        <p className="result__total result__total--fail">У вас закончились все попытки. Ничего, повезёт в следующий
+          раз!</p>
+      </LosingScreen>
+    );
   }
 
   switch (questions[currentStep].type) {
