@@ -1,4 +1,4 @@
-import {ActionCreator, reducer, isGenreAnswerCorrect, isArtistAnswerCorrect} from './reducer';
+import {ActionCreator, reducer, isGenreAnswerCorrect, isArtistAnswerCorrect} from './game';
 
 const initialState = {
   mistakes: 0,
@@ -52,7 +52,8 @@ describe(`Reducer works correctly`, () => {
       expect(reducer({
         step: 200,
         mistakes: 150,
-        time: 800
+        time: 800,
+        questions: [1, 4, 7]
       }, {
         type: `RESET`
       })).toEqual(initialState);

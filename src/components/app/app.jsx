@@ -4,15 +4,18 @@ import WelcomeScreen from '../welcome-screen/welcome-screen';
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
 import {connect} from "react-redux";
-import LosingScreen from "../losing-screen/losing-screen";
+import LosingScreenTime from "../losing-screen-time/losing-screen-time";
+import LosingScreenAttempt from "../losing-screen-attempts/losing-screen-attempts";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import withUserAnswers from "../../hocs/with-user-answers/with-user-answers";
-import {ActionCreator} from "../../reducer/reducer";
+import {ActionCreator} from "../../reducer/game/game";
+import {getTime, getStep, getMistakes} from '../../reducer/game/selectors';
+import {getQuestions} from "../../reducer/data/selectors";
 
 const GenreQuestionScreenWrapped = withUserAnswers(withActivePlayer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
-const App = ({currentStep, questions, time, attempts, onAnswer}) => {
+const App = ({currentStep, questions, time, attempts, onAnswer, mistakesCount}) => {
   if (currentStep === -1) {
     return (
       <WelcomeScreen attempts={attempts} />
@@ -20,7 +23,11 @@ const App = ({currentStep, questions, time, attempts, onAnswer}) => {
   }
 
   if (time === 0) {
-    return <LosingScreen/>;
+    return <LosingScreenTime/>;
+  }
+
+  if (mistakesCount >= attempts) {
+    return <LosingScreenAttempt/>;
   }
 
   switch (questions[currentStep].type) {
@@ -45,12 +52,15 @@ App.propTypes = {
   time: PropTypes.number.isRequired,
   attempts: PropTypes.number.isRequired,
   currentStep: PropTypes.number.isRequired,
-  onAnswer: PropTypes.func.isRequired
+  onAnswer: PropTypes.func.isRequired,
+  mistakesCount: PropTypes.number.isRequired
 };
 
-const mapStateToProps = ({step, time}) => ({
-  currentStep: step,
-  time
+const mapStateToProps = (state) => ({
+  currentStep: getStep(state),
+  time: getTime(state),
+  questions: getQuestions(state),
+  mistakesCount: getMistakes(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

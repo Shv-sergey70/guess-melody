@@ -1,9 +1,10 @@
 import React, {PureComponent} from 'react';
 import PropTypes from "prop-types";
 import MistakesList from "../mistakes-list/mistakes-list";
-import {ActionCreator} from "../../reducer/reducer";
+import {ActionCreator} from "../../reducer/game/game";
 import {connect} from "react-redux";
 import Timer from "../timer/timer";
+import {getStep} from "../../reducer/game/selectors";
 
 class ArtistQuestionScreen extends PureComponent {
   constructor(props) {
@@ -94,8 +95,8 @@ ArtistQuestionScreen.propTypes = {
   renderAudioPlayer: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({step}) => ({
-  screenIndex: step,
+const mapStateToProps = (state) => ({
+  screenIndex: getStep(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -5,6 +5,7 @@ import {genreQuestion} from '../../types/types';
 import MistakesList from "../mistakes-list/mistakes-list";
 import {connect} from "react-redux";
 import Timer from "../timer/timer";
+import {getStep} from "../../reducer/game/selectors";
 
 class GenreQuestionScreen extends PureComponent {
   constructor(props) {
@@ -100,8 +101,8 @@ GenreQuestionScreen.propTypes = {
   submitAnswers: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({step}) => ({
-  screenIndex: step
+const mapStateToProps = (state) => ({
+  screenIndex: getStep(state)
 });
 
 export {GenreQuestionScreen};

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {getMistakes} from "../../reducer/game/selectors";
 
 const MistakesList = ({mistakes}) => {
   const content = new Array(mistakes)
@@ -18,7 +19,9 @@ MistakesList.propTypes = {
   mistakes: PropTypes.number.isRequired
 };
 
-const mapStateToProps = ({mistakes}) => ({mistakes});
+const mapStateToProps = (state) => ({
+  mistakes: getMistakes(state)
+});
 
 export {MistakesList};
 export default connect(mapStateToProps)(MistakesList);
