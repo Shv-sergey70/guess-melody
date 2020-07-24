@@ -60,7 +60,8 @@ describe(`App correctly renders`, () => {
           questions={questions}
           currentStep={-1}
           onAnswer={jest.fn()}
-          mistakesCount={1} />
+          mistakesCount={1}
+          isAuthorizationRequired={false} />
     );
 
     expect(tree).toMatchSnapshot();
@@ -74,7 +75,8 @@ describe(`App correctly renders`, () => {
           questions={questions}
           currentStep={0}
           onAnswer={jest.fn()}
-          mistakesCount={1} />
+          mistakesCount={1}
+          isAuthorizationRequired={false} />
     );
 
     expect(tree).toMatchSnapshot();
@@ -88,7 +90,8 @@ describe(`App correctly renders`, () => {
           questions={questions}
           currentStep={1}
           onAnswer={jest.fn()}
-          mistakesCount={1} />
+          mistakesCount={1}
+          isAuthorizationRequired={false} />
     );
 
     expect(tree).toMatchSnapshot();
@@ -102,7 +105,8 @@ describe(`App correctly renders`, () => {
           questions={questions}
           currentStep={1}
           onAnswer={jest.fn()}
-          mistakesCount={1}/>
+          mistakesCount={1}
+          isAuthorizationRequired={false} />
     );
 
     expect(tree).toMatchSnapshot();
@@ -116,7 +120,23 @@ describe(`App correctly renders`, () => {
           questions={questions}
           currentStep={1}
           onAnswer={jest.fn()}
-          mistakesCount={3}/>
+          mistakesCount={3}
+          isAuthorizationRequired={false} />
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  test(`Authorization is required`, () => {
+    const tree = shallow(
+        <App
+          time={300}
+          attempts={3}
+          questions={questions}
+          currentStep={0}
+          onAnswer={jest.fn()}
+          mistakesCount={1}
+          isAuthorizationRequired={true} />
     );
 
     expect(tree).toMatchSnapshot();

@@ -10,14 +10,24 @@ import withUserAnswers from "../../hocs/with-user-answers/with-user-answers";
 import {ActionCreator} from "../../reducer/game/game";
 import {getTime, getStep, getMistakes} from '../../reducer/game/selectors';
 import {getQuestions} from "../../reducer/data/selectors";
+import {getAuthorization} from "../../reducer/user/selectors";
+import AuthorizationScreen from "../authorization-screen/authorization-screen";
+import withLogin from "../../hocs/with-login/with-login";
 
 const GenreQuestionScreenWrapped = withUserAnswers(withActivePlayer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
+const AuthorizationScreenWrapped = withLogin(AuthorizationScreen);
 
-const App = ({currentStep, questions, time, attempts, onAnswer, mistakesCount}) => {
+const App = ({currentStep, questions, time, attempts, onAnswer, mistakesCount, isAuthorizationRequired}) => {
   if (currentStep === -1) {
     return (
       <WelcomeScreen attempts={attempts} />
+    );
+  }
+
+  if (isAuthorizationRequired) {
+    return (
+      <AuthorizationScreenWrapped/>
     );
   }
 
@@ -63,14 +73,16 @@ App.propTypes = {
   attempts: PropTypes.number.isRequired,
   currentStep: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
-  mistakesCount: PropTypes.number.isRequired
+  mistakesCount: PropTypes.number.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
   currentStep: getStep(state),
   time: getTime(state),
   questions: getQuestions(state),
-  mistakesCount: getMistakes(state)
+  mistakesCount: getMistakes(state),
+  isAuthorizationRequired: getAuthorization(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

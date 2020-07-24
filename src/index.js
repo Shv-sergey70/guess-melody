@@ -20,6 +20,7 @@ const init = () => {
       )
   );
 
+  // store.dispatch(Operations.checkLogin());
   store.dispatch(Operations.loadQuestions());
 
   ReactDom.render(

@@ -43,6 +43,8 @@ exports[`App correctly renders Attempts losing screen 1`] = `
 </Connect(LosingScreen)>
 `;
 
+exports[`App correctly renders Authorization is required 1`] = `<WithLogin />`;
+
 exports[`App correctly renders Genre-question screen 1`] = `
 <WithUserAnswers
   onAnswer={[MockFunction]}
