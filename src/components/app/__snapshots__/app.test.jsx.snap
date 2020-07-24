@@ -28,6 +28,23 @@ exports[`App correctly renders Artist-question screen 1`] = `
 />
 `;
 
+exports[`App correctly renders Attempts losing screen 1`] = `
+<Connect(LosingScreen)>
+  <h2
+    className="result__title"
+  >
+    Какая жалость!
+  </h2>
+  <p
+    className="result__total result__total--fail"
+  >
+    У вас закончились все попытки. Ничего, повезёт в следующий раз!
+  </p>
+</Connect(LosingScreen)>
+`;
+
+exports[`App correctly renders Authorization is required 1`] = `<WithLogin />`;
+
 exports[`App correctly renders Genre-question screen 1`] = `
 <WithUserAnswers
   onAnswer={[MockFunction]}
@@ -58,7 +75,20 @@ exports[`App correctly renders Genre-question screen 1`] = `
 />
 `;
 
-exports[`App correctly renders Losing screen 1`] = `<Connect(LosingScreenTime) />`;
+exports[`App correctly renders Time losing screen 1`] = `
+<Connect(LosingScreen)>
+  <h2
+    className="result__title"
+  >
+    Увы и ах!
+  </h2>
+  <p
+    className="result__total result__total--fail"
+  >
+    Время вышло! Вы не успели отгадать все мелодии
+  </p>
+</Connect(LosingScreen)>
+`;
 
 exports[`App correctly renders Welcome screen 1`] = `
 <Connect(WelcomeScreen)

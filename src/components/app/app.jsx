@@ -4,30 +4,50 @@ import WelcomeScreen from '../welcome-screen/welcome-screen';
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
 import {connect} from "react-redux";
-import LosingScreenTime from "../losing-screen-time/losing-screen-time";
-import LosingScreenAttempt from "../losing-screen-attempts/losing-screen-attempts";
+import LosingScreen from "../losing-screen/losing-screen";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import withUserAnswers from "../../hocs/with-user-answers/with-user-answers";
 import {ActionCreator} from "../../reducer/game/game";
 import {getTime, getStep, getMistakes} from '../../reducer/game/selectors';
 import {getQuestions} from "../../reducer/data/selectors";
+import {getAuthorization} from "../../reducer/user/selectors";
+import AuthorizationScreen from "../authorization-screen/authorization-screen";
+import withLogin from "../../hocs/with-login/with-login";
 
 const GenreQuestionScreenWrapped = withUserAnswers(withActivePlayer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
+const AuthorizationScreenWrapped = withLogin(AuthorizationScreen);
 
-const App = ({currentStep, questions, time, attempts, onAnswer, mistakesCount}) => {
+const App = ({currentStep, questions, time, attempts, onAnswer, mistakesCount, isAuthorizationRequired}) => {
   if (currentStep === -1) {
     return (
       <WelcomeScreen attempts={attempts} />
     );
   }
 
+  if (isAuthorizationRequired) {
+    return (
+      <AuthorizationScreenWrapped/>
+    );
+  }
+
   if (time === 0) {
-    return <LosingScreenTime/>;
+    return (
+      <LosingScreen>
+        <h2 className="result__title">Увы и ах!</h2>
+        <p className="result__total result__total--fail">Время вышло! Вы не успели отгадать все мелодии</p>
+      </LosingScreen>
+    );
   }
 
   if (mistakesCount >= attempts) {
-    return <LosingScreenAttempt/>;
+    return (
+      <LosingScreen>
+        <h2 className="result__title">Какая жалость!</h2>
+        <p className="result__total result__total--fail">У вас закончились все попытки. Ничего, повезёт в следующий
+          раз!</p>
+      </LosingScreen>
+    );
   }
 
   switch (questions[currentStep].type) {
@@ -53,14 +73,16 @@ App.propTypes = {
   attempts: PropTypes.number.isRequired,
   currentStep: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
-  mistakesCount: PropTypes.number.isRequired
+  mistakesCount: PropTypes.number.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
   currentStep: getStep(state),
   time: getTime(state),
   questions: getQuestions(state),
-  mistakesCount: getMistakes(state)
+  mistakesCount: getMistakes(state),
+  isAuthorizationRequired: getAuthorization(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

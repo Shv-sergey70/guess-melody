@@ -59,7 +59,9 @@ describe(`App correctly renders`, () => {
           attempts={3}
           questions={questions}
           currentStep={-1}
-          onAnswer={jest.fn()} />
+          onAnswer={jest.fn()}
+          mistakesCount={1}
+          isAuthorizationRequired={false} />
     );
 
     expect(tree).toMatchSnapshot();
@@ -72,7 +74,9 @@ describe(`App correctly renders`, () => {
           attempts={3}
           questions={questions}
           currentStep={0}
-          onAnswer={jest.fn()} />
+          onAnswer={jest.fn()}
+          mistakesCount={1}
+          isAuthorizationRequired={false} />
     );
 
     expect(tree).toMatchSnapshot();
@@ -85,20 +89,54 @@ describe(`App correctly renders`, () => {
           attempts={3}
           questions={questions}
           currentStep={1}
-          onAnswer={jest.fn()} />
+          onAnswer={jest.fn()}
+          mistakesCount={1}
+          isAuthorizationRequired={false} />
     );
 
     expect(tree).toMatchSnapshot();
   });
 
-  test(`Losing screen`, () => {
+  test(`Time losing screen`, () => {
     const tree = shallow(
         <App
           time={0}
           attempts={3}
           questions={questions}
           currentStep={1}
-          onAnswer={jest.fn()} />
+          onAnswer={jest.fn()}
+          mistakesCount={1}
+          isAuthorizationRequired={false} />
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  test(`Attempts losing screen`, () => {
+    const tree = shallow(
+        <App
+          time={300}
+          attempts={3}
+          questions={questions}
+          currentStep={1}
+          onAnswer={jest.fn()}
+          mistakesCount={3}
+          isAuthorizationRequired={false} />
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  test(`Authorization is required`, () => {
+    const tree = shallow(
+        <App
+          time={300}
+          attempts={3}
+          questions={questions}
+          currentStep={0}
+          onAnswer={jest.fn()}
+          mistakesCount={1}
+          isAuthorizationRequired={true} />
     );
 
     expect(tree).toMatchSnapshot();

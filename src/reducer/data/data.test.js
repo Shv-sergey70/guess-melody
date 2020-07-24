@@ -3,7 +3,8 @@ import MockAdapter from 'axios-mock-adapter';
 import {ActionCreator, reducer, Operations} from './data';
 
 const initialState = {
-  questions: []
+  questions: [],
+  user: {}
 };
 
 describe(`Reducer works correctly`, () => {
@@ -16,6 +17,22 @@ describe(`Reducer works correctly`, () => {
         payload: questions
       })).toEqual(Object.assign({}, initialState, {questions}));
     });
+  });
+
+  describe(`Reducer with LOGIN action correctly works`, () => {
+    test(`Payload should be written into login state`, () => {
+      const userData = {name: `test`};
+
+      expect(reducer(initialState, {
+        type: `LOGIN`,
+        payload: userData
+      })).toEqual(Object.assign({}, initialState, {user: userData}));
+    });
+  });
+
+  test(`Reducer with undefined action returns initial state`, () => {
+    expect(reducer(initialState, {type: undefined}))
+      .toEqual(Object.assign({}, initialState));
   });
 });
 
@@ -30,10 +47,21 @@ describe(`ActionCreator correctly works`, () => {
       });
     });
   });
+
+  describe(`login correctly works`, () => {
+    test(`Returns correct object`, () => {
+      const userData = {name: `test`};
+
+      expect(ActionCreator.login(userData)).toEqual({
+        type: `LOGIN`,
+        payload: userData
+      });
+    });
+  });
 });
 
 describe(`Operations correctly works`, () => {
-  test(`loadQuestions return 200 status, success loading`, () => {
+  test(`loadQuestions returns 200 status, success loading`, () => {
     const dispatchMock = jest.fn();
     const API = createAPI(dispatchMock);
     const APIMock = new MockAdapter(API);
@@ -53,7 +81,7 @@ describe(`Operations correctly works`, () => {
       });
   });
 
-  test(`loadQuestions return 403 status, authorization required`, () => {
+  test(`loadQuestions returns 403 status, authorization required`, () => {
     const dispatchMock = jest.fn();
     const API = createAPI(dispatchMock);
     const APIMock = new MockAdapter(API);
@@ -67,6 +95,60 @@ describe(`Operations correctly works`, () => {
         expect(dispatchMock).toHaveBeenNthCalledWith(1, {
           type: `REQUIRED_AUTHORIZATION`,
           payload: true
+        });
+      });
+  });
+
+  test(`login returns 200 status, success login`, () => {
+    const dispatchMock = jest.fn();
+    const API = createAPI(dispatchMock);
+    const APIMock = new MockAdapter(API);
+
+    const userData = {
+      id: 1,
+      email: `testEmail`
+    };
+
+    APIMock.onPost(`/login`).reply(200, userData);
+    const login = Operations.login(`testEmail1`, `testPassword`);
+
+    return login(dispatchMock, jest.fn(), API)
+      .then(() => {
+        expect(dispatchMock).toHaveBeenCalledTimes(2);
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, {
+          type: `LOGIN`,
+          payload: userData
+        });
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, {
+          type: `REQUIRED_AUTHORIZATION`,
+          payload: false
+        });
+      });
+  });
+
+  test(`checkLogin returns 200 status, already login`, () => {
+    const dispatchMock = jest.fn();
+    const API = createAPI(dispatchMock);
+    const APIMock = new MockAdapter(API);
+
+    const userData = {
+      id: 1,
+      email: `testEmail`
+    };
+
+    APIMock.onGet(`/login`).reply(200, userData);
+    const checkLogin = Operations.checkLogin();
+
+    return checkLogin(dispatchMock, jest.fn(), API)
+      .then(() => {
+        expect(dispatchMock).toHaveBeenCalledTimes(2);
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, {
+          type: `LOGIN`,
+          payload: userData
+        });
+        expect(dispatchMock).toHaveBeenNthCalledWith(2, {
+          type: `REQUIRED_AUTHORIZATION`,
+          payload: false
         });
       });
   });

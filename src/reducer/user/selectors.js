@@ -1,9 +1,9 @@
 import NameSpace from '../namespaces';
 
-const NAMESPACE = NameSpace.DATA;
+const NAMESPACE = NameSpace.USER;
 
-const getQuestions = (state) => state[NAMESPACE].questions;
+const getAuthorization = (state) => state[NAMESPACE].isAuthorizationRequired;
 
 export {
-  getQuestions
+  getAuthorization
 };
