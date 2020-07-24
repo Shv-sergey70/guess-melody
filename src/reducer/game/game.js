@@ -1,3 +1,16 @@
+const initialState = {
+  mistakes: 0,
+  step: -1,
+  time: 300
+};
+
+const ActionType = {
+  INCREMENT_STEP: `INCREMENT_STEP`,
+  INCREMENT_MISTAKES: `INCREMENT_MISTAKES`,
+  RESET: `RESET`,
+  DECREMENT_TIME: `DECREMENT_TIME`
+};
+
 const isGenreAnswerCorrect = (userAnswers, {genre, answers}) => {
   return userAnswers.every((answer, i) => answer === (genre === answers[i].genre));
 };
@@ -6,7 +19,7 @@ const isArtistAnswerCorrect = (userAnswer, correctAnswer) => userAnswer === corr
 
 const ActionCreator = {
   incrementStep: () => ({
-    type: `INCREMENT_STEP`,
+    type: ActionType.INCREMENT_STEP,
     payload: 1
   }),
 
@@ -25,74 +38,40 @@ const ActionCreator = {
     }
 
     return {
-      type: `INCREMENT_MISTAKES`,
+      type: ActionType.INCREMENT_MISTAKES,
       payload: isCorrectAnswer ? 0 : 1
     };
   },
 
   decrementTime() {
     return {
-      type: `DECREMENT_TIME`,
+      type: ActionType.DECREMENT_TIME,
       payload: 1
     };
   },
 
   resetState() {
     return {
-      type: `RESET`
-    };
-  },
-
-  requireAuthorization(status) {
-    return {
-      type: `REQUIRED_AUTHORIZATION`,
-      payload: status
-    };
-  },
-
-  loadQuestions(questions) {
-    return {
-      type: `LOAD_QUESTIONS`,
-      payload: questions
+      type: ActionType.RESET
     };
   }
-};
-
-const Operations = {
-  loadQuestions: () => (dispatch, getState, api) => {
-    return api.get(`/questions`)
-      .then(({data: questions}) => {
-        dispatch(ActionCreator.loadQuestions(questions));
-      });
-  }
-};
-
-const initialState = {
-  mistakes: 0,
-  step: -1,
-  time: 300,
-  questions: []
 };
 
 const reducer = (state = initialState, {type, payload}) => {
   switch (type) {
-    case `INCREMENT_STEP`:
+    case ActionType.INCREMENT_STEP:
       return Object.assign({}, state, {
         step: state.step + payload
       });
-    case `INCREMENT_MISTAKES`:
+    case ActionType.INCREMENT_MISTAKES:
       return Object.assign({}, state, {
         mistakes: state.mistakes + payload
       });
-    case `RESET`:
+    case ActionType.RESET:
       return Object.assign({}, initialState);
-    case `DECREMENT_TIME`:
+    case ActionType.DECREMENT_TIME:
       return Object.assign({}, state, {
         time: state.time - payload
-      });
-    case `LOAD_QUESTIONS`:
-      return Object.assign({}, state, {
-        questions: payload
       });
   }
 
@@ -100,9 +79,9 @@ const reducer = (state = initialState, {type, payload}) => {
 };
 
 export {
-  ActionCreator,
-  Operations,
   reducer,
+  ActionCreator,
+  ActionType,
   isGenreAnswerCorrect,
   isArtistAnswerCorrect
 };

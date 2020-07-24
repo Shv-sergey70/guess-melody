@@ -1,7 +1,8 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {ActionCreator} from "../../reducer/reducer";
+import {ActionCreator} from "../../reducer/game/game";
+import {getTime} from "../../reducer/game/selectors";
 
 class Timer extends PureComponent {
   static _getFormattedTime(time) {
@@ -47,7 +48,10 @@ Timer.propTypes = {
   tick: PropTypes.func.isRequired
 };
 
-const mapStateToProps = ({time}) => ({time});
+const mapStateToProps = (state) => ({
+  time: getTime(state)
+});
+
 const mapDispatchToProps = (dispatch) => ({
   tick: () => dispatch(ActionCreator.decrementTime())
 });
