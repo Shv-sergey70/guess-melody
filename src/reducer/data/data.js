@@ -1,5 +1,5 @@
-import history from '../../history';
-import Routes from '../../routes';
+import history from "../../history";
+import Route from '../../routes';
 
 const initialState = {
   questions: [],
@@ -29,7 +29,9 @@ const ActionCreator = {
 const authUser = (dispatch, userData) => {
   dispatch(ActionCreator.login(userData));
 
-  history.push(Routes.MAIN);
+  if (history.location.pathname === Route.AUTH) {
+    history.push(Route.MAIN);
+  }
 };
 
 const Operations = {

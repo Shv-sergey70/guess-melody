@@ -14,6 +14,7 @@ import {getQuestions} from "../../reducer/data/selectors";
 import AuthorizationScreen from "../authorization-screen/authorization-screen";
 import withLogin from "../../hocs/with-login/with-login";
 import AppRoute from '../../routes';
+import VictoryScreen from "../victory-screen/victory-screen";
 
 const GenreQuestionScreenWrapped = withUserAnswers(withActivePlayer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
@@ -37,6 +38,7 @@ class App extends PureComponent {
             </LosingScreen>
           );
         }}/>
+        <Route path={AppRoute.VICTORY} exact component={VictoryScreen}/>
         <Route path="/" render={this._getScreen}/>
         <Route render={() => <div>404</div>}/>
       </Switch>
