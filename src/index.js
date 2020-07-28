@@ -11,6 +11,7 @@ import {Operations} from './reducer/data/data';
 import App from './components/app/app';
 import createAPI from './api';
 import Route from './routes';
+import {attempts} from './init-data';
 
 const init = () => {
   const api = createAPI(() => {
@@ -31,7 +32,7 @@ const init = () => {
       <Provider store={store}>
         <Router history={history}>
           <App
-            attempts={3} />
+            attempts={attempts} />
         </Router>
       </Provider>,
       document.querySelector(`#root`)
