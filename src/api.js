@@ -1,24 +1,26 @@
 import axios from 'axios';
-import {ActionCreator} from "./reducer/user/user";
 
 const ApiStatus = {
+  UNAUTHORIZED: 401,
   FORBIDDEN: 403
 };
 
-const createAPI = (dispatch) => {
+const BASE_URL = `https://htmlacademy-react-2.appspot.com/guess-melody`;
+
+const createAPI = (onNotAuthorize) => {
   const api = axios.create({
-    baseURL: `https://htmlacademy-react-2.appspot.com/guess-melody`,
+    baseURL: BASE_URL,
     timeout: 5000,
     withCredentials: true
   });
 
   const onSuccess = (response) => response;
   const onFail = (error) => {
-    if (error.response.status === ApiStatus.FORBIDDEN) {
-      dispatch(ActionCreator.requireAuthorization(true));
+    if ([ApiStatus.FORBIDDEN, ApiStatus.UNAUTHORIZED].includes(error.response.status)) {
+      onNotAuthorize();
     }
 
-    return error;
+    return Promise.reject(error);
   };
 
   api.interceptors.response.use(onSuccess, onFail);

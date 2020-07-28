@@ -1,4 +1,5 @@
-import {ActionCreator as UserActionCreator} from '../user/user';
+import history from "../../history";
+import Route from '../../routes';
 
 const initialState = {
   questions: [],
@@ -27,7 +28,10 @@ const ActionCreator = {
 
 const authUser = (dispatch, userData) => {
   dispatch(ActionCreator.login(userData));
-  dispatch(UserActionCreator.requireAuthorization(false));
+
+  if (history.location.pathname === Route.AUTH) {
+    history.push(Route.MAIN);
+  }
 };
 
 const Operations = {
@@ -35,6 +39,9 @@ const Operations = {
     return api.get(`/questions`)
       .then(({data: questions}) => {
         dispatch(ActionCreator.loadQuestions(questions));
+      })
+      .catch(() => {
+
       });
   },
   login: (email, password) => (dispatch, getState, api) => {
@@ -47,6 +54,9 @@ const Operations = {
     return api.get(`/login`)
       .then(({data: userData}) => {
         authUser(dispatch, userData);
+      })
+      .catch(() => {
+        // should add error handling
       });
   }
 };
