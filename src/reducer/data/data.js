@@ -1,4 +1,3 @@
-import {ActionCreator as UserActionCreator} from '../user/user';
 import history from '../../history';
 import Routes from '../../routes';
 
@@ -29,7 +28,6 @@ const ActionCreator = {
 
 const authUser = (dispatch, userData) => {
   dispatch(ActionCreator.login(userData));
-  dispatch(UserActionCreator.requireAuthorization(false));
 
   history.push(Routes.MAIN);
 };

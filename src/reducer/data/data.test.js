@@ -99,7 +99,8 @@ describe(`Operations correctly works`, () => {
 
   test(`login returns 200 status, success login`, () => {
     const dispatchMock = jest.fn();
-    const API = createAPI(dispatchMock);
+    const onNotAuthorize = jest.fn();
+    const API = createAPI(onNotAuthorize);
     const APIMock = new MockAdapter(API);
 
     const userData = {
@@ -112,21 +113,19 @@ describe(`Operations correctly works`, () => {
 
     return login(dispatchMock, jest.fn(), API)
       .then(() => {
-        expect(dispatchMock).toHaveBeenCalledTimes(2);
+        expect(onNotAuthorize).toHaveBeenCalledTimes(0);
+        expect(dispatchMock).toHaveBeenCalledTimes(1);
         expect(dispatchMock).toHaveBeenNthCalledWith(1, {
           type: `LOGIN`,
           payload: userData
-        });
-        expect(dispatchMock).toHaveBeenNthCalledWith(2, {
-          type: `REQUIRED_AUTHORIZATION`,
-          payload: false
         });
       });
   });
 
   test(`checkLogin returns 200 status, already login`, () => {
     const dispatchMock = jest.fn();
-    const API = createAPI(dispatchMock);
+    const onNotAuthorize = jest.fn();
+    const API = createAPI(onNotAuthorize);
     const APIMock = new MockAdapter(API);
 
     const userData = {
@@ -139,14 +138,11 @@ describe(`Operations correctly works`, () => {
 
     return checkLogin(dispatchMock, jest.fn(), API)
       .then(() => {
-        expect(dispatchMock).toHaveBeenCalledTimes(2);
+        expect(onNotAuthorize).toHaveBeenCalledTimes(0);
+        expect(dispatchMock).toHaveBeenCalledTimes(1);
         expect(dispatchMock).toHaveBeenNthCalledWith(1, {
           type: `LOGIN`,
           payload: userData
-        });
-        expect(dispatchMock).toHaveBeenNthCalledWith(2, {
-          type: `REQUIRED_AUTHORIZATION`,
-          payload: false
         });
       });
   });
