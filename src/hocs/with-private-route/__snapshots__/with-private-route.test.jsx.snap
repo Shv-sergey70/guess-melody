@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WithPrivateRoute correctly works Component renders 1`] = `
+<Component
+  user={
+    Object {
+      "email": "test@test.ru",
+    }
+  }
+/>
+`;
+
+exports[`WithPrivateRoute correctly works Redirect to auth screen renders 1`] = `
+<Redirect
+  to="/auth"
+/>
+`;

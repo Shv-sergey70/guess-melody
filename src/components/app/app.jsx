@@ -10,15 +10,17 @@ import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import withUserAnswers from "../../hocs/with-user-answers/with-user-answers";
 import {ActionCreator} from "../../reducer/game/game";
 import {getTime, getStep, getMistakes} from '../../reducer/game/selectors';
-import {getQuestions} from "../../reducer/data/selectors";
+import {getQuestions, getUser} from "../../reducer/data/selectors";
 import AuthorizationScreen from "../authorization-screen/authorization-screen";
 import withLogin from "../../hocs/with-login/with-login";
 import AppRoute from '../../routes';
 import VictoryScreen from "../victory-screen/victory-screen";
+import withPrivateRoute from "../../hocs/with-private-route/with-private-route";
 
 const GenreQuestionScreenWrapped = withUserAnswers(withActivePlayer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 const AuthorizationScreenWrapped = withLogin(AuthorizationScreen);
+const VictoryScreenWrapped = withPrivateRoute(VictoryScreen);
 
 class App extends PureComponent {
   constructor(props) {
@@ -28,6 +30,8 @@ class App extends PureComponent {
   }
 
   render() {
+    const {user} = this.props;
+
     return (
       <Switch>
         <Route path={AppRoute.AUTH} exact component={AuthorizationScreenWrapped} />
@@ -38,7 +42,11 @@ class App extends PureComponent {
             </LosingScreen>
           );
         }}/>
-        <Route path={AppRoute.VICTORY} exact component={VictoryScreen}/>
+        <Route path={AppRoute.VICTORY} exact render={() => {
+          return (
+            <VictoryScreenWrapped user={user} />
+          );
+        }} />
         <Route path="/" render={this._getScreen}/>
         <Route render={() => <div>404</div>}/>
       </Switch>
@@ -103,14 +111,16 @@ App.propTypes = {
   attempts: PropTypes.number.isRequired,
   currentStep: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
-  mistakesCount: PropTypes.number.isRequired
+  mistakesCount: PropTypes.number.isRequired,
+  user: PropTypes.object // fix it
 };
 
 const mapStateToProps = (state) => ({
   currentStep: getStep(state),
   time: getTime(state),
   questions: getQuestions(state),
-  mistakesCount: getMistakes(state)
+  mistakesCount: getMistakes(state),
+  user: getUser(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
