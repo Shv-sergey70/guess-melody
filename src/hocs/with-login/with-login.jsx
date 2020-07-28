@@ -21,6 +21,7 @@ const withLogin = (Component) => {
 
       return (
         <Component
+          {...this.props}
           email={email}
           password={password}
           onEmailChange={this._handleEmailChange}

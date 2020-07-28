@@ -1,97 +1,776 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`App correctly renders Artist-question screen 1`] = `
-<WithActivePlayer
-  question={
-    Object {
-      "answers": Array [
-        Object {
-          "artist": "Billie Eilish",
-          "picture": "/img/default-artist.png",
-        },
-        Object {
-          "artist": "Imagine Dragons",
-          "picture": "/img/default-artist.png",
-        },
-        Object {
-          "artist": "Artur Latte",
-          "picture": "/img/default-artist.png",
-        },
-      ],
-      "song": Object {
-        "artist": "Artur Latte",
-        "src": "./tracks/Raim_Artur_Latte.mp3",
+<App
+  attempts={3}
+  currentStep={1}
+  mistakesCount={1}
+  onAnswer={[MockFunction]}
+  questions={
+    Array [
+      Object {
+        "answers": Array [
+          Object {
+            "genre": "pop",
+            "src": "./tracks/Anivar_Summer.mp3",
+          },
+          Object {
+            "genre": "jazz",
+            "src": "./tracks/Billie_Eilish_ilomilo.mp3",
+          },
+          Object {
+            "genre": "rock",
+            "src": "./tracks/Cj_L_Black_Rain.mp3",
+          },
+          Object {
+            "genre": "classic",
+            "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
+          },
+        ],
+        "genre": "rock",
+        "type": "genre",
       },
-      "type": "artist",
-    }
+      Object {
+        "answers": Array [
+          Object {
+            "artist": "Billie Eilish",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Imagine Dragons",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Artur Latte",
+            "picture": "/img/default-artist.png",
+          },
+        ],
+        "song": Object {
+          "artist": "Artur Latte",
+          "src": "./tracks/Raim_Artur_Latte.mp3",
+        },
+        "type": "artist",
+      },
+    ]
   }
-/>
+  time={300}
+>
+  <Switch>
+    <Route
+      computedMatch={
+        Object {
+          "isExact": true,
+          "params": Object {},
+          "path": "/",
+          "url": "/",
+        }
+      }
+      location={
+        Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        }
+      }
+      path="/"
+      render={[Function]}
+    >
+      <WithActivePlayer
+        question={
+          Object {
+            "answers": Array [
+              Object {
+                "artist": "Billie Eilish",
+                "picture": "/img/default-artist.png",
+              },
+              Object {
+                "artist": "Imagine Dragons",
+                "picture": "/img/default-artist.png",
+              },
+              Object {
+                "artist": "Artur Latte",
+                "picture": "/img/default-artist.png",
+              },
+            ],
+            "song": Object {
+              "artist": "Artur Latte",
+              "src": "./tracks/Raim_Artur_Latte.mp3",
+            },
+            "type": "artist",
+          }
+        }
+      >
+        <artist-question-screen
+          question={
+            Object {
+              "answers": Array [
+                Object {
+                  "artist": "Billie Eilish",
+                  "picture": "/img/default-artist.png",
+                },
+                Object {
+                  "artist": "Imagine Dragons",
+                  "picture": "/img/default-artist.png",
+                },
+                Object {
+                  "artist": "Artur Latte",
+                  "picture": "/img/default-artist.png",
+                },
+              ],
+              "song": Object {
+                "artist": "Artur Latte",
+                "src": "./tracks/Raim_Artur_Latte.mp3",
+              },
+              "type": "artist",
+            }
+          }
+          renderAudioPlayer={[MockFunction]}
+        />
+      </WithActivePlayer>
+    </Route>
+  </Switch>
+</App>
 `;
 
 exports[`App correctly renders Attempts losing screen 1`] = `
-<Connect(LosingScreen)>
-  <h2
-    className="result__title"
-  >
-    Какая жалость!
-  </h2>
-  <p
-    className="result__total result__total--fail"
-  >
-    У вас закончились все попытки. Ничего, повезёт в следующий раз!
-  </p>
-</Connect(LosingScreen)>
+<App
+  attempts={3}
+  currentStep={1}
+  mistakesCount={3}
+  onAnswer={[MockFunction]}
+  questions={
+    Array [
+      Object {
+        "answers": Array [
+          Object {
+            "genre": "pop",
+            "src": "./tracks/Anivar_Summer.mp3",
+          },
+          Object {
+            "genre": "jazz",
+            "src": "./tracks/Billie_Eilish_ilomilo.mp3",
+          },
+          Object {
+            "genre": "rock",
+            "src": "./tracks/Cj_L_Black_Rain.mp3",
+          },
+          Object {
+            "genre": "classic",
+            "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
+          },
+        ],
+        "genre": "rock",
+        "type": "genre",
+      },
+      Object {
+        "answers": Array [
+          Object {
+            "artist": "Billie Eilish",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Imagine Dragons",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Artur Latte",
+            "picture": "/img/default-artist.png",
+          },
+        ],
+        "song": Object {
+          "artist": "Artur Latte",
+          "src": "./tracks/Raim_Artur_Latte.mp3",
+        },
+        "type": "artist",
+      },
+    ]
+  }
+  time={300}
+>
+  <Switch>
+    <Route
+      computedMatch={
+        Object {
+          "isExact": true,
+          "params": Object {},
+          "path": "/lose",
+          "url": "/lose",
+        }
+      }
+      exact={true}
+      location={
+        Object {
+          "hash": "",
+          "pathname": "/lose",
+          "search": "",
+          "state": undefined,
+        }
+      }
+      path="/lose"
+      render={[Function]}
+    >
+      <losing-screen>
+        <h2
+          className="result__title"
+        >
+          Какая жалость!
+        </h2>
+        <p
+          className="result__total result__total--fail"
+        >
+          У вас закончились все попытки. Ничего, повезёт в следующий раз!
+        </p>
+      </losing-screen>
+    </Route>
+  </Switch>
+</App>
 `;
 
-exports[`App correctly renders Authorization is required 1`] = `<WithLogin />`;
+exports[`App correctly renders Authorization is required 1`] = `
+<App
+  attempts={3}
+  currentStep={0}
+  mistakesCount={1}
+  onAnswer={[MockFunction]}
+  questions={
+    Array [
+      Object {
+        "answers": Array [
+          Object {
+            "genre": "pop",
+            "src": "./tracks/Anivar_Summer.mp3",
+          },
+          Object {
+            "genre": "jazz",
+            "src": "./tracks/Billie_Eilish_ilomilo.mp3",
+          },
+          Object {
+            "genre": "rock",
+            "src": "./tracks/Cj_L_Black_Rain.mp3",
+          },
+          Object {
+            "genre": "classic",
+            "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
+          },
+        ],
+        "genre": "rock",
+        "type": "genre",
+      },
+      Object {
+        "answers": Array [
+          Object {
+            "artist": "Billie Eilish",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Imagine Dragons",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Artur Latte",
+            "picture": "/img/default-artist.png",
+          },
+        ],
+        "song": Object {
+          "artist": "Artur Latte",
+          "src": "./tracks/Raim_Artur_Latte.mp3",
+        },
+        "type": "artist",
+      },
+    ]
+  }
+  time={300}
+>
+  <Switch>
+    <Route
+      component={[Function]}
+      computedMatch={
+        Object {
+          "isExact": true,
+          "params": Object {},
+          "path": "/auth",
+          "url": "/auth",
+        }
+      }
+      exact={true}
+      location={
+        Object {
+          "hash": "",
+          "pathname": "/auth",
+          "search": "",
+          "state": undefined,
+        }
+      }
+      path="/auth"
+    >
+      <WithLogin
+        history={
+          Object {
+            "action": "POP",
+            "block": [Function],
+            "canGo": [Function],
+            "createHref": [Function],
+            "entries": Array [
+              Object {
+                "hash": "",
+                "pathname": "/auth",
+                "search": "",
+                "state": undefined,
+              },
+            ],
+            "go": [Function],
+            "goBack": [Function],
+            "goForward": [Function],
+            "index": 0,
+            "length": 1,
+            "listen": [Function],
+            "location": Object {
+              "hash": "",
+              "pathname": "/auth",
+              "search": "",
+              "state": undefined,
+            },
+            "push": [Function],
+            "replace": [Function],
+          }
+        }
+        location={
+          Object {
+            "hash": "",
+            "pathname": "/auth",
+            "search": "",
+            "state": undefined,
+          }
+        }
+        match={
+          Object {
+            "isExact": true,
+            "params": Object {},
+            "path": "/auth",
+            "url": "/auth",
+          }
+        }
+      >
+        <authorization-screen
+          email=""
+          history={
+            Object {
+              "action": "POP",
+              "block": [Function],
+              "canGo": [Function],
+              "createHref": [Function],
+              "entries": Array [
+                Object {
+                  "hash": "",
+                  "pathname": "/auth",
+                  "search": "",
+                  "state": undefined,
+                },
+              ],
+              "go": [Function],
+              "goBack": [Function],
+              "goForward": [Function],
+              "index": 0,
+              "length": 1,
+              "listen": [Function],
+              "location": Object {
+                "hash": "",
+                "pathname": "/auth",
+                "search": "",
+                "state": undefined,
+              },
+              "push": [Function],
+              "replace": [Function],
+            }
+          }
+          isDisabled={true}
+          location={
+            Object {
+              "hash": "",
+              "pathname": "/auth",
+              "search": "",
+              "state": undefined,
+            }
+          }
+          match={
+            Object {
+              "isExact": true,
+              "params": Object {},
+              "path": "/auth",
+              "url": "/auth",
+            }
+          }
+          onEmailChange={[Function]}
+          onPasswordChange={[Function]}
+          password=""
+        />
+      </WithLogin>
+    </Route>
+  </Switch>
+</App>
+`;
 
 exports[`App correctly renders Genre-question screen 1`] = `
-<WithUserAnswers
+<App
+  attempts={3}
+  currentStep={0}
+  mistakesCount={1}
   onAnswer={[MockFunction]}
-  question={
-    Object {
-      "answers": Array [
-        Object {
-          "genre": "pop",
-          "src": "./tracks/Anivar_Summer.mp3",
+  questions={
+    Array [
+      Object {
+        "answers": Array [
+          Object {
+            "genre": "pop",
+            "src": "./tracks/Anivar_Summer.mp3",
+          },
+          Object {
+            "genre": "jazz",
+            "src": "./tracks/Billie_Eilish_ilomilo.mp3",
+          },
+          Object {
+            "genre": "rock",
+            "src": "./tracks/Cj_L_Black_Rain.mp3",
+          },
+          Object {
+            "genre": "classic",
+            "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
+          },
+        ],
+        "genre": "rock",
+        "type": "genre",
+      },
+      Object {
+        "answers": Array [
+          Object {
+            "artist": "Billie Eilish",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Imagine Dragons",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Artur Latte",
+            "picture": "/img/default-artist.png",
+          },
+        ],
+        "song": Object {
+          "artist": "Artur Latte",
+          "src": "./tracks/Raim_Artur_Latte.mp3",
         },
-        Object {
-          "genre": "jazz",
-          "src": "./tracks/Billie_Eilish_ilomilo.mp3",
-        },
-        Object {
-          "genre": "rock",
-          "src": "./tracks/Cj_L_Black_Rain.mp3",
-        },
-        Object {
-          "genre": "classic",
-          "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
-        },
-      ],
-      "genre": "rock",
-      "type": "genre",
-    }
+        "type": "artist",
+      },
+    ]
   }
-/>
+  time={300}
+>
+  <Switch>
+    <Route
+      computedMatch={
+        Object {
+          "isExact": true,
+          "params": Object {},
+          "path": "/",
+          "url": "/",
+        }
+      }
+      location={
+        Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        }
+      }
+      path="/"
+      render={[Function]}
+    >
+      <WithUserAnswers
+        onAnswer={[MockFunction]}
+        question={
+          Object {
+            "answers": Array [
+              Object {
+                "genre": "pop",
+                "src": "./tracks/Anivar_Summer.mp3",
+              },
+              Object {
+                "genre": "jazz",
+                "src": "./tracks/Billie_Eilish_ilomilo.mp3",
+              },
+              Object {
+                "genre": "rock",
+                "src": "./tracks/Cj_L_Black_Rain.mp3",
+              },
+              Object {
+                "genre": "classic",
+                "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
+              },
+            ],
+            "genre": "rock",
+            "type": "genre",
+          }
+        }
+      >
+        <WithActivePlayer
+          answers={
+            Array [
+              false,
+              false,
+              false,
+              false,
+            ]
+          }
+          changeAnswer={[Function]}
+          onAnswer={[MockFunction]}
+          question={
+            Object {
+              "answers": Array [
+                Object {
+                  "genre": "pop",
+                  "src": "./tracks/Anivar_Summer.mp3",
+                },
+                Object {
+                  "genre": "jazz",
+                  "src": "./tracks/Billie_Eilish_ilomilo.mp3",
+                },
+                Object {
+                  "genre": "rock",
+                  "src": "./tracks/Cj_L_Black_Rain.mp3",
+                },
+                Object {
+                  "genre": "classic",
+                  "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
+                },
+              ],
+              "genre": "rock",
+              "type": "genre",
+            }
+          }
+          submitAnswers={[Function]}
+        >
+          <genre-question-screen
+            answers={
+              Array [
+                false,
+                false,
+                false,
+                false,
+              ]
+            }
+            changeAnswer={[Function]}
+            onAnswer={[MockFunction]}
+            question={
+              Object {
+                "answers": Array [
+                  Object {
+                    "genre": "pop",
+                    "src": "./tracks/Anivar_Summer.mp3",
+                  },
+                  Object {
+                    "genre": "jazz",
+                    "src": "./tracks/Billie_Eilish_ilomilo.mp3",
+                  },
+                  Object {
+                    "genre": "rock",
+                    "src": "./tracks/Cj_L_Black_Rain.mp3",
+                  },
+                  Object {
+                    "genre": "classic",
+                    "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
+                  },
+                ],
+                "genre": "rock",
+                "type": "genre",
+              }
+            }
+            renderAudioPlayer={[MockFunction]}
+            submitAnswers={[Function]}
+          />
+        </WithActivePlayer>
+      </WithUserAnswers>
+    </Route>
+  </Switch>
+</App>
 `;
 
 exports[`App correctly renders Time losing screen 1`] = `
-<Connect(LosingScreen)>
-  <h2
-    className="result__title"
-  >
-    Увы и ах!
-  </h2>
-  <p
-    className="result__total result__total--fail"
-  >
-    Время вышло! Вы не успели отгадать все мелодии
-  </p>
-</Connect(LosingScreen)>
+<App
+  attempts={3}
+  currentStep={1}
+  isAuthorizationRequired={false}
+  mistakesCount={1}
+  onAnswer={[MockFunction]}
+  questions={
+    Array [
+      Object {
+        "answers": Array [
+          Object {
+            "genre": "pop",
+            "src": "./tracks/Anivar_Summer.mp3",
+          },
+          Object {
+            "genre": "jazz",
+            "src": "./tracks/Billie_Eilish_ilomilo.mp3",
+          },
+          Object {
+            "genre": "rock",
+            "src": "./tracks/Cj_L_Black_Rain.mp3",
+          },
+          Object {
+            "genre": "classic",
+            "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
+          },
+        ],
+        "genre": "rock",
+        "type": "genre",
+      },
+      Object {
+        "answers": Array [
+          Object {
+            "artist": "Billie Eilish",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Imagine Dragons",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Artur Latte",
+            "picture": "/img/default-artist.png",
+          },
+        ],
+        "song": Object {
+          "artist": "Artur Latte",
+          "src": "./tracks/Raim_Artur_Latte.mp3",
+        },
+        "type": "artist",
+      },
+    ]
+  }
+  time={0}
+>
+  <Switch>
+    <Route
+      computedMatch={
+        Object {
+          "isExact": true,
+          "params": Object {},
+          "path": "/lose",
+          "url": "/lose",
+        }
+      }
+      exact={true}
+      location={
+        Object {
+          "hash": "",
+          "pathname": "/lose",
+          "search": "",
+          "state": undefined,
+        }
+      }
+      path="/lose"
+      render={[Function]}
+    >
+      <losing-screen>
+        <h2
+          className="result__title"
+        >
+          Увы и ах!
+        </h2>
+        <p
+          className="result__total result__total--fail"
+        >
+          Время вышло! Вы не успели отгадать все мелодии
+        </p>
+      </losing-screen>
+    </Route>
+  </Switch>
+</App>
 `;
 
 exports[`App correctly renders Welcome screen 1`] = `
-<Connect(WelcomeScreen)
+<App
   attempts={3}
-/>
+  currentStep={-1}
+  mistakesCount={1}
+  onAnswer={[MockFunction]}
+  questions={
+    Array [
+      Object {
+        "answers": Array [
+          Object {
+            "genre": "pop",
+            "src": "./tracks/Anivar_Summer.mp3",
+          },
+          Object {
+            "genre": "jazz",
+            "src": "./tracks/Billie_Eilish_ilomilo.mp3",
+          },
+          Object {
+            "genre": "rock",
+            "src": "./tracks/Cj_L_Black_Rain.mp3",
+          },
+          Object {
+            "genre": "classic",
+            "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
+          },
+        ],
+        "genre": "rock",
+        "type": "genre",
+      },
+      Object {
+        "answers": Array [
+          Object {
+            "artist": "Billie Eilish",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Imagine Dragons",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Artur Latte",
+            "picture": "/img/default-artist.png",
+          },
+        ],
+        "song": Object {
+          "artist": "Artur Latte",
+          "src": "./tracks/Raim_Artur_Latte.mp3",
+        },
+        "type": "artist",
+      },
+    ]
+  }
+  time={300}
+>
+  <Switch>
+    <Route
+      computedMatch={
+        Object {
+          "isExact": true,
+          "params": Object {},
+          "path": "/",
+          "url": "/",
+        }
+      }
+      location={
+        Object {
+          "hash": "",
+          "pathname": "/",
+          "search": "",
+          "state": undefined,
+        }
+      }
+      path="/"
+      render={[Function]}
+    >
+      <welcome-screen
+        attempts={3}
+      />
+    </Route>
+  </Switch>
+</App>
 `;

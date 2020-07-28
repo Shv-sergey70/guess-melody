@@ -1,9 +1,17 @@
 import React from 'react';
-import {configure, shallow} from 'enzyme';
+import {configure, mount} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import {App} from "./app";
+import {MemoryRouter} from 'react-router-dom';
 
 configure({adapter: new Adapter()});
+
+jest.mock(`../../hocs/with-active-player/with-active-player.jsx`);
+jest.mock(`../artist-question-screen/artist-question-screen.jsx`, () => `artist-question-screen`);
+jest.mock(`../genre-question-screen/genre-question-screen.jsx`, () => `genre-question-screen`);
+jest.mock(`../welcome-screen/welcome-screen.jsx`, () => `welcome-screen`);
+jest.mock(`../authorization-screen/authorization-screen.jsx`, () => `authorization-screen`);
+jest.mock(`../losing-screen/losing-screen.jsx`, () => `losing-screen`);
 
 const questions = [
   {
@@ -53,92 +61,99 @@ const questions = [
 
 describe(`App correctly renders`, () => {
   test(`Welcome screen`, () => {
-    const tree = shallow(
-        <App
-          time={300}
-          attempts={3}
-          questions={questions}
-          currentStep={-1}
-          onAnswer={jest.fn()}
-          mistakesCount={1}
-          isAuthorizationRequired={false} />
+    const tree = mount(
+        <MemoryRouter initialEntries={[`/`]} keyLength={0} >
+          <App
+            time={300}
+            attempts={3}
+            questions={questions}
+            currentStep={-1}
+            onAnswer={jest.fn()}
+            mistakesCount={1} />
+        </MemoryRouter>
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.find(`App`)).toMatchSnapshot();
   });
 
   test(`Genre-question screen`, () => {
-    const tree = shallow(
-        <App
-          time={300}
-          attempts={3}
-          questions={questions}
-          currentStep={0}
-          onAnswer={jest.fn()}
-          mistakesCount={1}
-          isAuthorizationRequired={false} />
+    const tree = mount(
+        <MemoryRouter initialEntries={[`/`]} keyLength={0} >
+          <App
+            time={300}
+            attempts={3}
+            questions={questions}
+            currentStep={0}
+            onAnswer={jest.fn()}
+            mistakesCount={1} />
+        </MemoryRouter>
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.find(`App`)).toMatchSnapshot();
   });
 
   test(`Artist-question screen`, () => {
-    const tree = shallow(
-        <App
-          time={300}
-          attempts={3}
-          questions={questions}
-          currentStep={1}
-          onAnswer={jest.fn()}
-          mistakesCount={1}
-          isAuthorizationRequired={false} />
+    const tree = mount(
+        <MemoryRouter initialEntries={[`/`]} keyLength={0} >
+          <App
+            time={300}
+            attempts={3}
+            questions={questions}
+            currentStep={1}
+            onAnswer={jest.fn()}
+            mistakesCount={1} />
+        </MemoryRouter>
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.find(`App`)).toMatchSnapshot();
   });
 
   test(`Time losing screen`, () => {
-    const tree = shallow(
-        <App
-          time={0}
-          attempts={3}
-          questions={questions}
-          currentStep={1}
-          onAnswer={jest.fn()}
-          mistakesCount={1}
-          isAuthorizationRequired={false} />
+    const tree = mount(
+        <MemoryRouter initialEntries={[`/lose`]} keyLength={0} >
+          <App
+            time={0}
+            attempts={3}
+            questions={questions}
+            currentStep={1}
+            onAnswer={jest.fn()}
+            mistakesCount={1}
+            isAuthorizationRequired={false} />
+        </MemoryRouter>
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.find(`App`)).toMatchSnapshot();
   });
 
   test(`Attempts losing screen`, () => {
-    const tree = shallow(
-        <App
-          time={300}
-          attempts={3}
-          questions={questions}
-          currentStep={1}
-          onAnswer={jest.fn()}
-          mistakesCount={3}
-          isAuthorizationRequired={false} />
+    const tree = mount(
+        <MemoryRouter initialEntries={[`/lose`]} keyLength={0} >
+          <App
+            time={300}
+            attempts={3}
+            questions={questions}
+            currentStep={1}
+            onAnswer={jest.fn()}
+            mistakesCount={3} />
+        </MemoryRouter>
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.find(`App`)).toMatchSnapshot();
   });
 
   test(`Authorization is required`, () => {
-    const tree = shallow(
-        <App
-          time={300}
-          attempts={3}
-          questions={questions}
-          currentStep={0}
-          onAnswer={jest.fn()}
-          mistakesCount={1}
-          isAuthorizationRequired={true} />
+    const tree = mount(
+        <MemoryRouter initialEntries={[`/auth`]} keyLength={0} >
+          <App
+            time={300}
+            attempts={3}
+            questions={questions}
+            currentStep={0}
+            onAnswer={jest.fn()}
+            mistakesCount={1} />
+        </MemoryRouter>
     );
 
-    expect(tree).toMatchSnapshot();
+    expect(tree.find(`App`)).toMatchSnapshot();
   });
 });

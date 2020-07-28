@@ -2,8 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {Operations} from "../../reducer/data/data";
+import {getAuthorization} from "../../reducer/user/selectors";
 
-const AuthorizationScreen = ({email, password, onEmailChange, onPasswordChange, login, isDisabled}) => {
+const AuthorizationScreen = (props) => {
+  const {email, password, onEmailChange, onPasswordChange, login, isDisabled} = props;
+
   return (
     <section className="login">
       <div className="login__logo">
@@ -54,12 +57,17 @@ AuthorizationScreen.propTypes = {
   onEmailChange: PropTypes.func.isRequired,
   onPasswordChange: PropTypes.func.isRequired,
   login: PropTypes.func.isRequired,
-  isDisabled: PropTypes.bool.isRequired
+  isDisabled: PropTypes.bool.isRequired,
+  isAuthorizationRequired: PropTypes.bool.isRequired
 };
+
+const mapStateToProps = (state) => ({
+  isAuthorizationRequired: getAuthorization(state)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   login: (email, password) => dispatch(Operations.login(email, password))
 });
 
 export {AuthorizationScreen};
-export default connect(null, mapDispatchToProps)(AuthorizationScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(AuthorizationScreen);

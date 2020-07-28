@@ -4,19 +4,23 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {compose} from 'recompose';
+import {Router} from 'react-router-dom';
+import history from './history';
 import reducer from './reducer';
 import {Operations} from './reducer/data/data';
 import App from './components/app/app';
 import createAPI from './api';
+import Route from './routes';
 
 const init = () => {
-  // Function passes into createAPI, because store depends on API, and API depends on store
-  const api = createAPI((...args) => store.dispatch(...args));
+  const api = createAPI(() => {
+    history.push(Route.AUTH);
+  });
   const store = createStore(
       reducer,
       compose(
           applyMiddleware(thunk.withExtraArgument(api)),
-          window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+          window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__({trace: true})
       )
   );
 
@@ -25,8 +29,10 @@ const init = () => {
 
   ReactDom.render(
       <Provider store={store}>
-        <App
-          attempts={3} />
+        <Router history={history}>
+          <App
+            attempts={3} />
+        </Router>
       </Provider>,
       document.querySelector(`#root`)
   );

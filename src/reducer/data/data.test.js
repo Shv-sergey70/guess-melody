@@ -83,7 +83,8 @@ describe(`Operations correctly works`, () => {
 
   test(`loadQuestions returns 403 status, authorization required`, () => {
     const dispatchMock = jest.fn();
-    const API = createAPI(dispatchMock);
+    const onNotAuthorize = jest.fn();
+    const API = createAPI(onNotAuthorize);
     const APIMock = new MockAdapter(API);
 
     APIMock.onGet(`/questions`).reply(403);
@@ -91,11 +92,8 @@ describe(`Operations correctly works`, () => {
 
     return questionLoader(dispatchMock, jest.fn(), API)
       .then(() => {
-        expect(dispatchMock).toHaveBeenCalledTimes(2);
-        expect(dispatchMock).toHaveBeenNthCalledWith(1, {
-          type: `REQUIRED_AUTHORIZATION`,
-          payload: true
-        });
+        expect(dispatchMock).toHaveBeenCalledTimes(0);
+        expect(onNotAuthorize).toHaveBeenCalledTimes(1);
       });
   });
 
