@@ -13,7 +13,7 @@ describe(`AudioPlayer correctly renders`, () => {
         <AudioPlayer
           isPlaying={false}
           isLoading={true}
-          onPlayButtonClick={jest.fn()}>
+          changePlayingState={jest.fn()}>
           <audio src={pathToMusic}/>
         </AudioPlayer>
     );
@@ -26,7 +26,7 @@ describe(`AudioPlayer correctly renders`, () => {
         <AudioPlayer
           isPlaying={true}
           isLoading={false}
-          onPlayButtonClick={jest.fn()}>
+          changePlayingState={jest.fn()}>
           <audio src={pathToMusic}/>
         </AudioPlayer>
     );

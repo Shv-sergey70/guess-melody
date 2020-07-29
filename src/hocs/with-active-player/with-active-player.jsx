@@ -10,7 +10,7 @@ const withActivePlayer = (Component) => {
       super(props);
 
       this.state = {
-        activePlayer: -1
+        activePlayer: 0
       };
 
       this._setActivePlayer = this._setActivePlayer.bind(this);
@@ -27,7 +27,7 @@ const withActivePlayer = (Component) => {
               <AudioPlayerWrapped
                 src={src}
                 isPlaying={activePlayer === id}
-                onPlayButtonClick={() => this._setActivePlayer(id)}/>
+                changePlayingState={() => this._setActivePlayer(id)}/>
             );
           }}
         />

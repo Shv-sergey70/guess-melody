@@ -7,7 +7,6 @@ const withAudio = (Component) => {
       super(props);
 
       this.state = {
-        progress: 0,
         isLoading: true
       };
 
@@ -16,6 +15,7 @@ const withAudio = (Component) => {
 
     componentDidMount() {
       const {current: audio} = this._audioRef;
+      const {changePlayingState} = this.props;
 
       audio.oncanplaythrough = () => {
         this.setState({
@@ -23,22 +23,9 @@ const withAudio = (Component) => {
         });
       };
 
-      audio.onplay = () => {
-        this.setState({
-          isPlaying: true
-        });
-      };
-
-      audio.onpause = () => {
-        this.setState({
-          isPlaying: false
-        });
-      };
-
-      audio.ontimeupdate = () => {
-        this.setState({
-          progress: audio.currentTime
-        });
+      audio.onerror = () => {
+        changePlayingState();
+        audio.load();
       };
     }
 
@@ -78,7 +65,8 @@ const withAudio = (Component) => {
 
   WithAudio.propTypes = {
     src: PropTypes.string.isRequired,
-    isPlaying: PropTypes.bool.isRequired
+    isPlaying: PropTypes.bool.isRequired,
+    changePlayingState: PropTypes.func.isRequired
   };
 
   return WithAudio;
