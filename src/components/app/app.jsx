@@ -2,13 +2,8 @@ import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import WelcomeScreen from '../welcome-screen/welcome-screen';
-import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
-import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
 import {connect} from "react-redux";
 import LosingScreen from "../losing-screen/losing-screen";
-import withActivePlayer from "../../hocs/with-active-player/with-active-player";
-import withUserAnswers from "../../hocs/with-user-answers/with-user-answers";
-import {ActionCreator} from "../../reducer/game/game";
 import {getStep, getMistakes, checkTime, checkAttempt} from '../../reducer/game/selectors';
 import {getQuestions, getUser} from "../../reducer/data/selectors";
 import AuthorizationScreen from "../authorization-screen/authorization-screen";
@@ -16,9 +11,8 @@ import withLogin from "../../hocs/with-login/with-login";
 import AppRoute from '../../routes';
 import VictoryScreen from "../victory-screen/victory-screen";
 import withPrivateRoute from "../../hocs/with-private-route/with-private-route";
+import QuestionScreenLayout from "../question-screen-layout/question-screen-layout";
 
-const GenreQuestionScreenWrapped = withUserAnswers(withActivePlayer(GenreQuestionScreen));
-const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 const AuthorizationScreenWrapped = withLogin(AuthorizationScreen);
 const VictoryScreenWrapped = withPrivateRoute(VictoryScreen);
 
@@ -48,7 +42,7 @@ class App extends PureComponent {
   }
 
   _getScreen() {
-    const {currentStep, questions, attempts, onAnswer, isNoMoreTime, isNoMoreAttempts} = this.props;
+    const {currentStep, questions, attempts, isNoMoreTime, isNoMoreAttempts} = this.props;
 
     if (isNoMoreTime || isNoMoreAttempts) {
       return <Redirect to={AppRoute.LOSE}/>;
@@ -60,29 +54,17 @@ class App extends PureComponent {
       );
     }
 
-    switch (questions[currentStep].type) {
-      case `genre`:
-        return (
-          <GenreQuestionScreenWrapped
-            question={questions[currentStep]}
-            onAnswer={onAnswer} />
-        );
-      case `artist`:
-        return (
-          <ArtistQuestionScreenWrapped
-            question={questions[currentStep]} />
-        );
-    }
-
-    return null;
+    return (
+      <QuestionScreenLayout
+        question={questions[currentStep]}/>
+    );
   }
 }
 
 App.propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.object),
+  questions: PropTypes.arrayOf(PropTypes.object), // fix it
   attempts: PropTypes.number.isRequired,
   currentStep: PropTypes.number.isRequired,
-  onAnswer: PropTypes.func.isRequired,
   mistakesCount: PropTypes.number.isRequired,
   user: PropTypes.object, // fix it
   isNoMoreTime: PropTypes.bool.isRequired,
@@ -98,12 +80,5 @@ const mapStateToProps = (state) => ({
   isNoMoreAttempts: checkAttempt(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onAnswer: (answer, question) => {
-    dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistakes(answer, question));
-  }
-});
-
 export {App};
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

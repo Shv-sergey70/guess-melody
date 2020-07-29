@@ -1,10 +1,9 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, Fragment} from 'react';
 import PropTypes from "prop-types";
-import MistakesList from "../mistakes-list/mistakes-list";
 import {ActionCreator} from "../../reducer/game/game";
 import {connect} from "react-redux";
-import Timer from "../timer/timer";
 import {getStep} from "../../reducer/game/selectors";
+import {artistQuestion} from "../../types/types";
 
 class ArtistQuestionScreen extends PureComponent {
   constructor(props) {
@@ -34,36 +33,18 @@ class ArtistQuestionScreen extends PureComponent {
     });
 
     return (
-      <section className="game game--artist">
-        <header className="game__header">
-          <a className="game__back" href="#">
-            <span className="visually-hidden">Сыграть ещё раз</span>
-            <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
-          </a>
-
-          <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-            <circle className="timer__line" cx="390" cy="390" r="370"
-              style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
-          </svg>
-
-          <Timer/>
-
-          <MistakesList/>
-        </header>
-
-        <section className="game__screen">
-          <h2 className="game__title">Кто исполняет эту песню?</h2>
-          <div className="game__track">
-            <div className="track">
-              {renderAudioPlayer(song.src, 0)}
-            </div>
+      <Fragment>
+        <h2 className="game__title">Кто исполняет эту песню?</h2>
+        <div className="game__track">
+          <div className="track">
+            {renderAudioPlayer(song.src, 0)}
           </div>
+        </div>
 
-          <form className="game__artist">
-            {content}
-          </form>
-        </section>
-      </section>
+        <form className="game__artist">
+          {content}
+        </form>
+      </Fragment>
     );
   }
 
@@ -74,22 +55,8 @@ class ArtistQuestionScreen extends PureComponent {
   }
 }
 
-const artistQuestionPropTypes = PropTypes.exact({
-  type: PropTypes.oneOf([`artist`]).isRequired,
-  song: PropTypes.exact({
-    artist: PropTypes.string.isRequired,
-    src: PropTypes.string.isRequired
-  }).isRequired,
-  answers: PropTypes.arrayOf(
-      PropTypes.exact({
-        picture: PropTypes.string.isRequired,
-        artist: PropTypes.string.isRequired
-      }).isRequired
-  ).isRequired
-}).isRequired;
-
 ArtistQuestionScreen.propTypes = {
-  question: artistQuestionPropTypes,
+  question: artistQuestion,
   onAnswer: PropTypes.func.isRequired,
   screenIndex: PropTypes.number.isRequired,
   renderAudioPlayer: PropTypes.func.isRequired

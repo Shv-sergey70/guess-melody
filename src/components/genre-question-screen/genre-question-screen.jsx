@@ -1,10 +1,7 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {genreQuestion} from '../../types/types';
-
-import MistakesList from "../mistakes-list/mistakes-list";
 import {connect} from "react-redux";
-import Timer from "../timer/timer";
 import {getStep} from "../../reducer/game/selectors";
 
 class GenreQuestionScreen extends PureComponent {
@@ -42,38 +39,20 @@ class GenreQuestionScreen extends PureComponent {
     });
 
     return (
-      <section className="game game--genre">
-        <header className="game__header">
-          <a className="game__back" href="#">
-            <span className="visually-hidden">Сыграть ещё раз</span>
-            <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
-          </a>
+      <Fragment>
+        <h2 className="game__title">Выберите {genre} треки</h2>
+        <form
+          className="game__tracks"
+          onSubmit={this._handleFormSubmit}>
+          {content}
 
-          <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-            <circle className="timer__line" cx="390" cy="390" r="370"
-              style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
-          </svg>
-
-          <Timer/>
-
-          <MistakesList/>
-        </header>
-
-        <section className="game__screen">
-          <h2 className="game__title">Выберите {genre} треки</h2>
-          <form
-            className="game__tracks"
-            onSubmit={this._handleFormSubmit}>
-            {content}
-
-            <button
-              className="game__submit button"
-              type="submit">
-              Ответить
-            </button>
-          </form>
-        </section>
-      </section>
+          <button
+            className="game__submit button"
+            type="submit">
+            Ответить
+          </button>
+        </form>
+      </Fragment>
     );
   }
 
