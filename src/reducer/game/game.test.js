@@ -75,6 +75,19 @@ describe(`Reducer works correctly`, () => {
       })).toEqual(initialState);
     });
   });
+
+  describe(`Reducer with REPLAY action correctly works`, () => {
+    test(`Should set initial state, but step = 0`, () => {
+      expect(reducer({
+        step: 200,
+        mistakes: 150,
+        time: 800,
+        questions: [1, 4, 7]
+      }, {
+        type: `REPLAY`
+      })).toEqual(Object.assign({}, initialState, {step: 0}));
+    });
+  });
 });
 
 describe(`ActionCreator correctly works`, () => {
@@ -142,6 +155,14 @@ describe(`ActionCreator correctly works`, () => {
     test(`Returns correct object`, () => {
       expect(ActionCreator.resetState()).toEqual({
         type: `RESET`
+      });
+    });
+  });
+
+  describe(`replay correctly works`, () => {
+    test(`Returns correct object`, () => {
+      expect(ActionCreator.replay()).toEqual({
+        type: `REPLAY`
       });
     });
   });

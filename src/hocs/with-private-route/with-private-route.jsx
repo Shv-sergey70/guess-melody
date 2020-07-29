@@ -5,7 +5,6 @@ import Route from '../../routes';
 
 const withPrivateRoute = (Component) => {
   const WithPrivateRoute = (props) => {
-
     if (Object.keys(props.user).length === 0) {
       return <Redirect to={Route.AUTH} />;
     }

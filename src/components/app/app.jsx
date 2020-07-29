@@ -42,7 +42,7 @@ class App extends PureComponent {
   }
 
   _getScreen() {
-    const {currentStep, questions, attempts, isNoMoreTime, isNoMoreAttempts} = this.props;
+    const {currentStep, questions, attempts, isNoMoreTime, isNoMoreAttempts, user} = this.props;
 
     if (isNoMoreTime || isNoMoreAttempts) {
       return <Redirect to={AppRoute.LOSE}/>;
@@ -52,6 +52,10 @@ class App extends PureComponent {
       return (
         <WelcomeScreen attempts={attempts} />
       );
+    }
+
+    if (currentStep >= questions.length) {
+      return <VictoryScreenWrapped user={user} />;
     }
 
     return (

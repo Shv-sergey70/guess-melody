@@ -1,6 +1,6 @@
 import {createSelector} from 'reselect';
 import NameSpace from '../namespaces';
-import {attempts} from '../../init-data';
+import {attempts, gameTime} from '../../init-data';
 
 const NAMESPACE = NameSpace.GAME;
 
@@ -9,11 +9,13 @@ const getStep = (state) => state[NAMESPACE].step;
 const getTime = (state) => state[NAMESPACE].time;
 const checkTime = createSelector([getTime], (time) => time === 0);
 const checkAttempt = createSelector([getMistakes], (mistakes) => mistakes >= attempts);
+const getWastedTime = createSelector([getTime], (timeLeft) => gameTime - timeLeft);
 
 export {
   getMistakes,
   getStep,
   getTime,
   checkTime,
-  checkAttempt
+  checkAttempt,
+  getWastedTime
 };
