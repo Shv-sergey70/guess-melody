@@ -35,15 +35,13 @@ class App extends PureComponent {
     return (
       <Switch>
         <Route path={AppRoute.AUTH} exact component={AuthorizationScreenWrapped} />
-        <Route path={AppRoute.LOSE} exact render={() => {
-          return (<LosingScreen/>);
-        }}/>
+        <Route path={AppRoute.LOSE} exact component={LosingScreen} />
         <Route path={AppRoute.VICTORY} exact render={() => {
           return (
             <VictoryScreenWrapped user={user} />
           );
         }} />
-        <Route path="/" render={this._getScreen}/>
+        <Route path={AppRoute.MAIN} render={this._getScreen}/>
         <Route render={() => <div>404</div>}/>
       </Switch>
     );
