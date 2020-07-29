@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
 import Timer from "../timer/timer";
 import MistakesList from "../mistakes-list/mistakes-list";
 import {ActionCreator} from "../../reducer/game/game";
@@ -9,11 +10,12 @@ import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 import {question as questionPropTypes} from "../../types/types";
+import Route from '../../routes';
 
 const GenreQuestionScreenWrapped = withUserAnswers(withActivePlayer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
-const QuestionScreenLayout = ({question, onAnswer}) => {
+const QuestionScreenLayout = ({question, onAnswer, onReplay}) => {
   let content = null;
 
   switch (question.type) {
@@ -39,15 +41,13 @@ const QuestionScreenLayout = ({question, onAnswer}) => {
   return (
     <section className={`game game--${question.type}`}>
       <header className="game__header">
-        <a className="game__back" href="#">
+        <Link
+          to={Route.MAIN}
+          className="game__back"
+          onClick={onReplay} >
           <span className="visually-hidden">Сыграть ещё раз</span>
           <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
-        </a>
-
-        <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
-          <circle className="timer__line" cx="390" cy="390" r="370"
-            style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
-        </svg>
+        </Link>
 
         <Timer/>
 
@@ -63,13 +63,17 @@ const QuestionScreenLayout = ({question, onAnswer}) => {
 
 QuestionScreenLayout.propTypes = {
   question: questionPropTypes,
-  onAnswer: PropTypes.func.isRequired
+  onAnswer: PropTypes.func.isRequired,
+  onReplay: PropTypes.func.isRequired
 };
 
 const mapDispatchToProps = (dispatch) => ({
   onAnswer: (answer, question) => {
     dispatch(ActionCreator.incrementStep());
     dispatch(ActionCreator.incrementMistakes(answer, question));
+  },
+  onReplay: () => {
+    dispatch(ActionCreator.resetState());
   }
 });
 

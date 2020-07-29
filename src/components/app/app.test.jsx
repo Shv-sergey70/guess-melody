@@ -7,8 +7,7 @@ import {MemoryRouter} from 'react-router-dom';
 configure({adapter: new Adapter()});
 
 jest.mock(`../../hocs/with-active-player/with-active-player.jsx`);
-jest.mock(`../artist-question-screen/artist-question-screen.jsx`, () => `artist-question-screen`);
-jest.mock(`../genre-question-screen/genre-question-screen.jsx`, () => `genre-question-screen`);
+jest.mock(`../question-screen-layout/question-screen-layout.jsx`, () => `question-screen-layout`);
 jest.mock(`../welcome-screen/welcome-screen.jsx`, () => `welcome-screen`);
 jest.mock(`../authorization-screen/authorization-screen.jsx`, () => `authorization-screen`);
 jest.mock(`../losing-screen/losing-screen.jsx`, () => `losing-screen`);
@@ -77,24 +76,7 @@ describe(`App correctly renders`, () => {
     expect(tree.find(`App`)).toMatchSnapshot();
   });
 
-  test(`Genre-question screen`, () => {
-    const tree = mount(
-        <MemoryRouter initialEntries={[`/`]} keyLength={0} >
-          <App
-            attempts={3}
-            questions={questions}
-            currentStep={0}
-            onAnswer={jest.fn()}
-            mistakesCount={1}
-            isNoMoreTime={false}
-            isNoMoreAttempts={false} />
-        </MemoryRouter>
-    );
-
-    expect(tree.find(`App`)).toMatchSnapshot();
-  });
-
-  test(`Artist-question screen`, () => {
+  test(`Question-question screen`, () => {
     const tree = mount(
         <MemoryRouter initialEntries={[`/`]} keyLength={0} >
           <App

@@ -1,145 +1,99 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ArtistQuestionScreen correctly renders 1`] = `
-<section
-  className="game game--artist"
->
-  <header
-    className="game__header"
+<Fragment>
+  <h2
+    className="game__title"
   >
-    <a
-      className="game__back"
-      href="#"
-    >
-      <span
-        className="visually-hidden"
-      >
-        Сыграть ещё раз
-      </span>
-      <img
-        alt="Угадай мелодию"
-        className="game__logo"
-        src="img/melody-logo-ginger.png"
-      />
-    </a>
-    <svg
-      className="timer"
-      viewBox="0 0 780 780"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <circle
-        className="timer__line"
-        cx="390"
-        cy="390"
-        r="370"
-        style={
-          Object {
-            "filter": "url(#blur)",
-            "transform": "rotate(-90deg) scaleY(-1)",
-            "transformOrigin": "center",
-          }
-        }
-      />
-    </svg>
-    <Connect(Timer) />
-    <Connect(MistakesList) />
-  </header>
-  <section
-    className="game__screen"
+    Кто исполняет эту песню?
+  </h2>
+  <div
+    className="game__track"
   >
-    <h2
-      className="game__title"
-    >
-      Кто исполняет эту песню?
-    </h2>
     <div
-      className="game__track"
+      className="track"
     >
-      <div
-        className="track"
+      <audio
+        id={0}
+        src="test/track1.mp3"
+      />
+    </div>
+  </div>
+  <form
+    className="game__artist"
+  >
+    <div
+      className="artist"
+      key="3 - Billie Eilish"
+    >
+      <input
+        className="artist__input visually-hidden"
+        id="answer-1"
+        name="answer"
+        onClick={[Function]}
+        type="radio"
+        value="Billie Eilish"
+      />
+      <label
+        className="artist__name"
+        htmlFor="answer-1"
       >
-        <audio
-          id={0}
+        <img
+          alt="Billie Eilish"
+          className="artist__picture"
+          src="test/track2.mp3"
+        />
+        Billie Eilish
+      </label>
+    </div>
+    <div
+      className="artist"
+      key="3 - Imagine Dragons"
+    >
+      <input
+        className="artist__input visually-hidden"
+        id="answer-2"
+        name="answer"
+        onClick={[Function]}
+        type="radio"
+        value="Imagine Dragons"
+      />
+      <label
+        className="artist__name"
+        htmlFor="answer-2"
+      >
+        <img
+          alt="Imagine Dragons"
+          className="artist__picture"
           src="test/track1.mp3"
         />
-      </div>
+        Imagine Dragons
+      </label>
     </div>
-    <form
-      className="game__artist"
+    <div
+      className="artist"
+      key="3 - Artur Latte"
     >
-      <div
-        className="artist"
-        key="3 - Billie Eilish"
+      <input
+        className="artist__input visually-hidden"
+        id="answer-3"
+        name="answer"
+        onClick={[Function]}
+        type="radio"
+        value="Artur Latte"
+      />
+      <label
+        className="artist__name"
+        htmlFor="answer-3"
       >
-        <input
-          className="artist__input visually-hidden"
-          id="answer-1"
-          name="answer"
-          onClick={[Function]}
-          type="radio"
-          value="Billie Eilish"
+        <img
+          alt="Artur Latte"
+          className="artist__picture"
+          src="test/track3.mp3"
         />
-        <label
-          className="artist__name"
-          htmlFor="answer-1"
-        >
-          <img
-            alt="Billie Eilish"
-            className="artist__picture"
-            src="test/track2.mp3"
-          />
-          Billie Eilish
-        </label>
-      </div>
-      <div
-        className="artist"
-        key="3 - Imagine Dragons"
-      >
-        <input
-          className="artist__input visually-hidden"
-          id="answer-2"
-          name="answer"
-          onClick={[Function]}
-          type="radio"
-          value="Imagine Dragons"
-        />
-        <label
-          className="artist__name"
-          htmlFor="answer-2"
-        >
-          <img
-            alt="Imagine Dragons"
-            className="artist__picture"
-            src="test/track1.mp3"
-          />
-          Imagine Dragons
-        </label>
-      </div>
-      <div
-        className="artist"
-        key="3 - Artur Latte"
-      >
-        <input
-          className="artist__input visually-hidden"
-          id="answer-3"
-          name="answer"
-          onClick={[Function]}
-          type="radio"
-          value="Artur Latte"
-        />
-        <label
-          className="artist__name"
-          htmlFor="answer-3"
-        >
-          <img
-            alt="Artur Latte"
-            className="artist__picture"
-            src="test/track3.mp3"
-          />
-          Artur Latte
-        </label>
-      </div>
-    </form>
-  </section>
-</section>
+        Artur Latte
+      </label>
+    </div>
+  </form>
+</Fragment>
 `;

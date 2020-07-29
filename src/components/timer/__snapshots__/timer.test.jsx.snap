@@ -1,47 +1,89 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Timer renders correctly Timer has a lot of time - usual behaviour 1`] = `
-<div
-  className="timer__value "
-  xmlns="http://www.w3.org/1999/xhtml"
->
-  <span
-    className="timer__mins"
+<Fragment>
+  <svg
+    className="timer"
+    viewBox="0 0 780 780"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    01
-  </span>
-  <span
-    className="timer__dots"
+    <circle
+      className="timer__line"
+      cx="390"
+      cy="390"
+      r="370"
+      style={
+        Object {
+          "filter": "url(#blur)",
+          "transform": "rotate(-90deg) scaleY(-1)",
+          "transformOrigin": "center",
+        }
+      }
+    />
+  </svg>
+  <div
+    className="timer__value "
+    xmlns="http://www.w3.org/1999/xhtml"
   >
-    :
-  </span>
-  <span
-    className="timer__secs"
-  >
-    59
-  </span>
-</div>
+    <span
+      className="timer__mins"
+    >
+      01
+    </span>
+    <span
+      className="timer__dots"
+    >
+      :
+    </span>
+    <span
+      className="timer__secs"
+    >
+      59
+    </span>
+  </div>
+</Fragment>
 `;
 
 exports[`Timer renders correctly Timer has low time - should be added finishing class 1`] = `
-<div
-  className="timer__value timer__value--finished"
-  xmlns="http://www.w3.org/1999/xhtml"
->
-  <span
-    className="timer__mins"
+<Fragment>
+  <svg
+    className="timer"
+    viewBox="0 0 780 780"
+    xmlns="http://www.w3.org/2000/svg"
   >
-    00
-  </span>
-  <span
-    className="timer__dots"
+    <circle
+      className="timer__line"
+      cx="390"
+      cy="390"
+      r="370"
+      style={
+        Object {
+          "filter": "url(#blur)",
+          "transform": "rotate(-90deg) scaleY(-1)",
+          "transformOrigin": "center",
+        }
+      }
+    />
+  </svg>
+  <div
+    className="timer__value timer__value--finished"
+    xmlns="http://www.w3.org/1999/xhtml"
   >
-    :
-  </span>
-  <span
-    className="timer__secs"
-  >
-    30
-  </span>
-</div>
+    <span
+      className="timer__mins"
+    >
+      00
+    </span>
+    <span
+      className="timer__dots"
+    >
+      :
+    </span>
+    <span
+      className="timer__secs"
+    >
+      30
+    </span>
+  </div>
+</Fragment>
 `;

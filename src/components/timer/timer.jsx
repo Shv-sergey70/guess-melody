@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React, {PureComponent, Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/game/game";
@@ -37,11 +37,18 @@ class Timer extends PureComponent {
     const isFinishing = time <= LOW_TIME_LEFT_VALUE;
 
     return (
-      <div className={`timer__value ${isFinishing ? `timer__value--finished` : ``}`} xmlns="http://www.w3.org/1999/xhtml">
-        <span className="timer__mins">{minutes}</span>
-        <span className="timer__dots">:</span>
-        <span className="timer__secs">{seconds}</span>
-      </div>
+      <Fragment>
+        <svg xmlns="http://www.w3.org/2000/svg" className="timer" viewBox="0 0 780 780">
+          <circle className="timer__line" cx="390" cy="390" r="370"
+            style={{filter: `url(#blur)`, transform: `rotate(-90deg) scaleY(-1)`, transformOrigin: `center`}}/>
+        </svg>
+
+        <div className={`timer__value ${isFinishing ? `timer__value--finished` : ``}`} xmlns="http://www.w3.org/1999/xhtml">
+          <span className="timer__mins">{minutes}</span>
+          <span className="timer__dots">:</span>
+          <span className="timer__secs">{seconds}</span>
+        </div>
+      </Fragment>
     );
   }
 }
