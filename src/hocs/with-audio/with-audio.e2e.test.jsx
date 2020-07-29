@@ -25,11 +25,11 @@ describe(`WithAudio correctly works`, () => {
         <ComponentWrapped
           src="/src/to/music.mp3"
           isPlaying={false}
+          changePlayingState={jest.fn()}
         />
     );
 
     expect(componentWrapped.state()).toEqual({
-      progress: 0,
       isLoading: true
     });
   });

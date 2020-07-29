@@ -5,13 +5,28 @@ import {WelcomeScreen} from "./welcome-screen";
 
 configure({adapter: new Adapter()});
 
-test(`WelcomeScreen correctly renders`, () => {
-  const tree = shallow(
-      <WelcomeScreen
-        time={300}
-        attempts={3}
-        onWelcomeButtonClick={jest.fn()}
-      />);
+describe(`WelcomeScreen correctly works`, () => {
+  test(`Start button enabled`, () => {
+    const tree = shallow(
+        <WelcomeScreen
+          time={300}
+          attempts={3}
+          onWelcomeButtonClick={jest.fn()}
+          isButtonDisabled={false}/>
+    );
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
+
+  test(`Start button disabled`, () => {
+    const tree = shallow(
+        <WelcomeScreen
+          time={300}
+          attempts={3}
+          onWelcomeButtonClick={jest.fn()}
+          isButtonDisabled={true}/>
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
 });

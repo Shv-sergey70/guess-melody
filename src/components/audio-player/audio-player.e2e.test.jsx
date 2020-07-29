@@ -9,13 +9,13 @@ describe(`AudioPlayer behaviour testing`, () => {
   const pathToMusic = `my/custom/way/to/music.mp3`;
 
   test(`AudioPlayer is disabled`, () => {
-    const onPlayButtonClick = jest.fn();
+    const changePlayingState = jest.fn();
 
     const audioPlayer = mount(
         <AudioPlayer
           isPlaying={false}
           isLoading={true}
-          onPlayButtonClick={onPlayButtonClick}>
+          changePlayingState={changePlayingState}>
           <audio src={pathToMusic} />
         </AudioPlayer>
     );
@@ -24,23 +24,23 @@ describe(`AudioPlayer behaviour testing`, () => {
 
     audioPlayer.find(`.track__button`).simulate(`click`);
 
-    expect(onPlayButtonClick).toHaveBeenCalledTimes(0);
+    expect(changePlayingState).toHaveBeenCalledTimes(0);
   });
 
 
   test(`AudioPlayer's click on loaded player works correctly`, () => {
-    const onPlayButtonClick = jest.fn();
+    const changePlayingState = jest.fn();
 
     const audioPlayer = shallow(
         <AudioPlayer
           isPlaying={false}
           isLoading={true}
-          onPlayButtonClick={onPlayButtonClick}>
+          changePlayingState={changePlayingState}>
           <audio src={pathToMusic} />
         </AudioPlayer>
     );
 
     audioPlayer.find(`.track__button`).simulate(`click`);
-    expect(onPlayButtonClick).toHaveBeenCalledTimes(1);
+    expect(changePlayingState).toHaveBeenCalledTimes(1);
   });
 });

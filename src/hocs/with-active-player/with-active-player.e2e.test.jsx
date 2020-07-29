@@ -31,7 +31,7 @@ describe(`WithActivePlayer correctly works`, () => {
   test(`WithActivePlayer has correct initial state`, () => {
     const componentWrapped = mount(<ComponentWrapped/>);
 
-    expect(componentWrapped.state(`activePlayer`)).toEqual(-1);
+    expect(componentWrapped.state(`activePlayer`)).toEqual(0);
   });
 
   test(`WithActivePlayer changes state correctly`, () => {

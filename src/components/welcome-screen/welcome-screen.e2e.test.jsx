@@ -13,7 +13,8 @@ test(`WelcomeScreen welcome button success click`, () => {
         time={300}
         attempts={3}
         onWelcomeButtonClick={onWelcomeButtonClick}
-      />);
+        isButtonDisabled={false} />
+  );
 
   welcomeScreen.find(`.welcome__button`).simulate(`click`);
 

@@ -4,7 +4,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import WelcomeScreen from '../welcome-screen/welcome-screen';
 import {connect} from "react-redux";
 import LosingScreen from "../losing-screen/losing-screen";
-import {getStep, getMistakes, checkTime, checkAttempt} from '../../reducer/game/selectors';
+import {getStep, checkTime, checkAttempt} from '../../reducer/game/selectors';
 import {getQuestions, getUser} from "../../reducer/data/selectors";
 import AuthorizationScreen from "../authorization-screen/authorization-screen";
 import withLogin from "../../hocs/with-login/with-login";
@@ -65,7 +65,6 @@ App.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object), // fix it
   attempts: PropTypes.number.isRequired,
   currentStep: PropTypes.number.isRequired,
-  mistakesCount: PropTypes.number.isRequired,
   user: PropTypes.object, // fix it
   isNoMoreTime: PropTypes.bool.isRequired,
   isNoMoreAttempts: PropTypes.bool.isRequired
@@ -74,7 +73,6 @@ App.propTypes = {
 const mapStateToProps = (state) => ({
   currentStep: getStep(state),
   questions: getQuestions(state),
-  mistakesCount: getMistakes(state),
   user: getUser(state),
   isNoMoreTime: checkTime(state),
   isNoMoreAttempts: checkAttempt(state)

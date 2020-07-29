@@ -2,14 +2,14 @@
 
 exports[`AudioPlayer correctly renders Play button is disabled and has play class 1`] = `
 <AudioPlayer
+  changePlayingState={[MockFunction]}
   isLoading={true}
   isPlaying={false}
-  onPlayButtonClick={[MockFunction]}
 >
   <button
     className="track__button track__button--play"
     disabled={true}
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
   />
   <div
@@ -24,14 +24,14 @@ exports[`AudioPlayer correctly renders Play button is disabled and has play clas
 
 exports[`AudioPlayer correctly renders Play button is enabled and has pause class 1`] = `
 <AudioPlayer
+  changePlayingState={[MockFunction]}
   isLoading={false}
   isPlaying={true}
-  onPlayButtonClick={[MockFunction]}
 >
   <button
     className="track__button track__button--pause"
     disabled={false}
-    onClick={[MockFunction]}
+    onClick={[Function]}
     type="button"
   />
   <div
