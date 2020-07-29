@@ -1,14 +1,17 @@
+import {gameTime} from '../../init-data';
+
 const initialState = {
   mistakes: 0,
   step: -1,
-  time: 300
+  time: gameTime
 };
 
 const ActionType = {
   INCREMENT_STEP: `INCREMENT_STEP`,
   INCREMENT_MISTAKES: `INCREMENT_MISTAKES`,
   RESET: `RESET`,
-  DECREMENT_TIME: `DECREMENT_TIME`
+  DECREMENT_TIME: `DECREMENT_TIME`,
+  REPLAY: `REPLAY`
 };
 
 const isGenreAnswerCorrect = (userAnswers, {genre, answers}) => {
@@ -54,6 +57,12 @@ const ActionCreator = {
     return {
       type: ActionType.RESET
     };
+  },
+
+  replay() {
+    return {
+      type: ActionType.REPLAY
+    };
   }
 };
 
@@ -72,6 +81,10 @@ const reducer = (state = initialState, {type, payload}) => {
     case ActionType.DECREMENT_TIME:
       return Object.assign({}, state, {
         time: state.time - payload
+      });
+    case ActionType.REPLAY:
+      return Object.assign({}, initialState, {
+        step: 0
       });
   }
 

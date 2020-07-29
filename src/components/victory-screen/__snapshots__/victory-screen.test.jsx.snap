@@ -22,15 +22,20 @@ exports[`Victory screen renders correctly 1`] = `
   <p
     className="login__total"
   >
-    За 3 минуты и 25 секунд вы набрали 12 баллов (8 быстрых), совершив 
+    За 
+    1
+     минуты и 
+    15
+     секунд вы набрали 12 баллов (8 быстрых), совершив 
     1
      ошибки
   </p>
-  <button
+  <Link
     className="replay"
-    type="button"
+    onClick={[MockFunction]}
+    to="/"
   >
     Сыграть ещё раз
-  </button>
+  </Link>
 </section>
 `;

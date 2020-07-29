@@ -8,7 +8,9 @@ configure({adapter: new Adapter()});
 test(`Victory screen renders correctly`, () => {
   const tree = shallow(
       <VictoryScreen
-        mistakesCount={1} />
+        mistakesCount={1}
+        wastedTime={75}
+        onReplayButtonClick={jest.fn()}/>
   );
 
   expect(tree).toMatchSnapshot();
