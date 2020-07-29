@@ -722,9 +722,9 @@ img {
   -webkit-animation: shrink 2000ms infinite;
           animation: shrink 2000ms infinite;
   color: red; }
-  .timer__value--finished .timer__dots {
-    -webkit-animation: none;
-            animation: none; }
+.timer__value--finished .timer__dots {
+  -webkit-animation: none;
+          animation: none; }
 
 @-webkit-keyframes blink {
   0% {
@@ -740,25 +740,33 @@ img {
 
 @-webkit-keyframes shrink {
   0% {
-    -webkit-transform: translateX(-50%) scale(1);
-            transform: translateX(-50%) scale(1); }
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
   50% {
-    -webkit-transform: translateX(-50%) scale(1.1);
-            transform: translateX(-50%) scale(1.1); }
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
   100% {
-    -webkit-transform: translateX(-50%) scale(1);
-            transform: translateX(-50%) scale(1); } }
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
 
 @keyframes shrink {
   0% {
-    -webkit-transform: translateX(-50%) scale(1);
-            transform: translateX(-50%) scale(1); }
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
   50% {
-    -webkit-transform: translateX(-50%) scale(1.1);
-            transform: translateX(-50%) scale(1.1); }
+    -webkit-transform: scale(1.1);
+            transform: scale(1.1);
+  }
   100% {
-    -webkit-transform: translateX(-50%) scale(1);
-            transform: translateX(-50%) scale(1); } }
+    -webkit-transform: scale(1);
+            transform: scale(1);
+  }
+}
 
 /*
  * Стили для трека на экране игры на выбор жанра

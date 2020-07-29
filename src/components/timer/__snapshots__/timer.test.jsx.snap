@@ -1,8 +1,8 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Timer renders correctly 1`] = `
+exports[`Timer renders correctly Timer has a lot of time - usual behaviour 1`] = `
 <div
-  className="timer__value"
+  className="timer__value "
   xmlns="http://www.w3.org/1999/xhtml"
 >
   <span
@@ -19,6 +19,29 @@ exports[`Timer renders correctly 1`] = `
     className="timer__secs"
   >
     59
+  </span>
+</div>
+`;
+
+exports[`Timer renders correctly Timer has low time - should be added finishing class 1`] = `
+<div
+  className="timer__value timer__value--finished"
+  xmlns="http://www.w3.org/1999/xhtml"
+>
+  <span
+    className="timer__mins"
+  >
+    00
+  </span>
+  <span
+    className="timer__dots"
+  >
+    :
+  </span>
+  <span
+    className="timer__secs"
+  >
+    30
   </span>
 </div>
 `;

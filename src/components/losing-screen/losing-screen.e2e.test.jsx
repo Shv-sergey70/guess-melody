@@ -9,12 +9,14 @@ test(`LosingScreen replay button success click`, () => {
   const onReplayButtonClick = jest.fn();
 
   const losingScreen = shallow(
-      <LosingScreen onReplayButtonClick={onReplayButtonClick}>
-        <h2>My custom text</h2>
-      </LosingScreen>
+      <LosingScreen
+        onReplayButtonClick={onReplayButtonClick}
+        isNoMoreTime={true}
+        isNoMoreAttempts={false}
+      />
   );
 
-  losingScreen.find(`button.replay`).simulate(`click`);
+  losingScreen.find(`.replay`).simulate(`click`);
 
   expect(onReplayButtonClick).toHaveBeenCalledTimes(1);
 });

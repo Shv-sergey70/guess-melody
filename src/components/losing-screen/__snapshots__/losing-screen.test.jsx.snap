@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`LosingScreen renders correctly 1`] = `
+exports[`LosingScreen renders correctly Losing by attempts 1`] = `
 <section
   className="result"
 >
@@ -14,15 +14,56 @@ exports[`LosingScreen renders correctly 1`] = `
       width="186"
     />
   </div>
-  <h2>
-    My custom text
+  <h2
+    className="result__title"
+  >
+    Какая жалость!
   </h2>
-  <button
+  <p
+    className="result__total result__total--fail"
+  >
+    У вас закончились все попытки. Ничего, повезёт в следующий раз!
+  </p>
+  <Link
     className="replay"
     onClick={[MockFunction]}
-    type="button"
+    to="/"
   >
     Попробовать ещё раз
-  </button>
+  </Link>
+</section>
+`;
+
+exports[`LosingScreen renders correctly Losing by time 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="result__title"
+  >
+    Увы и ах!
+  </h2>
+  <p
+    className="result__total result__total--fail"
+  >
+    Время вышло! Вы не успели отгадать все мелодии
+  </p>
+  <Link
+    className="replay"
+    onClick={[MockFunction]}
+    to="/"
+  >
+    Попробовать ещё раз
+  </Link>
 </section>
 `;

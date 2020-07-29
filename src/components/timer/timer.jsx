@@ -4,6 +4,8 @@ import {connect} from "react-redux";
 import {ActionCreator} from "../../reducer/game/game";
 import {getTime} from "../../reducer/game/selectors";
 
+const LOW_TIME_LEFT_VALUE = 30;
+
 class Timer extends PureComponent {
   static _getFormattedTime(time) {
     const minutes = Math.floor(time / 60);
@@ -32,9 +34,10 @@ class Timer extends PureComponent {
   render() {
     const {time} = this.props;
     const {minutes, seconds} = Timer._getFormattedTime(time);
+    const isFinishing = time <= LOW_TIME_LEFT_VALUE;
 
     return (
-      <div className="timer__value" xmlns="http://www.w3.org/1999/xhtml">
+      <div className={`timer__value ${isFinishing ? `timer__value--finished` : ``}`} xmlns="http://www.w3.org/1999/xhtml">
         <span className="timer__mins">{minutes}</span>
         <span className="timer__dots">:</span>
         <span className="timer__secs">{seconds}</span>

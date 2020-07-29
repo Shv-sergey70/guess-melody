@@ -5,14 +5,24 @@ import {Timer} from "./timer";
 
 configure({adapter: new Adapter()});
 
-test(`Timer renders correctly`, () => {
-  const tickMock = jest.fn();
+describe(`Timer renders correctly`, () => {
+  test(`Timer has a lot of time - usual behaviour`, () => {
+    const tree = shallow(
+        <Timer
+          time={119}
+          tick={jest.fn()} />
+    );
 
-  const tree = shallow(
-      <Timer
-        time={119}
-        tick={tickMock} />
-  );
+    expect(tree).toMatchSnapshot();
+  });
 
-  expect(tree).toMatchSnapshot();
+  test(`Timer has low time - should be added finishing class`, () => {
+    const tree = shallow(
+        <Timer
+          time={30}
+          tick={jest.fn()} />
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
 });

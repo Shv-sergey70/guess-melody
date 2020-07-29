@@ -1,6 +1,6 @@
-import React, {PureComponent, Fragment} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Redirect} from 'react-router-dom';
 import WelcomeScreen from '../welcome-screen/welcome-screen';
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
@@ -9,7 +9,7 @@ import LosingScreen from "../losing-screen/losing-screen";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import withUserAnswers from "../../hocs/with-user-answers/with-user-answers";
 import {ActionCreator} from "../../reducer/game/game";
-import {getTime, getStep, getMistakes} from '../../reducer/game/selectors';
+import {getStep, getMistakes, checkTime, checkAttempt} from '../../reducer/game/selectors';
 import {getQuestions, getUser} from "../../reducer/data/selectors";
 import AuthorizationScreen from "../authorization-screen/authorization-screen";
 import withLogin from "../../hocs/with-login/with-login";
@@ -23,8 +23,8 @@ const AuthorizationScreenWrapped = withLogin(AuthorizationScreen);
 const VictoryScreenWrapped = withPrivateRoute(VictoryScreen);
 
 class App extends PureComponent {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
 
     this._getScreen = this._getScreen.bind(this);
   }
@@ -36,11 +36,7 @@ class App extends PureComponent {
       <Switch>
         <Route path={AppRoute.AUTH} exact component={AuthorizationScreenWrapped} />
         <Route path={AppRoute.LOSE} exact render={() => {
-          return (
-            <LosingScreen>
-              {this._getLosingText()}
-            </LosingScreen>
-          );
+          return (<LosingScreen/>);
         }}/>
         <Route path={AppRoute.VICTORY} exact render={() => {
           return (
@@ -54,7 +50,11 @@ class App extends PureComponent {
   }
 
   _getScreen() {
-    const {currentStep, questions, attempts, onAnswer} = this.props;
+    const {currentStep, questions, attempts, onAnswer, isNoMoreTime, isNoMoreAttempts} = this.props;
+
+    if (isNoMoreTime || isNoMoreAttempts) {
+      return <Redirect to={AppRoute.LOSE}/>;
+    }
 
     if (currentStep === -1) {
       return (
@@ -78,49 +78,26 @@ class App extends PureComponent {
 
     return null;
   }
-
-  _getLosingText() {
-    const {time, attempts, mistakesCount} = this.props;
-
-    if (time === 0) {
-      return (
-        <Fragment>
-          <h2 className="result__title">Увы и ах!</h2>
-          <p className="result__total result__total--fail">Время вышло! Вы не успели отгадать все мелодии</p>
-        </Fragment>
-      );
-    }
-
-    if (mistakesCount >= attempts) {
-      return (
-        <Fragment>
-          <h2 className="result__title">Какая жалость!</h2>
-          <p className="result__total result__total--fail">У вас закончились все попытки. Ничего, повезёт в следующий
-            раз!</p>
-        </Fragment>
-      );
-    }
-
-    return null;
-  }
 }
 
 App.propTypes = {
   questions: PropTypes.arrayOf(PropTypes.object),
-  time: PropTypes.number.isRequired,
   attempts: PropTypes.number.isRequired,
   currentStep: PropTypes.number.isRequired,
   onAnswer: PropTypes.func.isRequired,
   mistakesCount: PropTypes.number.isRequired,
-  user: PropTypes.object // fix it
+  user: PropTypes.object, // fix it
+  isNoMoreTime: PropTypes.bool.isRequired,
+  isNoMoreAttempts: PropTypes.bool.isRequired
 };
 
 const mapStateToProps = (state) => ({
   currentStep: getStep(state),
-  time: getTime(state),
   questions: getQuestions(state),
   mistakesCount: getMistakes(state),
-  user: getUser(state)
+  user: getUser(state),
+  isNoMoreTime: checkTime(state),
+  isNoMoreAttempts: checkAttempt(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({

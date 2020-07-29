@@ -64,12 +64,13 @@ describe(`App correctly renders`, () => {
     const tree = mount(
         <MemoryRouter initialEntries={[`/`]} keyLength={0} >
           <App
-            time={300}
             attempts={3}
             questions={questions}
             currentStep={-1}
             onAnswer={jest.fn()}
-            mistakesCount={1} />
+            mistakesCount={1}
+            isNoMoreTime={false}
+            isNoMoreAttempts={false} />
         </MemoryRouter>
     );
 
@@ -80,12 +81,13 @@ describe(`App correctly renders`, () => {
     const tree = mount(
         <MemoryRouter initialEntries={[`/`]} keyLength={0} >
           <App
-            time={300}
             attempts={3}
             questions={questions}
             currentStep={0}
             onAnswer={jest.fn()}
-            mistakesCount={1} />
+            mistakesCount={1}
+            isNoMoreTime={false}
+            isNoMoreAttempts={false} />
         </MemoryRouter>
     );
 
@@ -96,45 +98,30 @@ describe(`App correctly renders`, () => {
     const tree = mount(
         <MemoryRouter initialEntries={[`/`]} keyLength={0} >
           <App
-            time={300}
-            attempts={3}
-            questions={questions}
-            currentStep={1}
-            onAnswer={jest.fn()}
-            mistakesCount={1} />
-        </MemoryRouter>
-    );
-
-    expect(tree.find(`App`)).toMatchSnapshot();
-  });
-
-  test(`Time losing screen`, () => {
-    const tree = mount(
-        <MemoryRouter initialEntries={[`/lose`]} keyLength={0} >
-          <App
-            time={0}
             attempts={3}
             questions={questions}
             currentStep={1}
             onAnswer={jest.fn()}
             mistakesCount={1}
-            isAuthorizationRequired={false} />
+            isNoMoreTime={false}
+            isNoMoreAttempts={false} />
         </MemoryRouter>
     );
 
     expect(tree.find(`App`)).toMatchSnapshot();
   });
 
-  test(`Attempts losing screen`, () => {
+  test(`Losing screen`, () => {
     const tree = mount(
         <MemoryRouter initialEntries={[`/lose`]} keyLength={0} >
           <App
-            time={300}
             attempts={3}
             questions={questions}
             currentStep={1}
             onAnswer={jest.fn()}
-            mistakesCount={3} />
+            mistakesCount={1}
+            isNoMoreTime={true}
+            isNoMoreAttempts={false} />
         </MemoryRouter>
     );
 
@@ -145,12 +132,13 @@ describe(`App correctly renders`, () => {
     const tree = mount(
         <MemoryRouter initialEntries={[`/auth`]} keyLength={0} >
           <App
-            time={300}
             attempts={3}
             questions={questions}
             currentStep={0}
             onAnswer={jest.fn()}
-            mistakesCount={1} />
+            mistakesCount={1}
+            isNoMoreTime={false}
+            isNoMoreAttempts={false} />
         </MemoryRouter>
     );
 

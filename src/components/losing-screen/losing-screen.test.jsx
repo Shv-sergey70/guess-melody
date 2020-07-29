@@ -5,12 +5,26 @@ import {LosingScreen} from "./losing-screen";
 
 configure({adapter: new Adapter()});
 
-test(`LosingScreen renders correctly`, () => {
-  const tree = shallow(
-      <LosingScreen onReplayButtonClick={jest.fn()}>
-        <h2>My custom text</h2>
-      </LosingScreen>
-  );
+describe(`LosingScreen renders correctly`, () => {
+  test(`Losing by time`, () => {
+    const tree = shallow(
+        <LosingScreen
+          onReplayButtonClick={jest.fn()}
+          isNoMoreTime={true}
+          isNoMoreAttempts={false} />
+    );
 
-  expect(tree).toMatchSnapshot();
+    expect(tree).toMatchSnapshot();
+  });
+
+  test(`Losing by attempts`, () => {
+    const tree = shallow(
+        <LosingScreen
+          onReplayButtonClick={jest.fn()}
+          isNoMoreTime={false}
+          isNoMoreAttempts={true} />
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
 });
