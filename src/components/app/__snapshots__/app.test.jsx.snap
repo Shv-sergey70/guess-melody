@@ -4,6 +4,8 @@ exports[`App correctly renders Artist-question screen 1`] = `
 <App
   attempts={3}
   currentStep={1}
+  isNoMoreAttempts={false}
+  isNoMoreTime={false}
   mistakesCount={1}
   onAnswer={[MockFunction]}
   questions={
@@ -53,7 +55,6 @@ exports[`App correctly renders Artist-question screen 1`] = `
       },
     ]
   }
-  time={300}
 >
   <Switch>
     <Route
@@ -133,104 +134,12 @@ exports[`App correctly renders Artist-question screen 1`] = `
 </App>
 `;
 
-exports[`App correctly renders Attempts losing screen 1`] = `
-<App
-  attempts={3}
-  currentStep={1}
-  mistakesCount={3}
-  onAnswer={[MockFunction]}
-  questions={
-    Array [
-      Object {
-        "answers": Array [
-          Object {
-            "genre": "pop",
-            "src": "./tracks/Anivar_Summer.mp3",
-          },
-          Object {
-            "genre": "jazz",
-            "src": "./tracks/Billie_Eilish_ilomilo.mp3",
-          },
-          Object {
-            "genre": "rock",
-            "src": "./tracks/Cj_L_Black_Rain.mp3",
-          },
-          Object {
-            "genre": "classic",
-            "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
-          },
-        ],
-        "genre": "rock",
-        "type": "genre",
-      },
-      Object {
-        "answers": Array [
-          Object {
-            "artist": "Billie Eilish",
-            "picture": "/img/default-artist.png",
-          },
-          Object {
-            "artist": "Imagine Dragons",
-            "picture": "/img/default-artist.png",
-          },
-          Object {
-            "artist": "Artur Latte",
-            "picture": "/img/default-artist.png",
-          },
-        ],
-        "song": Object {
-          "artist": "Artur Latte",
-          "src": "./tracks/Raim_Artur_Latte.mp3",
-        },
-        "type": "artist",
-      },
-    ]
-  }
-  time={300}
->
-  <Switch>
-    <Route
-      computedMatch={
-        Object {
-          "isExact": true,
-          "params": Object {},
-          "path": "/lose",
-          "url": "/lose",
-        }
-      }
-      exact={true}
-      location={
-        Object {
-          "hash": "",
-          "pathname": "/lose",
-          "search": "",
-          "state": undefined,
-        }
-      }
-      path="/lose"
-      render={[Function]}
-    >
-      <losing-screen>
-        <h2
-          className="result__title"
-        >
-          Какая жалость!
-        </h2>
-        <p
-          className="result__total result__total--fail"
-        >
-          У вас закончились все попытки. Ничего, повезёт в следующий раз!
-        </p>
-      </losing-screen>
-    </Route>
-  </Switch>
-</App>
-`;
-
 exports[`App correctly renders Authorization is required 1`] = `
 <App
   attempts={3}
   currentStep={0}
+  isNoMoreAttempts={false}
+  isNoMoreTime={false}
   mistakesCount={1}
   onAnswer={[MockFunction]}
   questions={
@@ -280,7 +189,6 @@ exports[`App correctly renders Authorization is required 1`] = `
       },
     ]
   }
-  time={300}
 >
   <Switch>
     <Route
@@ -415,6 +323,8 @@ exports[`App correctly renders Genre-question screen 1`] = `
 <App
   attempts={3}
   currentStep={0}
+  isNoMoreAttempts={false}
+  isNoMoreTime={false}
   mistakesCount={1}
   onAnswer={[MockFunction]}
   questions={
@@ -464,7 +374,6 @@ exports[`App correctly renders Genre-question screen 1`] = `
       },
     ]
   }
-  time={300}
 >
   <Switch>
     <Route
@@ -596,11 +505,12 @@ exports[`App correctly renders Genre-question screen 1`] = `
 </App>
 `;
 
-exports[`App correctly renders Time losing screen 1`] = `
+exports[`App correctly renders Losing screen 1`] = `
 <App
   attempts={3}
   currentStep={1}
-  isAuthorizationRequired={false}
+  isNoMoreAttempts={false}
+  isNoMoreTime={true}
   mistakesCount={1}
   onAnswer={[MockFunction]}
   questions={
@@ -650,7 +560,6 @@ exports[`App correctly renders Time losing screen 1`] = `
       },
     ]
   }
-  time={0}
 >
   <Switch>
     <Route
@@ -674,18 +583,7 @@ exports[`App correctly renders Time losing screen 1`] = `
       path="/lose"
       render={[Function]}
     >
-      <losing-screen>
-        <h2
-          className="result__title"
-        >
-          Увы и ах!
-        </h2>
-        <p
-          className="result__total result__total--fail"
-        >
-          Время вышло! Вы не успели отгадать все мелодии
-        </p>
-      </losing-screen>
+      <losing-screen />
     </Route>
   </Switch>
 </App>
@@ -695,6 +593,8 @@ exports[`App correctly renders Welcome screen 1`] = `
 <App
   attempts={3}
   currentStep={-1}
+  isNoMoreAttempts={false}
+  isNoMoreTime={false}
   mistakesCount={1}
   onAnswer={[MockFunction]}
   questions={
@@ -744,7 +644,6 @@ exports[`App correctly renders Welcome screen 1`] = `
       },
     ]
   }
-  time={300}
 >
   <Switch>
     <Route

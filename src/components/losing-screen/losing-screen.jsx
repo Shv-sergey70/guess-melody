@@ -1,8 +1,10 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {Link} from 'react-router-dom';
 import {ActionCreator} from "../../reducer/game/game";
 import {checkTime, checkAttempt} from '../../reducer/game/selectors';
+import Route from '../../routes';
 
 const LosingScreen = ({onReplayButtonClick, isNoMoreTime, isNoMoreAttempts}) => {
   let content = null;
@@ -35,12 +37,12 @@ const LosingScreen = ({onReplayButtonClick, isNoMoreTime, isNoMoreAttempts}) => 
         <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/>
       </div>
       {content}
-      <button
+      <Link
         className="replay"
-        type="button"
+        to={Route.MAIN}
         onClick={onReplayButtonClick}>
         Попробовать ещё раз
-      </button>
+      </Link>
     </section>
   );
 };
