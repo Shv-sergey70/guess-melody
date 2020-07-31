@@ -1,7 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
-import Timer from "../timer/timer";
 import MistakesList from "../mistakes-list/mistakes-list";
 import {ActionCreator} from "../../reducer/game/game";
 import {connect} from "react-redux";
