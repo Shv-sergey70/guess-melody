@@ -23,7 +23,7 @@ exports[`Game screen correctly works Artist screen renders 1`] = `
         src="img/melody-logo-ginger.png"
       />
     </Link>
-    <Connect(Timer)
+    <Connect(TimerContainer)
       onTick={[Function]}
     />
     <Connect(MistakesList) />
@@ -81,7 +81,7 @@ exports[`Game screen correctly works Genre screen renders 1`] = `
         src="img/melody-logo-ginger.png"
       />
     </Link>
-    <Connect(Timer)
+    <Connect(TimerContainer)
       onTick={[Function]}
     />
     <Connect(MistakesList) />

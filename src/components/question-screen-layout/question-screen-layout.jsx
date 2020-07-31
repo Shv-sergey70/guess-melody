@@ -11,6 +11,7 @@ import GenreQuestionScreen from "../genre-question-screen/genre-question-screen"
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
 import {question as questionPropTypes} from "../../types/types";
 import Route from '../../routes';
+import TimerBlock from "../timer-block/timer-block";
 
 const GenreQuestionScreenWrapped = withUserAnswers(withActivePlayer(GenreQuestionScreen));
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
@@ -67,9 +68,7 @@ class QuestionScreenLayout extends PureComponent {
             <img className="game__logo" src="img/melody-logo-ginger.png" alt="Угадай мелодию"/>
           </Link>
 
-          <Timer
-            onTick={this._increaseQuestionTime}
-          />
+          <TimerBlock/>
 
           <MistakesList/>
         </header>
