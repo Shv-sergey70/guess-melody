@@ -1,7 +1,7 @@
 import React from 'react';
 import {configure, shallow} from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import {QuestionScreenLayout} from "./question-screen-layout";
+import QuestionScreenLayout from "./question-screen-layout";
 
 configure({adapter: new Adapter()});
 
@@ -53,7 +53,7 @@ describe(`Game screen correctly works`, () => {
         <QuestionScreenLayout
           question={genreQuestion}
           onAnswer={jest.fn()}
-          onReplay={jest.fn()} />
+        />
     );
 
     expect(tree).toMatchSnapshot();
@@ -64,7 +64,7 @@ describe(`Game screen correctly works`, () => {
         <QuestionScreenLayout
           question={artistQuestion}
           onAnswer={jest.fn()}
-          onReplay={jest.fn()} />
+        />
     );
 
     expect(tree).toMatchSnapshot();

@@ -7,22 +7,7 @@ exports[`Game screen correctly works Artist screen renders 1`] = `
   <header
     className="game__header"
   >
-    <Link
-      className="game__back"
-      onClick={[MockFunction]}
-      to="/"
-    >
-      <span
-        className="visually-hidden"
-      >
-        Сыграть ещё раз
-      </span>
-      <img
-        alt="Угадай мелодию"
-        className="game__logo"
-        src="img/melody-logo-ginger.png"
-      />
-    </Link>
+    <Connect(WelcomeScreen) />
     <TimerBlock />
     <Connect(MistakesList) />
   </header>
@@ -63,22 +48,7 @@ exports[`Game screen correctly works Genre screen renders 1`] = `
   <header
     className="game__header"
   >
-    <Link
-      className="game__back"
-      onClick={[MockFunction]}
-      to="/"
-    >
-      <span
-        className="visually-hidden"
-      >
-        Сыграть ещё раз
-      </span>
-      <img
-        alt="Угадай мелодию"
-        className="game__logo"
-        src="img/melody-logo-ginger.png"
-      />
-    </Link>
+    <Connect(WelcomeScreen) />
     <TimerBlock />
     <Connect(MistakesList) />
   </header>

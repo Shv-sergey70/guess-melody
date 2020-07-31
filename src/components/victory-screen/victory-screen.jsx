@@ -1,10 +1,8 @@
 import React from 'react';
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
-import {Link} from 'react-router-dom';
 import {getMistakes, getWastedTime} from "../../reducer/game/selectors";
-import Route from '../../routes';
-import {ActionCreator} from "../../reducer/game/game";
+import PlayAgainLink from "../links/play-again/play-again";
 
 const getFormattedTime = (time) => {
   return {
@@ -13,7 +11,7 @@ const getFormattedTime = (time) => {
   };
 };
 
-const VictoryScreen = ({mistakesCount, wastedTime, onReplayButtonClick}) => {
+const VictoryScreen = ({mistakesCount, wastedTime}) => {
   const formattedTime = getFormattedTime(wastedTime);
 
   return (
@@ -23,12 +21,8 @@ const VictoryScreen = ({mistakesCount, wastedTime, onReplayButtonClick}) => {
       </div>
       <h2 className="login__title">Вы настоящий меломан!</h2>
       <p className="login__total">За {formattedTime.minutes} минуты и {formattedTime.seconds} секунд вы набрали 12 баллов (8 быстрых), совершив {mistakesCount} ошибки</p>
-      <Link
-        to={Route.MAIN}
-        className="replay"
-        onClick={onReplayButtonClick} >
-        Сыграть ещё раз
-      </Link>
+
+      <PlayAgainLink />
     </section>
   );
 };
@@ -36,7 +30,6 @@ const VictoryScreen = ({mistakesCount, wastedTime, onReplayButtonClick}) => {
 VictoryScreen.propTypes = {
   mistakesCount: PropTypes.number.isRequired,
   wastedTime: PropTypes.number.isRequired,
-  onReplayButtonClick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -44,9 +37,5 @@ const mapStateToProps = (state) => ({
   wastedTime: getWastedTime(state)
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onReplayButtonClick: () => dispatch(ActionCreator.replay())
-});
-
 export {VictoryScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(VictoryScreen);
+export default connect(mapStateToProps)(VictoryScreen);

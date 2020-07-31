@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlayAgainLink correctly renders 1`] = `
+<Simple
+  className="replay"
+  onClick={[MockFunction]}
+  to="/"
+>
+  Сыграть ещё раз
+</Simple>
+`;
