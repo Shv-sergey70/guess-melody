@@ -10,7 +10,7 @@ test(`Victory screen renders correctly`, () => {
       <VictoryScreen
         mistakesCount={1}
         wastedTime={75}
-        onReplayButtonClick={jest.fn()}/>
+      />
   );
 
   expect(tree).toMatchSnapshot();

@@ -30,12 +30,6 @@ exports[`Victory screen renders correctly 1`] = `
     1
      ошибки
   </p>
-  <Link
-    className="replay"
-    onClick={[MockFunction]}
-    to="/"
-  >
-    Сыграть ещё раз
-  </Link>
+  <Connect(PlayAgain) />
 </section>
 `;

@@ -1,12 +1,10 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {Link} from 'react-router-dom';
-import {ActionCreator} from "../../reducer/game/game";
 import {checkTime, checkAttempt} from '../../reducer/game/selectors';
-import Route from '../../routes';
+import PlayAgainLink from "../links/play-again/play-again";
 
-const LosingScreen = ({onReplayButtonClick, isNoMoreTime, isNoMoreAttempts}) => {
+const LosingScreen = ({isNoMoreTime, isNoMoreAttempts}) => {
   let content = null;
 
   switch (true) {
@@ -36,19 +34,15 @@ const LosingScreen = ({onReplayButtonClick, isNoMoreTime, isNoMoreAttempts}) => 
       <div className="result__logo">
         <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/>
       </div>
+
       {content}
-      <Link
-        className="replay"
-        to={Route.MAIN}
-        onClick={onReplayButtonClick}>
-        Попробовать ещё раз
-      </Link>
+
+      <PlayAgainLink />
     </section>
   );
 };
 
 LosingScreen.propTypes = {
-  onReplayButtonClick: PropTypes.func.isRequired,
   isNoMoreTime: PropTypes.bool.isRequired,
   isNoMoreAttempts: PropTypes.bool.isRequired
 };
@@ -59,9 +53,5 @@ const mapStateToProps = (state) => ({
 
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  onReplayButtonClick: () => dispatch(ActionCreator.resetState())
-});
-
 export {LosingScreen};
-export default connect(mapStateToProps, mapDispatchToProps)(LosingScreen);
+export default connect(mapStateToProps)(LosingScreen);

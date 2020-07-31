@@ -24,13 +24,7 @@ exports[`LosingScreen renders correctly Losing by attempts 1`] = `
   >
     У вас закончились все попытки. Ничего, повезёт в следующий раз!
   </p>
-  <Link
-    className="replay"
-    onClick={[MockFunction]}
-    to="/"
-  >
-    Попробовать ещё раз
-  </Link>
+  <Connect(PlayAgain) />
 </section>
 `;
 
@@ -58,12 +52,6 @@ exports[`LosingScreen renders correctly Losing by time 1`] = `
   >
     Время вышло! Вы не успели отгадать все мелодии
   </p>
-  <Link
-    className="replay"
-    onClick={[MockFunction]}
-    to="/"
-  >
-    Попробовать ещё раз
-  </Link>
+  <Connect(PlayAgain) />
 </section>
 `;

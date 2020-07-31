@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SimpleLink correctly renders with not required props 1`] = `
+<Link
+  className="myClass"
+  onClick={[MockFunction]}
+  to="/main"
+>
+  My custom children
+</Link>
+`;
+
+exports[`SimpleLink correctly renders without not required props 1`] = `
+<Link
+  className=""
+  onClick={[Function]}
+  to="/main"
+/>
+`;
