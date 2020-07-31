@@ -1,14 +1,21 @@
 import {gameTime} from '../../init-data';
+import {AnswerType, TIME_FOR_FAST_QUESTION} from '../../const/const';
 
 const initialState = {
   mistakes: 0,
   step: -1,
-  time: gameTime
+  time: gameTime,
+  correctAnswersCounter: {
+    usual: 0,
+    fast: 0
+  }
 };
 
 const ActionType = {
   INCREMENT_STEP: `INCREMENT_STEP`,
   INCREMENT_MISTAKES: `INCREMENT_MISTAKES`,
+  INCREMENT_CORRECT_USUAL_ANSWERS_COUNTER: `INCREMENT_CORRECT_USUAL_ANSWERS_COUNTER`,
+  INCREMENT_CORRECT_FAST_ANSWERS_COUNTER: `INCREMENT_CORRECT_FAST_ANSWERS_COUNTER`,
   RESET: `RESET`,
   DECREMENT_TIME: `DECREMENT_TIME`,
   REPLAY: `REPLAY`
@@ -20,31 +27,18 @@ const isGenreAnswerCorrect = (userAnswers, {genre, answers}) => {
 
 const isArtistAnswerCorrect = (userAnswer, correctAnswer) => userAnswer === correctAnswer;
 
+const getAnswerType = (wastedTime) => wastedTime > TIME_FOR_FAST_QUESTION ? AnswerType.USUAL : AnswerType.FAST;
+
 const ActionCreator = {
   incrementStep: () => ({
     type: ActionType.INCREMENT_STEP,
     payload: 1
   }),
 
-  incrementMistakes: (userAnswer, question) => {
-    let isCorrectAnswer = false;
-
-    switch (question.type) {
-      case `artist`:
-        isCorrectAnswer = isArtistAnswerCorrect(userAnswer, question.song.artist);
-
-        break;
-      case `genre`:
-        isCorrectAnswer = isGenreAnswerCorrect(userAnswer, question);
-
-        break;
-    }
-
-    return {
-      type: ActionType.INCREMENT_MISTAKES,
-      payload: isCorrectAnswer ? 0 : 1
-    };
-  },
+  incrementMistakes: () => ({
+    type: ActionType.INCREMENT_MISTAKES,
+    payload: 1
+  }),
 
   decrementTime() {
     return {
@@ -63,7 +57,24 @@ const ActionCreator = {
     return {
       type: ActionType.REPLAY
     };
-  }
+  },
+
+  incrementCorrectAnswersCounter: (answerType) => {
+    switch (answerType) {
+      case AnswerType.USUAL:
+        return {
+          type: ActionType.INCREMENT_CORRECT_USUAL_ANSWERS_COUNTER,
+          payload: 1
+        };
+      case AnswerType.FAST:
+        return {
+          type: ActionType.INCREMENT_CORRECT_FAST_ANSWERS_COUNTER,
+          payload: 1
+        };
+    }
+
+    throw new Error(`Unhandled answer type: ${answerType}`);
+  },
 };
 
 const reducer = (state = initialState, {type, payload}) => {
@@ -86,6 +97,20 @@ const reducer = (state = initialState, {type, payload}) => {
       return Object.assign({}, initialState, {
         step: 0
       });
+    case ActionType.INCREMENT_CORRECT_USUAL_ANSWERS_COUNTER: {
+      const correctAnswersCounter = Object.assign({}, state.correctAnswersCounter);
+
+      correctAnswersCounter.usual += payload;
+
+      return Object.assign({}, state, {correctAnswersCounter});
+    }
+    case ActionType.INCREMENT_CORRECT_FAST_ANSWERS_COUNTER: {
+      const correctAnswersCounter = Object.assign({}, state.correctAnswersCounter);
+
+      correctAnswersCounter.fast += payload;
+
+      return Object.assign({}, state, {correctAnswersCounter});
+    }
   }
 
   return state;
@@ -96,5 +121,6 @@ export {
   ActionCreator,
   ActionType,
   isGenreAnswerCorrect,
-  isArtistAnswerCorrect
+  isArtistAnswerCorrect,
+  getAnswerType
 };

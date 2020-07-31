@@ -1,6 +1,6 @@
 import React, {PureComponent, Fragment} from 'react';
 import PropTypes from "prop-types";
-import {ActionCreator} from "../../reducer/game/game";
+import {ActionCreator, isArtistAnswerCorrect, getAnswerType} from "../../reducer/game/game";
 import {connect} from "react-redux";
 import {getStep} from "../../reducer/game/selectors";
 import {artistQuestion} from "../../types/types";
@@ -49,9 +49,9 @@ class ArtistQuestionScreen extends PureComponent {
   }
 
   _handleOnAnswerClick(evt) {
-    const {onAnswer, question} = this.props;
+    const {onAnswer, question, questionTime} = this.props;
 
-    onAnswer(evt.target.value, question);
+    onAnswer(evt.target.value, question, questionTime);
   }
 }
 
@@ -59,17 +59,25 @@ ArtistQuestionScreen.propTypes = {
   question: artistQuestion,
   onAnswer: PropTypes.func.isRequired,
   screenIndex: PropTypes.number.isRequired,
-  renderAudioPlayer: PropTypes.func.isRequired
+  renderAudioPlayer: PropTypes.func.isRequired,
+  questionTime: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
-  screenIndex: getStep(state),
+  screenIndex: getStep(state)
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onAnswer: (answer, question) => {
+  onAnswer: (answer, question, questionTime) => {
+    const isCorrectAnswer = isArtistAnswerCorrect(answer, question.song.artist);
+
+    if (isCorrectAnswer) {
+      dispatch(ActionCreator.incrementCorrectAnswersCounter(getAnswerType(questionTime)));
+    } else {
+      dispatch(ActionCreator.incrementMistakes());
+    }
+
     dispatch(ActionCreator.incrementStep());
-    dispatch(ActionCreator.incrementMistakes(answer, question));
   }
 });
 

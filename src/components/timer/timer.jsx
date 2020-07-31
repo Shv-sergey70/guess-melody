@@ -20,10 +20,11 @@ class Timer extends PureComponent {
   constructor(props) {
     super(props);
 
-    const {tick} = props;
+    const {tick, onTick} = props;
 
     this.timerId = setInterval(() => {
       tick();
+      onTick();
     }, 1000);
   }
 
@@ -55,7 +56,8 @@ class Timer extends PureComponent {
 
 Timer.propTypes = {
   time: PropTypes.number.isRequired,
-  tick: PropTypes.func.isRequired
+  tick: PropTypes.func.isRequired,
+  onTick: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({

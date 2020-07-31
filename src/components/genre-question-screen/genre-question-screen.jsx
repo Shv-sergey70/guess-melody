@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {genreQuestion} from '../../types/types';
 import {connect} from "react-redux";
 import {getStep} from "../../reducer/game/selectors";
+import {ActionCreator, isGenreAnswerCorrect, getAnswerType} from "../../reducer/game/game";
 
 class GenreQuestionScreen extends PureComponent {
   constructor(props) {
@@ -65,9 +66,9 @@ class GenreQuestionScreen extends PureComponent {
   _handleFormSubmit(evt) {
     evt.preventDefault();
 
-    const {submitAnswers} = this.props;
+    const {onAnswer, answers: activeItems, question, questionTime} = this.props;
 
-    submitAnswers();
+    onAnswer(activeItems, question, questionTime);
   }
 }
 
@@ -77,14 +78,29 @@ GenreQuestionScreen.propTypes = {
   renderAudioPlayer: PropTypes.func.isRequired,
   answers: PropTypes.arrayOf(PropTypes.bool).isRequired,
   changeAnswer: PropTypes.func.isRequired,
-  submitAnswers: PropTypes.func.isRequired
+  onAnswer: PropTypes.func.isRequired,
+  questionTime: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
   screenIndex: getStep(state)
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  onAnswer: (answer, question, questionTime) => {
+    const isCorrectAnswer = isGenreAnswerCorrect(answer, question);
+
+    if (isCorrectAnswer) {
+      dispatch(ActionCreator.incrementCorrectAnswersCounter(getAnswerType(questionTime)));
+    } else {
+      dispatch(ActionCreator.incrementMistakes());
+    }
+
+    dispatch(ActionCreator.incrementStep());
+  }
+});
+
 export {GenreQuestionScreen};
-export default connect(mapStateToProps)(GenreQuestionScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(GenreQuestionScreen);
 
 
