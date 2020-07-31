@@ -34,6 +34,7 @@ test(`ArtistQuestionScreen correctly renders`, () => {
         screenIndex={3}
         onAnswer={jest.fn()}
         renderAudioPlayer={(src, id) => <audio src={src} id={id} />}
+        questionTime={35}
       />
   );
 

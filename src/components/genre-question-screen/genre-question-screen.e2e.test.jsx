@@ -39,7 +39,8 @@ test(`GenreQuestionScreen correct answer response`, () => {
   const preventDefault = jest.fn();
   const renderAudioPlayer = jest.fn();
   const changeAnswer = jest.fn();
-  const submitAnswers = jest.fn();
+  const onAnswer = jest.fn();
+  const questionTime = 25;
 
   const genreQuestionScreen = shallow(
       <GenreQuestionScreen
@@ -48,7 +49,8 @@ test(`GenreQuestionScreen correct answer response`, () => {
         renderAudioPlayer={renderAudioPlayer}
         answers={[false, false, false, false]}
         changeAnswer={changeAnswer}
-        submitAnswers={submitAnswers} />
+        questionTime={questionTime}
+        onAnswer={onAnswer} />
   );
 
   genreQuestionScreen.find(`#answer-0`).simulate(`change`, getChangeEventMock(0, true));
@@ -62,6 +64,7 @@ test(`GenreQuestionScreen correct answer response`, () => {
 
   genreQuestionScreen.find(`.game__tracks`).simulate(`submit`, {preventDefault});
 
-  expect(submitAnswers).toHaveBeenCalledTimes(1);
+  expect(onAnswer).toHaveBeenCalledTimes(1);
+  expect(onAnswer).toHaveBeenNthCalledWith(1, [false, false, false, false], question, questionTime);
   expect(preventDefault).toHaveBeenCalledTimes(1);
 });

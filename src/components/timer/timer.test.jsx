@@ -10,7 +10,9 @@ describe(`Timer renders correctly`, () => {
     const tree = shallow(
         <Timer
           time={119}
-          tick={jest.fn()} />
+          tick={jest.fn()}
+          onTick={jest.fn()}
+        />
     );
 
     expect(tree).toMatchSnapshot();
@@ -20,7 +22,9 @@ describe(`Timer renders correctly`, () => {
     const tree = shallow(
         <Timer
           time={30}
-          tick={jest.fn()} />
+          tick={jest.fn()}
+          onTick={jest.fn()}
+        />
     );
 
     expect(tree).toMatchSnapshot();

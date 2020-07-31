@@ -36,7 +36,9 @@ test(`GenreQuestionScreen correctly renders`, () => {
         renderAudioPlayer={(src, id) => <audio src={src} id={id}/>}
         answers={[false, true, false, true]}
         changeAnswer={jest.fn()}
-        submitAnswers={jest.fn()} />
+        onAnswer={jest.fn()}
+        questionTime={25}
+      />
   );
 
   expect(tree).toMatchSnapshot();

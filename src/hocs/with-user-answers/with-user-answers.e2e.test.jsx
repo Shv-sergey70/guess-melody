@@ -36,7 +36,7 @@ describe(`withUserAnswer correctly works`, () => {
     const renderedComponent = shallow(
         <ComponentWrapped
           question={question}
-          onAnswer={jest.fn()} />
+        />
     );
 
     expect(renderedComponent.state()).toEqual({
@@ -48,7 +48,7 @@ describe(`withUserAnswer correctly works`, () => {
     const renderedComponent = shallow(
         <ComponentWrapped
           question={question}
-          onAnswer={jest.fn()} />
+        />
     );
 
     expect(renderedComponent.state()).toEqual({
@@ -65,20 +65,13 @@ describe(`withUserAnswer correctly works`, () => {
   });
 
   test(`answers correctly submit`, () => {
-    const onAnswerMock = jest.fn();
-
     const renderedComponent = shallow(
         <ComponentWrapped
           question={question}
-          onAnswer={onAnswerMock} />
+        />
     );
 
     renderedComponent.prop(`changeAnswer`)(2);
     renderedComponent.prop(`changeAnswer`)(1);
-
-    renderedComponent.prop(`submitAnswers`)();
-
-    expect(onAnswerMock).toHaveBeenCalledTimes(1);
-    expect(onAnswerMock).toHaveBeenCalledWith([false, true, true, false], question);
   });
 });

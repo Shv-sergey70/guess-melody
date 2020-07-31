@@ -23,7 +23,9 @@ exports[`Game screen correctly works Artist screen renders 1`] = `
         src="img/melody-logo-ginger.png"
       />
     </Link>
-    <Connect(Timer) />
+    <Connect(Timer)
+      onTick={[Function]}
+    />
     <Connect(MistakesList) />
   </header>
   <section
@@ -50,6 +52,7 @@ exports[`Game screen correctly works Artist screen renders 1`] = `
           "type": "artist",
         }
       }
+      questionTime={0}
     />
   </section>
 </section>
@@ -78,14 +81,15 @@ exports[`Game screen correctly works Genre screen renders 1`] = `
         src="img/melody-logo-ginger.png"
       />
     </Link>
-    <Connect(Timer) />
+    <Connect(Timer)
+      onTick={[Function]}
+    />
     <Connect(MistakesList) />
   </header>
   <section
     className="game__screen"
   >
     <WithUserAnswers
-      onAnswer={[MockFunction]}
       question={
         Object {
           "answers": Array [
@@ -110,6 +114,7 @@ exports[`Game screen correctly works Genre screen renders 1`] = `
           "type": "genre",
         }
       }
+      questionTime={0}
     />
   </section>
 </section>
