@@ -29,6 +29,8 @@ const question = {
 
 test(`ArtistQuestionScreen correct answer response`, () => {
   const onAnswer = jest.fn();
+  const onAnswerQuestion = jest.fn();
+  const renderAudioPlayerMock = jest.fn().mockImplementation((src, id) => <audio src={src} id={id}/>);
   const questionTime = 29;
 
   const artistQuestionScreen = shallow(
@@ -36,18 +38,22 @@ test(`ArtistQuestionScreen correct answer response`, () => {
         question={question}
         screenIndex={3}
         onAnswer={onAnswer}
-        renderAudioPlayer={(src, id) => <audio src={src} id={id} />}
+        renderAudioPlayer={renderAudioPlayerMock}
         questionTime={questionTime}
-      />);
+        onAnswerQuestion={onAnswerQuestion}
+      />
+  );
 
   const correctAnswer = `Artur Latte`;
 
-  artistQuestionScreen.find(`#answer-3`).simulate(`click`, {
-    target: {
-      value: correctAnswer
-    }
+  expect(renderAudioPlayerMock).toHaveBeenCalledTimes(1);
+  expect(renderAudioPlayerMock.mock.calls[0][0]).toEqual(question.song.src);
+  expect(renderAudioPlayerMock.mock.calls[0][1]).toEqual(0);
+
+  artistQuestionScreen.find(`ArtistAnswersList`).prop(`onArtistSelect`)({
+    target: {value: correctAnswer}
   });
 
   expect(onAnswer).toHaveBeenCalledTimes(1);
-  expect(onAnswer).toHaveBeenCalledWith(correctAnswer, question, questionTime);
+  expect(onAnswerQuestion).toHaveBeenNthCalledWith(1, correctAnswer, question, questionTime);
 });

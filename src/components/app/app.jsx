@@ -4,7 +4,7 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import WelcomeScreen from '../welcome-screen/welcome-screen';
 import {connect} from "react-redux";
 import LosingScreen from "../losing-screen/losing-screen";
-import {getStep, checkTime, checkAttempt} from '../../reducer/game/selectors';
+import {getStep, isTimeOver, areAttemptsOver} from '../../reducer/game/selectors';
 import {getQuestions, getUser} from "../../reducer/data/selectors";
 import AuthorizationScreen from "../authorization-screen/authorization-screen";
 import withLogin from "../../hocs/with-login/with-login";
@@ -30,11 +30,7 @@ class App extends PureComponent {
       <Switch>
         <Route path={AppRoute.AUTH} exact component={AuthorizationScreenWrapped} />
         <Route path={AppRoute.LOSE} exact component={LosingScreen} />
-        <Route path={AppRoute.VICTORY} exact render={() => {
-          return (
-            <VictoryScreenWrapped user={user} />
-          );
-        }} />
+        <Route path={AppRoute.VICTORY} exact render={() => <VictoryScreenWrapped user={user} />} />
         <Route path={AppRoute.MAIN} render={this._getScreen}/>
         <Route render={() => <div>404</div>}/>
       </Switch>
@@ -45,13 +41,11 @@ class App extends PureComponent {
     const {currentStep, questions, attempts, isNoMoreTime, isNoMoreAttempts, user} = this.props;
 
     if (isNoMoreTime || isNoMoreAttempts) {
-      return <Redirect to={AppRoute.LOSE}/>;
+      return <Redirect to={AppRoute.LOSE} />;
     }
 
     if (currentStep === -1) {
-      return (
-        <WelcomeScreen attempts={attempts} />
-      );
+      return <WelcomeScreen attempts={attempts} />;
     }
 
     if (currentStep >= questions.length) {
@@ -78,8 +72,8 @@ const mapStateToProps = (state) => ({
   currentStep: getStep(state),
   questions: getQuestions(state),
   user: getUser(state),
-  isNoMoreTime: checkTime(state),
-  isNoMoreAttempts: checkAttempt(state)
+  isNoMoreTime: isTimeOver(state),
+  isNoMoreAttempts: areAttemptsOver(state)
 });
 
 export {App};

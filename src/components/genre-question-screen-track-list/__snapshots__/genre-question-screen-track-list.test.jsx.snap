@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`GenreQuestionScreenTrackList correctly renders 1`] = `
+Array [
+  <GenreQuestionScreenTrack
+    isSelected={false}
+    key="3 - test/track1.mp3"
+    onChange={[MockFunction]}
+    src="test/track1.mp3"
+    trackIndex={0}
+  >
+    <div>
+      test/track1.mp3
+       - 
+      0
+    </div>
+  </GenreQuestionScreenTrack>,
+  <GenreQuestionScreenTrack
+    isSelected={true}
+    key="3 - test/track2.mp3"
+    onChange={[MockFunction]}
+    src="test/track2.mp3"
+    trackIndex={1}
+  >
+    <div>
+      test/track2.mp3
+       - 
+      1
+    </div>
+  </GenreQuestionScreenTrack>,
+  <GenreQuestionScreenTrack
+    isSelected={false}
+    key="3 - test/track3.mp3"
+    onChange={[MockFunction]}
+    src="test/track3.mp3"
+    trackIndex={2}
+  >
+    <div>
+      test/track3.mp3
+       - 
+      2
+    </div>
+  </GenreQuestionScreenTrack>,
+  <GenreQuestionScreenTrack
+    isSelected={true}
+    key="3 - test/track4.mp3"
+    onChange={[MockFunction]}
+    src="test/track4.mp3"
+    trackIndex={3}
+  >
+    <div>
+      test/track4.mp3
+       - 
+      3
+    </div>
+  </GenreQuestionScreenTrack>,
+]
+`;

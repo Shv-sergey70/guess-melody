@@ -7,15 +7,15 @@ const NAMESPACE = NameSpace.GAME;
 const getMistakes = (state) => state[NAMESPACE].mistakes;
 const getStep = (state) => state[NAMESPACE].step;
 const getTime = (state) => state[NAMESPACE].time;
-const checkTime = createSelector([getTime], (time) => time === 0);
-const checkAttempt = createSelector([getMistakes], (mistakes) => mistakes >= attempts);
+const isTimeOver = createSelector([getTime], (time) => time <= 0);
+const areAttemptsOver = createSelector([getMistakes], (mistakes) => mistakes >= attempts);
 const getWastedTime = createSelector([getTime], (timeLeft) => gameTime - timeLeft);
 
 export {
   getMistakes,
   getStep,
   getTime,
-  checkTime,
-  checkAttempt,
+  isTimeOver,
+  areAttemptsOver,
   getWastedTime
 };

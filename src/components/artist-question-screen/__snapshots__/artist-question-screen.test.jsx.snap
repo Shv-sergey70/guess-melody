@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`ArtistQuestionScreen correctly renders 1`] = `
-<Fragment>
+<section
+  className="game__screen"
+>
   <h2
     className="game__title"
   >
@@ -19,81 +21,25 @@ exports[`ArtistQuestionScreen correctly renders 1`] = `
       />
     </div>
   </div>
-  <form
-    className="game__artist"
-  >
-    <div
-      className="artist"
-      key="3 - Billie Eilish"
-    >
-      <input
-        className="artist__input visually-hidden"
-        id="answer-1"
-        name="answer"
-        onClick={[Function]}
-        type="radio"
-        value="Billie Eilish"
-      />
-      <label
-        className="artist__name"
-        htmlFor="answer-1"
-      >
-        <img
-          alt="Billie Eilish"
-          className="artist__picture"
-          src="test/track2.mp3"
-        />
-        Billie Eilish
-      </label>
-    </div>
-    <div
-      className="artist"
-      key="3 - Imagine Dragons"
-    >
-      <input
-        className="artist__input visually-hidden"
-        id="answer-2"
-        name="answer"
-        onClick={[Function]}
-        type="radio"
-        value="Imagine Dragons"
-      />
-      <label
-        className="artist__name"
-        htmlFor="answer-2"
-      >
-        <img
-          alt="Imagine Dragons"
-          className="artist__picture"
-          src="test/track1.mp3"
-        />
-        Imagine Dragons
-      </label>
-    </div>
-    <div
-      className="artist"
-      key="3 - Artur Latte"
-    >
-      <input
-        className="artist__input visually-hidden"
-        id="answer-3"
-        name="answer"
-        onClick={[Function]}
-        type="radio"
-        value="Artur Latte"
-      />
-      <label
-        className="artist__name"
-        htmlFor="answer-3"
-      >
-        <img
-          alt="Artur Latte"
-          className="artist__picture"
-          src="test/track3.mp3"
-        />
-        Artur Latte
-      </label>
-    </div>
-  </form>
-</Fragment>
+  <ArtistAnswersList
+    onArtistSelect={[Function]}
+    questionAnswers={
+      Array [
+        Object {
+          "artist": "Billie Eilish",
+          "picture": "test/track2.mp3",
+        },
+        Object {
+          "artist": "Imagine Dragons",
+          "picture": "test/track1.mp3",
+        },
+        Object {
+          "artist": "Artur Latte",
+          "picture": "test/track3.mp3",
+        },
+      ]
+    }
+    screenIndex={3}
+  />
+</section>
 `;

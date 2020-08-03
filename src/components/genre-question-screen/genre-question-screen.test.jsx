@@ -38,6 +38,8 @@ test(`GenreQuestionScreen correctly renders`, () => {
         changeAnswer={jest.fn()}
         onAnswer={jest.fn()}
         questionTime={25}
+        onAnswerQuestion={jest.fn()}
+        resetAnswers={jest.fn()}
       />
   );
 

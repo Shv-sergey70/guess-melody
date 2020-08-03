@@ -1,7 +1,7 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {checkTime, checkAttempt} from '../../reducer/game/selectors';
+import {isTimeOver, areAttemptsOver} from '../../reducer/game/selectors';
 import PlayAgainLink from "../links/play-again/play-again";
 
 const LosingScreen = ({isNoMoreTime, isNoMoreAttempts}) => {
@@ -48,8 +48,8 @@ LosingScreen.propTypes = {
 };
 
 const mapStateToProps = (state) => ({
-  isNoMoreTime: checkTime(state),
-  isNoMoreAttempts: checkAttempt(state)
+  isNoMoreTime: isTimeOver(state),
+  isNoMoreAttempts: areAttemptsOver(state)
 
 });
 

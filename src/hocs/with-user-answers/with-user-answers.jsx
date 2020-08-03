@@ -13,6 +13,7 @@ const withUserAnswers = (Component) => {
       };
 
       this._changeAnswer = this._changeAnswer.bind(this);
+      this._resetAnswers = this._resetAnswers.bind(this);
     }
 
     render() {
@@ -23,6 +24,7 @@ const withUserAnswers = (Component) => {
           {...this.props}
           answers={answers}
           changeAnswer={this._changeAnswer}
+          resetAnswers={this._resetAnswers}
         />
       );
     }
@@ -34,6 +36,14 @@ const withUserAnswers = (Component) => {
       answersCopy[itemPosition] = !answersCopy[itemPosition];
 
       this.setState({answers: answersCopy});
+    }
+
+    _resetAnswers() {
+      const {question: {answers}} = this.props;
+
+      this.setState({
+        answers: new Array(answers.length).fill(false)
+      });
     }
   }
 

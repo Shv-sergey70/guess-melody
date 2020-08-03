@@ -28,18 +28,13 @@ const question = {
   ]
 };
 
-const getChangeEventMock = (value, checked) => ({
-  target: {
-    checked,
-    value
-  }
-});
-
 test(`GenreQuestionScreen correct answer response`, () => {
   const preventDefault = jest.fn();
   const renderAudioPlayer = jest.fn();
   const changeAnswer = jest.fn();
   const onAnswer = jest.fn();
+  const resetAnswers = jest.fn();
+  const onAnswerQuestion = jest.fn();
   const questionTime = 25;
 
   const genreQuestionScreen = shallow(
@@ -50,21 +45,17 @@ test(`GenreQuestionScreen correct answer response`, () => {
         answers={[false, false, false, false]}
         changeAnswer={changeAnswer}
         questionTime={questionTime}
-        onAnswer={onAnswer} />
+        resetAnswers={resetAnswers}
+        onAnswer={onAnswer}
+        onAnswerQuestion={onAnswerQuestion}
+      />
   );
-
-  genreQuestionScreen.find(`#answer-0`).simulate(`change`, getChangeEventMock(0, true));
-  expect(changeAnswer).toHaveBeenNthCalledWith(1, 0);
-  genreQuestionScreen.find(`#answer-2`).simulate(`change`, getChangeEventMock(2, true));
-  expect(changeAnswer).toHaveBeenNthCalledWith(2, 2);
-  genreQuestionScreen.find(`#answer-0`).simulate(`change`, getChangeEventMock(0, false));
-  expect(changeAnswer).toHaveBeenNthCalledWith(3, 0);
-  genreQuestionScreen.find(`#answer-1`).simulate(`change`, getChangeEventMock(1, true));
-  expect(changeAnswer).toHaveBeenNthCalledWith(4, 1);
 
   genreQuestionScreen.find(`.game__tracks`).simulate(`submit`, {preventDefault});
 
+  expect(resetAnswers).toHaveBeenCalledTimes(1);
   expect(onAnswer).toHaveBeenCalledTimes(1);
-  expect(onAnswer).toHaveBeenNthCalledWith(1, [false, false, false, false], question, questionTime);
+  expect(onAnswerQuestion).toHaveBeenCalledTimes(1);
+  expect(onAnswerQuestion).toHaveBeenNthCalledWith(1, [false, false, false, false], question, questionTime);
   expect(preventDefault).toHaveBeenCalledTimes(1);
 });

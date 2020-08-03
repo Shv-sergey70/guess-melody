@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`GenreQuestionScreen correctly renders 1`] = `
-<Fragment>
+<section
+  className="game__screen"
+>
   <h2
     className="game__title"
   >
@@ -13,118 +15,38 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
     className="game__tracks"
     onSubmit={[Function]}
   >
-    <div
-      className="track"
-      key="3 - test/track1.mp3"
-    >
-      <audio
-        id={0}
-        src="test/track1.mp3"
-      />
-      <div
-        className="game__answer"
-      >
-        <input
-          checked={false}
-          className="game__input visually-hidden"
-          id="answer-0"
-          name="answer"
-          onChange={[Function]}
-          type="checkbox"
-          value={0}
-        />
-        <label
-          className="game__check"
-          htmlFor="answer-0"
-        >
-          Отметить
-        </label>
-      </div>
-    </div>
-    <div
-      className="track"
-      key="3 - test/track2.mp3"
-    >
-      <audio
-        id={1}
-        src="test/track2.mp3"
-      />
-      <div
-        className="game__answer"
-      >
-        <input
-          checked={true}
-          className="game__input visually-hidden"
-          id="answer-1"
-          name="answer"
-          onChange={[Function]}
-          type="checkbox"
-          value={1}
-        />
-        <label
-          className="game__check"
-          htmlFor="answer-1"
-        >
-          Отметить
-        </label>
-      </div>
-    </div>
-    <div
-      className="track"
-      key="3 - test/track3.mp3"
-    >
-      <audio
-        id={2}
-        src="test/track3.mp3"
-      />
-      <div
-        className="game__answer"
-      >
-        <input
-          checked={false}
-          className="game__input visually-hidden"
-          id="answer-2"
-          name="answer"
-          onChange={[Function]}
-          type="checkbox"
-          value={2}
-        />
-        <label
-          className="game__check"
-          htmlFor="answer-2"
-        >
-          Отметить
-        </label>
-      </div>
-    </div>
-    <div
-      className="track"
-      key="3 - test/track4.mp3"
-    >
-      <audio
-        id={3}
-        src="test/track4.mp3"
-      />
-      <div
-        className="game__answer"
-      >
-        <input
-          checked={true}
-          className="game__input visually-hidden"
-          id="answer-3"
-          name="answer"
-          onChange={[Function]}
-          type="checkbox"
-          value={3}
-        />
-        <label
-          className="game__check"
-          htmlFor="answer-3"
-        >
-          Отметить
-        </label>
-      </div>
-    </div>
+    <WithActivePlayer
+      activeItems={
+        Array [
+          false,
+          true,
+          false,
+          true,
+        ]
+      }
+      onChange={[Function]}
+      questionAnswers={
+        Array [
+          Object {
+            "genre": "pop",
+            "src": "test/track1.mp3",
+          },
+          Object {
+            "genre": "jazz",
+            "src": "test/track2.mp3",
+          },
+          Object {
+            "genre": "rock",
+            "src": "test/track3.mp3",
+          },
+          Object {
+            "genre": "classic",
+            "src": "test/track4.mp3",
+          },
+        ]
+      }
+      screenIndex={3}
+    />
     <button
       className="game__submit button"
       type="submit"
@@ -132,5 +54,5 @@ exports[`GenreQuestionScreen correctly renders 1`] = `
       Ответить
     </button>
   </form>
-</Fragment>
+</section>
 `;

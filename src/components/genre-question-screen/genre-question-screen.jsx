@@ -1,9 +1,16 @@
-import React, {PureComponent, Fragment} from 'react';
+import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
 import {genreQuestion} from '../../types/types';
 import {connect} from "react-redux";
 import {getStep} from "../../reducer/game/selectors";
-import {ActionCreator, isGenreAnswerCorrect, getAnswerType} from "../../reducer/game/game";
+import {ActionCreator as GameActionCreator, isGenreAnswerCorrect} from "../../reducer/game/game";
+import {ActionCreator as UserAnswersActionCreator} from "../../reducer/user-answers/user-answers";
+import GenreQuestionScreenTrackList from "../genre-question-screen-track-list/genre-question-screen-track-list";
+import withActivePlayer from "../../hocs/with-active-player/with-active-player";
+import {getQuestionTime} from "../../reducer/user-answers/selectors";
+import {getAnswerType} from "../../reducer/user-answers/user-answers";
+
+const GenreQuestionScreenTrackListWrapped = withActivePlayer(GenreQuestionScreenTrackList);
 
 class GenreQuestionScreen extends PureComponent {
   constructor(props) {
@@ -14,38 +21,23 @@ class GenreQuestionScreen extends PureComponent {
   }
 
   render() {
-    const {question, screenIndex, renderAudioPlayer, answers: activeItems} = this.props;
+    const {question, screenIndex, answers: activeItems} = this.props;
 
-    const {answers, genre} = question;
-
-    const content = answers.map(({src}, ind) => {
-      const id = `answer-${ind}`;
-
-      return (
-        <div className="track" key={`${screenIndex} - ${src}`}>
-          {renderAudioPlayer(src, ind)}
-          <div className="game__answer">
-            <input
-              className="game__input visually-hidden"
-              type="checkbox"
-              name="answer"
-              value={ind}
-              id={id}
-              onChange={this._itemSelectHandler}
-              checked={activeItems[ind]}/>
-            <label className="game__check" htmlFor={id}>Отметить</label>
-          </div>
-        </div>
-      );
-    });
+    const {answers: questionAnswers, genre} = question;
 
     return (
-      <Fragment>
+      <section className="game__screen">
         <h2 className="game__title">Выберите {genre} треки</h2>
         <form
           className="game__tracks"
-          onSubmit={this._handleFormSubmit}>
-          {content}
+          onSubmit={this._handleFormSubmit} >
+
+          <GenreQuestionScreenTrackListWrapped
+            onChange={this._itemSelectHandler}
+            screenIndex={screenIndex}
+            questionAnswers={questionAnswers}
+            activeItems={activeItems}
+          />
 
           <button
             className="game__submit button"
@@ -53,7 +45,7 @@ class GenreQuestionScreen extends PureComponent {
             Ответить
           </button>
         </form>
-      </Fragment>
+      </section>
     );
   }
 
@@ -66,37 +58,39 @@ class GenreQuestionScreen extends PureComponent {
   _handleFormSubmit(evt) {
     evt.preventDefault();
 
-    const {onAnswer, answers: activeItems, question, questionTime} = this.props;
+    const {onAnswer, answers: activeItems, question, resetAnswers, questionTime, onAnswerQuestion} = this.props;
 
-    onAnswer(activeItems, question, questionTime);
+    onAnswerQuestion(activeItems, question, questionTime);
+    onAnswer();
+    resetAnswers();
   }
 }
 
 GenreQuestionScreen.propTypes = {
   question: genreQuestion,
   screenIndex: PropTypes.number.isRequired,
-  renderAudioPlayer: PropTypes.func.isRequired,
   answers: PropTypes.arrayOf(PropTypes.bool).isRequired,
   changeAnswer: PropTypes.func.isRequired,
   onAnswer: PropTypes.func.isRequired,
+  onAnswerQuestion: PropTypes.func.isRequired,
+  resetAnswers: PropTypes.func.isRequired,
   questionTime: PropTypes.number.isRequired
 };
 
-const mapStateToProps = (state) => ({
-  screenIndex: getStep(state)
-});
+const mapStateToProps = (state) => {
+  return {
+    questionTime: getQuestionTime(state),
+    screenIndex: getStep(state),
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
-  onAnswer: (answer, question, questionTime) => {
-    const isCorrectAnswer = isGenreAnswerCorrect(answer, question);
-
-    if (isCorrectAnswer) {
-      dispatch(ActionCreator.incrementCorrectAnswersCounter(getAnswerType(questionTime)));
+  onAnswerQuestion: (answer, question, questionTime) => {
+    if (isGenreAnswerCorrect(answer, question)) {
+      dispatch(UserAnswersActionCreator.incrementAnswersCounter(getAnswerType(questionTime)));
     } else {
-      dispatch(ActionCreator.incrementMistakes());
+      dispatch(GameActionCreator.incrementMistakes());
     }
-
-    dispatch(ActionCreator.incrementStep());
   }
 });
 

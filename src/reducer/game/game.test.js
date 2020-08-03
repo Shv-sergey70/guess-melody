@@ -1,13 +1,9 @@
-import {ActionCreator, reducer, isGenreAnswerCorrect, isArtistAnswerCorrect, getAnswerType} from './game';
+import {ActionCreator, reducer, isGenreAnswerCorrect, isArtistAnswerCorrect} from './game';
 
 const initialState = {
   mistakes: 0,
   step: -1,
-  time: 300,
-  correctAnswersCounter: {
-    usual: 0,
-    fast: 0
-  }
+  time: 300
 };
 
 describe(`Reducer works correctly`, () => {
@@ -92,34 +88,6 @@ describe(`Reducer works correctly`, () => {
       })).toEqual(Object.assign({}, initialState, {step: 0}));
     });
   });
-
-  describe(`Reducer with INCREMENT_CORRECT_USUAL_ANSWERS_COUNTER action correctly works`, () => {
-    test(`Should increment usual answers counter`, () => {
-      expect(reducer(initialState, {
-        type: `INCREMENT_CORRECT_USUAL_ANSWERS_COUNTER`,
-        payload: 1
-      })).toEqual(Object.assign({}, initialState, {
-        correctAnswersCounter: {
-          usual: 1,
-          fast: 0
-        }
-      }));
-    });
-  });
-
-  describe(`Reducer with INCREMENT_CORRECT_FAST_ANSWERS_COUNTER action correctly works`, () => {
-    test(`Should increment fast answers counter`, () => {
-      expect(reducer(initialState, {
-        type: `INCREMENT_CORRECT_FAST_ANSWERS_COUNTER`,
-        payload: 1
-      })).toEqual(Object.assign({}, initialState, {
-        correctAnswersCounter: {
-          usual: 0,
-          fast: 1
-        }
-      }));
-    });
-  });
 });
 
 describe(`ActionCreator correctly works`, () => {
@@ -165,31 +133,6 @@ describe(`ActionCreator correctly works`, () => {
       });
     });
   });
-
-  describe(`incrementCorrectAnswersCounter correctly works`, () => {
-    test(`Usual answer type, should be returned INCREMENT_CORRECT_USUAL_ANSWERS_COUNTER`, () => {
-      expect(ActionCreator.incrementCorrectAnswersCounter(`usual`)).toEqual({
-        type: `INCREMENT_CORRECT_USUAL_ANSWERS_COUNTER`,
-        payload: 1
-      });
-    });
-
-    test(`Fast answer type, should be returned INCREMENT_CORRECT_FAST_ANSWERS_COUNTER`, () => {
-      expect(ActionCreator.incrementCorrectAnswersCounter(`fast`)).toEqual({
-        type: `INCREMENT_CORRECT_FAST_ANSWERS_COUNTER`,
-        payload: 1
-      });
-    });
-
-    test(`Undefined answer type, should be returned Error`, () => {
-      const checkFunction = () => {
-        ActionCreator.incrementCorrectAnswersCounter(undefined);
-      };
-
-      expect(checkFunction)
-        .toThrowError(new Error(`Unhandled answer type: undefined`));
-    });
-  });
 });
 
 describe(`isGenreAnswerCorrect function correctly works`, () => {
@@ -229,15 +172,5 @@ describe(`isArtistAnswerCorrect function correctly works`, () => {
 
   test(`selected incorrect answer`, () => {
     expect(isArtistAnswerCorrect(`Wrong Artist`, correctAnswer)).toEqual(false);
-  });
-});
-
-describe(`getAnswerType function correctly works`, () => {
-  test(`time = 30 seconds, should return 'fast' type`, () => {
-    expect(getAnswerType(30)).toEqual(`fast`);
-  });
-
-  test(`time = 31 seconds, should return 'fast' type`, () => {
-    expect(getAnswerType(31)).toEqual(`usual`);
   });
 });
