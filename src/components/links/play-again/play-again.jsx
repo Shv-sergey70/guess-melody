@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {ActionCreator} from "../../../reducer/game/game";
+import {ActionCreator as GameActionCreator} from "../../../reducer/game/game";
+import {ActionCreator as UserAnswersActionCreator} from '../../../reducer/user-answers/user-answers';
 import {connect} from "react-redux";
 import Simple from "../simple/simple";
 import Route from '../../../routes';
@@ -21,7 +22,10 @@ PlayAgain.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onClick: () => dispatch(ActionCreator.replay())
+  onClick: () => {
+    dispatch(GameActionCreator.replay());
+    dispatch(UserAnswersActionCreator.resetAnswers());
+  }
 });
 
 export {PlayAgain};
