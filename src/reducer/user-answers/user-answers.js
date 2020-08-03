@@ -10,7 +10,8 @@ const ActionType = {
   INCREMENT_USUAL_ANSWERS: `INCREMENT_USUAL_ANSWERS`,
   INCREMENT_FAST_ANSWERS: `INCREMENT_FAST_ANSWERS`,
   INCREMENT_QUESTION_TIME: `INCREMENT_QUESTION_TIME`,
-  RESET_QUESTION_TIME: `RESET_QUESTION_TIME`
+  RESET_QUESTION_TIME: `RESET_QUESTION_TIME`,
+  RESET_ANSWERS: `RESET_ANSWERS`
 };
 
 const getAnswerType = (wastedTime) => wastedTime > TIME_FOR_FAST_QUESTION ? AnswerType.USUAL : AnswerType.FAST;
@@ -45,6 +46,12 @@ const ActionCreator = {
 
     throw new Error(`Unhandled answer type: ${answerType}`);
   },
+
+  resetAnswers() {
+    return {
+      type: ActionType.RESET_ANSWERS
+    };
+  },
 };
 
 const reducer = (state = initialState, {type, payload}) => {
@@ -65,6 +72,13 @@ const reducer = (state = initialState, {type, payload}) => {
     case ActionType.INCREMENT_FAST_ANSWERS: {
       return Object.assign({}, state, {
         fast: state.fast + payload
+      });
+    }
+    case ActionType.RESET_ANSWERS: {
+      return Object.assign({}, state, {
+        usual: 0,
+        fast: 0,
+        questionTime: 0
       });
     }
   }

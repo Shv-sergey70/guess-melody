@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
-import {ActionCreator} from "../../../reducer/game/game";
+import {ActionCreator as GameActionCreator} from "../../../reducer/game/game";
+import {ActionCreator as UserAnswersActionCreator} from '../../../reducer/user-answers/user-answers';
 import Simple from "../simple/simple";
 import Route from '../../../routes';
 
@@ -22,7 +23,10 @@ WelcomeScreen.propTypes = {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onClick: () => dispatch(ActionCreator.resetState())
+  onClick: () => {
+    dispatch(GameActionCreator.resetState());
+    dispatch(UserAnswersActionCreator.resetAnswers());
+  }
 });
 
 export {WelcomeScreen};

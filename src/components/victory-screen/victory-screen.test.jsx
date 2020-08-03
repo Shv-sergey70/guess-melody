@@ -10,6 +10,8 @@ test(`Victory screen renders correctly`, () => {
       <VictoryScreen
         mistakesCount={1}
         wastedTime={75}
+        totalScores={12}
+        fastScores={8}
       />
   );
 

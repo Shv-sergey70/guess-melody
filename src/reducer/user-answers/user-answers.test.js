@@ -10,7 +10,8 @@ const ActionType = {
   INCREMENT_USUAL_ANSWERS: `INCREMENT_USUAL_ANSWERS`,
   INCREMENT_FAST_ANSWERS: `INCREMENT_FAST_ANSWERS`,
   INCREMENT_QUESTION_TIME: `INCREMENT_QUESTION_TIME`,
-  RESET_QUESTION_TIME: `RESET_QUESTION_TIME`
+  RESET_QUESTION_TIME: `RESET_QUESTION_TIME`,
+  RESET_ANSWERS: `RESET_ANSWERS`
 };
 
 describe(`Reducer correctly works`, () => {
@@ -41,26 +42,32 @@ describe(`Reducer correctly works`, () => {
     })).toEqual(Object.assign({}, customState, {questionTime: 0}));
   });
 
-  describe(`Reducer with ${ActionType.INCREMENT_USUAL_ANSWERS} action correctly works`, () => {
-    test(`Should increment usual answers counter`, () => {
-      expect(reducer(initialState, {
-        type: ActionType.INCREMENT_USUAL_ANSWERS,
-        payload: 1
-      })).toEqual(Object.assign({}, initialState, {
-        usual: 1,
-      }));
-    });
+  test(`${ActionType.INCREMENT_USUAL_ANSWERS} action should increment usual answers counter`, () => {
+    expect(reducer(initialState, {
+      type: ActionType.INCREMENT_USUAL_ANSWERS,
+      payload: 1
+    })).toEqual(Object.assign({}, initialState, {
+      usual: 1,
+    }));
   });
 
-  describe(`Reducer with ${ActionType.INCREMENT_FAST_ANSWERS} action correctly works`, () => {
-    test(`Should increment fast answers counter`, () => {
-      expect(reducer(initialState, {
-        type: ActionType.INCREMENT_FAST_ANSWERS,
-        payload: 1
-      })).toEqual(Object.assign({}, initialState, {
-        fast: 1
-      }));
-    });
+  test(`${ActionType.INCREMENT_FAST_ANSWERS} action should increment fast answers counter`, () => {
+    expect(reducer(initialState, {
+      type: ActionType.INCREMENT_FAST_ANSWERS,
+      payload: 1
+    })).toEqual(Object.assign({}, initialState, {
+      fast: 1
+    }));
+  });
+
+  test(`${ActionType.RESET_ANSWERS} action should reset all answers and questionTime into 0`, () => {
+    expect(reducer(initialState, {
+      type: ActionType.RESET_ANSWERS
+    })).toEqual(Object.assign({}, initialState, {
+      usual: 0,
+      fast: 0,
+      questionTime: 0
+    }));
   });
 });
 
@@ -100,6 +107,12 @@ describe(`ActionCreator correctly works`, () => {
 
       expect(checkFunction)
         .toThrowError(new Error(`Unhandled answer type: undefined`));
+    });
+  });
+
+  test(`resetAnswers returns correct action`, () => {
+    expect(ActionCreator.resetAnswers()).toEqual({
+      type: ActionType.RESET_ANSWERS
     });
   });
 });

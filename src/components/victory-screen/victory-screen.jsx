@@ -3,6 +3,7 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {getMistakes, getWastedTime} from "../../reducer/game/selectors";
 import PlayAgainLink from "../links/play-again/play-again";
+import {getFastAnswersScores, getTotalScores} from "../../reducer/user-answers/selectors";
 
 const getFormattedTime = (time) => {
   return {
@@ -11,7 +12,7 @@ const getFormattedTime = (time) => {
   };
 };
 
-const VictoryScreen = ({mistakesCount, wastedTime}) => {
+const VictoryScreen = ({mistakesCount, wastedTime, totalScores, fastScores}) => {
   const formattedTime = getFormattedTime(wastedTime);
 
   return (
@@ -20,7 +21,7 @@ const VictoryScreen = ({mistakesCount, wastedTime}) => {
         <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/>
       </div>
       <h2 className="login__title">Вы настоящий меломан!</h2>
-      <p className="login__total">За {formattedTime.minutes} минуты и {formattedTime.seconds} секунд вы набрали 12 баллов (8 быстрых), совершив {mistakesCount} ошибки</p>
+      <p className="login__total">За {formattedTime.minutes} минуты и {formattedTime.seconds} секунд вы набрали {totalScores} баллов ({fastScores} быстрых), совершив {mistakesCount} ошибки</p>
 
       <PlayAgainLink />
     </section>
@@ -30,10 +31,14 @@ const VictoryScreen = ({mistakesCount, wastedTime}) => {
 VictoryScreen.propTypes = {
   mistakesCount: PropTypes.number.isRequired,
   wastedTime: PropTypes.number.isRequired,
+  totalScores: PropTypes.number.isRequired,
+  fastScores: PropTypes.number.isRequired
 };
 
 const mapStateToProps = (state) => ({
   mistakesCount: getMistakes(state),
+  totalScores: getTotalScores(state),
+  fastScores: getFastAnswersScores(state),
   wastedTime: getWastedTime(state)
 });
 
