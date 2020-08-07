@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SimpleLink correctly renders with not required props 1`] = `ShallowWrapper {}`;
+
+exports[`SimpleLink correctly renders without not required props 1`] = `ShallowWrapper {}`;

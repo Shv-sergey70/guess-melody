@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomeScreen correctly works Start button disabled 1`] = `ShallowWrapper {}`;
+
+exports[`WelcomeScreen correctly works Start button enabled 1`] = `ShallowWrapper {}`;

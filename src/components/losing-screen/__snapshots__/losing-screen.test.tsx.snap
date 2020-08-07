@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LosingScreen renders correctly Losing by attempts 1`] = `ShallowWrapper {}`;
+
+exports[`LosingScreen renders correctly Losing by time 1`] = `ShallowWrapper {}`;
+
+exports[`LosingScreen renders correctly No losing reasons - redirect to main page 1`] = `ShallowWrapper {}`;
