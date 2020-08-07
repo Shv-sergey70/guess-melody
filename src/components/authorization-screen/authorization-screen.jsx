@@ -12,7 +12,8 @@ const AuthorizationScreen = (props) => {
         <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/>
       </div>
       <h2 className="login__title">Вы настоящий меломан!</h2>
-      <p className="login__total">За 3 минуты и 25 секунд вы набрали 12 баллов (8 быстрых), совершив 3 ошибки</p>
+      <p className="login__total"/>
+      <br/><br/>
       <p className="login__text">Хотите сравнить свой результат с предыдущими попытками? Представтесь!</p>
       <form
         className="login__form"
@@ -45,7 +46,6 @@ const AuthorizationScreen = (props) => {
         </p>
         <button className="login__button button" type="submit" disabled={isDisabled}>Войти</button>
       </form>
-      <button className="replay" type="button">Сыграть ещё раз</button>
     </section>
   );
 };

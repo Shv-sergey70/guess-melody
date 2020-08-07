@@ -1,16 +1,17 @@
 import PropTypes from "prop-types";
 
 const {exact, oneOf, string, arrayOf} = PropTypes;
+const answers = arrayOf(
+    exact({
+      src: string.isRequired,
+      genre: string.isRequired
+    }).isRequired
+).isRequired;
 
-const genreQuestion = exact({
+const question = exact({
   type: oneOf([`genre`]).isRequired,
   genre: string.isRequired,
-  answers: arrayOf(
-      exact({
-        src: string.isRequired,
-        genre: string.isRequired
-      }).isRequired
-  ).isRequired
+  answers
 }).isRequired;
 
-export default genreQuestion;
+export {question, answers};

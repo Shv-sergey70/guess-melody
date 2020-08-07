@@ -1,8 +1,10 @@
 import React, {Fragment} from 'react';
 import PropTypes from 'prop-types';
 import {connect} from "react-redux";
+import {Redirect} from 'react-router-dom';
 import {isTimeOver, areAttemptsOver} from '../../reducer/game/selectors';
 import PlayAgainLink from "../links/play-again/play-again";
+import Route from '../../routes';
 
 const LosingScreen = ({isNoMoreTime, isNoMoreAttempts}) => {
   let content = null;
@@ -27,6 +29,8 @@ const LosingScreen = ({isNoMoreTime, isNoMoreAttempts}) => {
       );
 
       break;
+    default:
+      content = <Redirect to={Route.MAIN}/>;
   }
 
   return (

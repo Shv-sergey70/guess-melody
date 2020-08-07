@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from "prop-types";
+import {artistAnswers} from "../../types/types";
 
 const ArtistAnswersList = ({questionAnswers, onArtistSelect, screenIndex}) => {
   const content = questionAnswers.map(({picture, artist}, ind) => {
@@ -27,7 +28,7 @@ const ArtistAnswersList = ({questionAnswers, onArtistSelect, screenIndex}) => {
 };
 
 ArtistAnswersList.propTypes = {
-  questionAnswers: PropTypes.array.isRequired, // fix it
+  questionAnswers: artistAnswers,
   onArtistSelect: PropTypes.func.isRequired,
   screenIndex: PropTypes.number.isRequired
 };
