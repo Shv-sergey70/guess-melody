@@ -55,3 +55,24 @@ exports[`LosingScreen renders correctly Losing by time 1`] = `
   <Connect(PlayAgain) />
 </section>
 `;
+
+exports[`LosingScreen renders correctly No losing reasons - redirect to main page 1`] = `
+<section
+  className="result"
+>
+  <div
+    className="result__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <Redirect
+    to="/"
+  />
+  <Connect(PlayAgain) />
+</section>
+`;

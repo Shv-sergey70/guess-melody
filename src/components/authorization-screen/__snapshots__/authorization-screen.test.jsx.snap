@@ -21,9 +21,9 @@ exports[`Authorization screen correctly renders 1`] = `
   </h2>
   <p
     className="login__total"
-  >
-    За 3 минуты и 25 секунд вы набрали 12 баллов (8 быстрых), совершив 3 ошибки
-  </p>
+  />
+  <br />
+  <br />
   <p
     className="login__text"
   >
@@ -83,11 +83,5 @@ exports[`Authorization screen correctly renders 1`] = `
       Войти
     </button>
   </form>
-  <button
-    className="replay"
-    type="button"
-  >
-    Сыграть ещё раз
-  </button>
 </section>
 `;

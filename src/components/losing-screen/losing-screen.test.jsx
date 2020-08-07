@@ -27,4 +27,15 @@ describe(`LosingScreen renders correctly`, () => {
 
     expect(tree).toMatchSnapshot();
   });
+
+  test(`No losing reasons - redirect to main page`, () => {
+    const tree = shallow(
+        <LosingScreen
+          onReplayButtonClick={jest.fn()}
+          isNoMoreTime={false}
+          isNoMoreAttempts={false} />
+    );
+
+    expect(tree).toMatchSnapshot();
+  });
 });

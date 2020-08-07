@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import {genreAnswers as genreAnswersTypes} from '../../types/types';
 import GenreQuestionScreenTrack from "../genre-question-screen-track/genre-question-screen-track";
 
 const GenreQuestionScreenTrackList = ({questionAnswers, screenIndex, activeItems, onChange, renderAudioPlayer}) => {
@@ -16,7 +17,7 @@ const GenreQuestionScreenTrackList = ({questionAnswers, screenIndex, activeItems
 };
 
 GenreQuestionScreenTrackList.propTypes = {
-  questionAnswers: PropTypes.arrayOf(PropTypes.object).isRequired, // fix it
+  questionAnswers: genreAnswersTypes,
   renderAudioPlayer: PropTypes.func.isRequired,
   screenIndex: PropTypes.number.isRequired,
   activeItems: PropTypes.arrayOf(PropTypes.bool.isRequired).isRequired,

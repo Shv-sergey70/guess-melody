@@ -1,5 +1,6 @@
 import React, {PureComponent} from 'react';
 import PropTypes from 'prop-types';
+import {question} from '../../types/types';
 import {Switch, Route, Redirect} from 'react-router-dom';
 import WelcomeScreen from '../welcome-screen/welcome-screen';
 import {connect} from "react-redux";
@@ -60,10 +61,13 @@ class App extends PureComponent {
 }
 
 App.propTypes = {
-  questions: PropTypes.arrayOf(PropTypes.object), // fix it
+  questions: PropTypes.arrayOf(question),
   attempts: PropTypes.number.isRequired,
   currentStep: PropTypes.number.isRequired,
-  user: PropTypes.object, // fix it
+  user: PropTypes.exact({
+    id: PropTypes.number,
+    email: PropTypes.string
+  }),
   isNoMoreTime: PropTypes.bool.isRequired,
   isNoMoreAttempts: PropTypes.bool.isRequired
 };
