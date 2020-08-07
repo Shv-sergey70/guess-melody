@@ -5,15 +5,32 @@ import {getMistakes, getWastedTime} from "../../reducer/game/selectors";
 import PlayAgainLink from "../links/play-again/play-again";
 import {getFastAnswersScores, getTotalScores} from "../../reducer/user-answers/selectors";
 
-const getFormattedTime = (time) => {
-  return {
-    minutes: Math.floor(time / 60),
-    seconds: Math.floor(time % 60)
-  };
+const getFormattedTime = (time) => ({
+  minutes: Math.floor(time / 60),
+  seconds: Math.floor(time % 60)
+});
+
+const getPluralForm = (number, textForms) => {
+  number = Math.abs(number) % 100;
+  const number1 = number % 10;
+
+  if (number > 10 && number < 20) {
+    return textForms[2];
+  }
+  if (number1 > 1 && number1 < 5) {
+    return textForms[1];
+  }
+  if (number1 === 1) {
+    return textForms[0];
+  }
+
+  return textForms[2];
 };
 
 const VictoryScreen = ({mistakesCount, wastedTime, totalScores, fastScores}) => {
-  const formattedTime = getFormattedTime(wastedTime);
+  const {minutes, seconds} = getFormattedTime(wastedTime);
+  const minutesText = getPluralForm(minutes, [`минуту`, `минуты`, `минут`]);
+  const secondsText = getPluralForm(seconds, [`секунду`, `секунды`, `секунд`]);
 
   return (
     <section className="login">
@@ -21,7 +38,7 @@ const VictoryScreen = ({mistakesCount, wastedTime, totalScores, fastScores}) => 
         <img src="img/melody-logo.png" alt="Угадай мелодию" width="186" height="83"/>
       </div>
       <h2 className="login__title">Вы настоящий меломан!</h2>
-      <p className="login__total">За {formattedTime.minutes} минуты и {formattedTime.seconds} секунд вы набрали {totalScores} баллов ({fastScores} быстрых), совершив {mistakesCount} ошибки</p>
+      <p className="login__total">За {minutes} {minutesText} и {seconds} {secondsText} вы набрали {totalScores} баллов ({fastScores} быстрых), совершив {mistakesCount} ошибки</p>
 
       <PlayAgainLink />
     </section>
