@@ -1,8 +1,13 @@
-import React from 'react';
-import PropTypes from "prop-types";
-import {artistAnswers} from "../../types/types";
+import * as React from 'react';
+import {ArtistAnswer} from "../../types";
 
-const ArtistAnswersList = ({questionAnswers, onArtistSelect, screenIndex}) => {
+type Props = {
+  questionAnswers: ArtistAnswer[],
+  onArtistSelect: (evt: React.SyntheticEvent) => void,
+  screenIndex: number
+};
+
+const ArtistAnswersList: React.FunctionComponent<Props> = ({questionAnswers, onArtistSelect, screenIndex}) => {
   const content = questionAnswers.map(({picture, artist}, ind) => {
     const id = `answer-${ind}`;
 
@@ -25,12 +30,6 @@ const ArtistAnswersList = ({questionAnswers, onArtistSelect, screenIndex}) => {
   return (
     <form className="game__artist">{content}</form>
   );
-};
-
-ArtistAnswersList.propTypes = {
-  questionAnswers: artistAnswers,
-  onArtistSelect: PropTypes.func.isRequired,
-  screenIndex: PropTypes.number.isRequired
 };
 
 export default ArtistAnswersList;

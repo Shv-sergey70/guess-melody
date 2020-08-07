@@ -1,15 +1,23 @@
-import React, {PureComponent} from 'react';
-import PropTypes from "prop-types";
+import * as React from 'react';
 import {ActionCreator as GameActionCreator, isArtistAnswerCorrect} from "../../reducer/game/game";
 import {ActionCreator as UserAnswersActionCreator} from "../../reducer/user-answers/user-answers";
 import {connect} from "react-redux";
 import {getStep} from "../../reducer/game/selectors";
-import {artistQuestion} from "../../types/types";
+import {ArtistQuestion} from "../../types";
 import ArtistAnswersList from "../artist-answers-list/artist-answers-list";
 import {getQuestionTime} from "../../reducer/user-answers/selectors";
 import {getAnswerType} from "../../reducer/user-answers/user-answers";
 
-class ArtistQuestionScreen extends PureComponent {
+type Props = {
+  question: ArtistQuestion,
+  onAnswer: () => void,
+  onAnswerQuestion: (value: string, question: ArtistQuestion, questionTime: number) => void,
+  screenIndex: number,
+  renderAudioPlayer: (src: string, index: number) => React.ReactNode,
+  questionTime: number
+};
+
+class ArtistQuestionScreen extends React.PureComponent<Props> {
   constructor(props) {
     super(props);
 
@@ -44,15 +52,6 @@ class ArtistQuestionScreen extends PureComponent {
     onAnswer();
   }
 }
-
-ArtistQuestionScreen.propTypes = {
-  question: artistQuestion,
-  onAnswer: PropTypes.func.isRequired,
-  onAnswerQuestion: PropTypes.func.isRequired,
-  screenIndex: PropTypes.number.isRequired,
-  renderAudioPlayer: PropTypes.func.isRequired,
-  questionTime: PropTypes.number.isRequired
-};
 
 const mapStateToProps = (state) => ({
   questionTime: getQuestionTime(state),

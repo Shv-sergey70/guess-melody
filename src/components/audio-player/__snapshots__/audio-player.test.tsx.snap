@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AudioPlayer correctly renders Play button is disabled and has play class 1`] = `ReactWrapper {}`;
+
+exports[`AudioPlayer correctly renders Play button is enabled and has pause class 1`] = `ReactWrapper {}`;

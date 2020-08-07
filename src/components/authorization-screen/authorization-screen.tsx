@@ -1,9 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {connect} from "react-redux";
 import {Operations} from "../../reducer/data/data";
 
-const AuthorizationScreen = (props) => {
+type Props = {
+  email: string
+  password: string
+  onEmailChange: (evt: React.SyntheticEvent) => void
+  onPasswordChange: (evt: React.SyntheticEvent) => void
+  login: (email: string, password: string) => void
+  isDisabled: boolean
+};
+
+const AuthorizationScreen: React.FunctionComponent<Props> = (props) => {
   const {email, password, onEmailChange, onPasswordChange, login, isDisabled} = props;
 
   return (
@@ -48,15 +56,6 @@ const AuthorizationScreen = (props) => {
       </form>
     </section>
   );
-};
-
-AuthorizationScreen.propTypes = {
-  email: PropTypes.string.isRequired,
-  password: PropTypes.string.isRequired,
-  onEmailChange: PropTypes.func.isRequired,
-  onPasswordChange: PropTypes.func.isRequired,
-  login: PropTypes.func.isRequired,
-  isDisabled: PropTypes.bool.isRequired,
 };
 
 const mapDispatchToProps = (dispatch) => ({

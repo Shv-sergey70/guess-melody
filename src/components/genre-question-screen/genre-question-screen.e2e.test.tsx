@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import {configure, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as Adapter from 'enzyme-adapter-react-16';
 import {GenreQuestionScreen} from "./genre-question-screen";
 
 configure({adapter: new Adapter()});
@@ -30,7 +30,6 @@ const question = {
 
 test(`GenreQuestionScreen correct answer response`, () => {
   const preventDefault = jest.fn();
-  const renderAudioPlayer = jest.fn();
   const changeAnswer = jest.fn();
   const onAnswer = jest.fn();
   const resetAnswers = jest.fn();
@@ -41,7 +40,6 @@ test(`GenreQuestionScreen correct answer response`, () => {
       <GenreQuestionScreen
         question={question}
         screenIndex={3}
-        renderAudioPlayer={renderAudioPlayer}
         answers={[false, false, false, false]}
         changeAnswer={changeAnswer}
         questionTime={questionTime}

@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import {configure, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as Adapter from 'enzyme-adapter-react-16';
 import {ArtistQuestionScreen} from "./artist-question-screen";
 
 configure({adapter: new Adapter()});
@@ -33,7 +33,7 @@ test(`ArtistQuestionScreen correctly renders`, () => {
         question={question}
         screenIndex={3}
         onAnswer={jest.fn()}
-        renderAudioPlayer={(src, id) => <audio src={src} id={id} />}
+        renderAudioPlayer={(src, id) => <audio src={src} id={`${id}`} />}
         questionTime={35}
         onAnswerQuestion={jest.fn()}
       />

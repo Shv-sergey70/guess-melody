@@ -1,6 +1,4 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
-import {genreQuestion} from '../../types/types';
+import * as React from 'react';
 import {connect} from "react-redux";
 import {getStep} from "../../reducer/game/selectors";
 import {ActionCreator as GameActionCreator, isGenreAnswerCorrect} from "../../reducer/game/game";
@@ -9,10 +7,22 @@ import GenreQuestionScreenTrackList from "../genre-question-screen-track-list/ge
 import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import {getQuestionTime} from "../../reducer/user-answers/selectors";
 import {getAnswerType} from "../../reducer/user-answers/user-answers";
+import {GenreQuestion} from "../../types";
+
+type Props = {
+  question: GenreQuestion,
+  screenIndex: number,
+  answers: boolean[],
+  changeAnswer: (answerPosition: number) => void,
+  onAnswer: () => void,
+  onAnswerQuestion: (userAnswers: boolean[], question: GenreQuestion, questionTime: number) => void,
+  resetAnswers: () => void,
+  questionTime: number
+};
 
 const GenreQuestionScreenTrackListWrapped = withActivePlayer(GenreQuestionScreenTrackList);
 
-class GenreQuestionScreen extends PureComponent {
+class GenreQuestionScreen extends React.PureComponent<Props> {
   constructor(props) {
     super(props);
 
@@ -65,17 +75,6 @@ class GenreQuestionScreen extends PureComponent {
     resetAnswers();
   }
 }
-
-GenreQuestionScreen.propTypes = {
-  question: genreQuestion,
-  screenIndex: PropTypes.number.isRequired,
-  answers: PropTypes.arrayOf(PropTypes.bool).isRequired,
-  changeAnswer: PropTypes.func.isRequired,
-  onAnswer: PropTypes.func.isRequired,
-  onAnswerQuestion: PropTypes.func.isRequired,
-  resetAnswers: PropTypes.func.isRequired,
-  questionTime: PropTypes.number.isRequired
-};
 
 const mapStateToProps = (state) => {
   return {

@@ -1,6 +1,6 @@
-import React from 'react';
+import * as React from 'react';
 import {configure, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as Adapter from 'enzyme-adapter-react-16';
 import {GenreQuestionScreen} from "./genre-question-screen";
 
 configure({adapter: new Adapter()});
@@ -33,7 +33,6 @@ test(`GenreQuestionScreen correctly renders`, () => {
       <GenreQuestionScreen
         question={question}
         screenIndex={3}
-        renderAudioPlayer={(src, id) => <audio src={src} id={id}/>}
         answers={[false, true, false, true]}
         changeAnswer={jest.fn()}
         onAnswer={jest.fn()}
