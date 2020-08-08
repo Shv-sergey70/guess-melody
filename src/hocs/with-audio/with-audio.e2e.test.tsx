@@ -1,16 +1,15 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import {configure, mount} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as Adapter from 'enzyme-adapter-react-16';
 import withAudio from "./with-audio";
 
 configure({adapter: new Adapter()});
 
-const Component = ({children}) => <div>{children}</div>;
+interface Props {
+  children: React.ReactNode
+}
 
-Component.propTypes = {
-  children: PropTypes.node.isRequired
-};
+const Component: React.FunctionComponent<Props> = ({children}) => <div>{children}</div>;
 
 describe(`WithAudio correctly works`, () => {
   beforeAll(() => {

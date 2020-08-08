@@ -1,8 +1,20 @@
-import React, {PureComponent} from 'react';
-import {genreQuestion} from '../../types/types';
+import * as React from 'react';
+import {GenreQuestion} from '../../types';
+import {Subtract} from "utility-types";
+
+interface State {
+  answers: boolean[]
+}
+
+interface InjectedProps {
+  question: GenreQuestion
+}
 
 const withUserAnswers = (Component) => {
-  class WithUserAnswers extends PureComponent {
+  type Props = React.ComponentProps<typeof Component>
+  type ActualProps = Subtract<Props, InjectedProps>
+
+  class WithUserAnswers extends React.PureComponent<ActualProps, State> {
     constructor(props) {
       super(props);
 
@@ -46,10 +58,6 @@ const withUserAnswers = (Component) => {
       });
     }
   }
-
-  WithUserAnswers.propTypes = {
-    question: genreQuestion
-  };
 
   return WithUserAnswers;
 };

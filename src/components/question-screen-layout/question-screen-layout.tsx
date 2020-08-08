@@ -1,11 +1,10 @@
-import React, {PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import MistakesList from "../mistakes-list/mistakes-list";
 import withUserAnswers from "../../hocs/with-user-answers/with-user-answers";
 import withActivePlayer from "../../hocs/with-active-player/with-active-player";
 import GenreQuestionScreen from "../genre-question-screen/genre-question-screen";
 import ArtistQuestionScreen from "../artist-question-screen/artist-question-screen";
-import {question as questionPropTypes} from "../../types/types";
+import {GenreQuestion, ArtistQuestion} from "../../types";
 import TimerBlock from "../timer-block/timer-block";
 import WelcomeScreenLink from "../links/welcome-screen/welcome-screen";
 import {connect} from "react-redux";
@@ -15,7 +14,15 @@ import {ActionCreator as UserAnswersActionCreator} from "../../reducer/user-answ
 const GenreQuestionScreenWrapped = withUserAnswers(GenreQuestionScreen);
 const ArtistQuestionScreenWrapped = withActivePlayer(ArtistQuestionScreen);
 
-class QuestionScreenLayout extends PureComponent {
+interface Props {
+  question: GenreQuestion | ArtistQuestion,
+  onAnswer: () => void,
+  onTimerTick: () => void
+}
+
+class QuestionScreenLayout extends React.PureComponent<Props> {
+  readonly _timerId: NodeJS.Timeout;
+
   static _getQuestionScreen(question, onAnswer) {
     switch (question.type) {
       case `genre`:
@@ -39,10 +46,9 @@ class QuestionScreenLayout extends PureComponent {
 
   constructor(props) {
     super(props);
-    const {onTimerTick} = props;
 
     this._timerId = setInterval(() => {
-      onTimerTick();
+      props.onTimerTick();
     }, 1000);
   }
 
@@ -68,12 +74,6 @@ class QuestionScreenLayout extends PureComponent {
     );
   }
 }
-
-QuestionScreenLayout.propTypes = {
-  question: questionPropTypes,
-  onAnswer: PropTypes.func.isRequired,
-  onTimerTick: PropTypes.func.isRequired
-};
 
 const mapDispatchToProps = (dispatch) => ({
   onAnswer: () => {

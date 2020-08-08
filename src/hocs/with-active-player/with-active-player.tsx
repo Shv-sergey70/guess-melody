@@ -1,11 +1,17 @@
-import React, {PureComponent} from 'react';
+import * as React from 'react';
 import withAudio from "../with-audio/with-audio";
 import AudioPlayer from "../../components/audio-player/audio-player";
 
 const AudioPlayerWrapped = withAudio(AudioPlayer);
 
+type State = {
+  activePlayer: number
+};
+
 const withActivePlayer = (Component) => {
-  class WithActivePlayer extends PureComponent {
+  type Props = React.ComponentProps<typeof Component>; // Получаем пропсы переданного компонента
+
+  class WithActivePlayer extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
 

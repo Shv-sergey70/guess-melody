@@ -1,8 +1,24 @@
-import React, {createRef, PureComponent} from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
+import {Subtract} from "utility-types";
+
+interface InjectedProps {
+  src: string,
+  isPlaying: boolean,
+  changePlayingState: () => void
+}
+
+interface State {
+  isLoading: boolean
+};
 
 const withAudio = (Component) => {
-  class WithAudio extends PureComponent {
+  type Props = React.ComponentPropsWithRef<typeof Component>;
+
+  type ActualProps = Subtract<Props, InjectedProps>;
+
+  class WithAudio extends React.PureComponent<ActualProps, State> {
+    readonly _audioRef: React.RefObject<HTMLMediaElement>;
+
     constructor(props) {
       super(props);
 
@@ -10,7 +26,7 @@ const withAudio = (Component) => {
         isLoading: true
       };
 
-      this._audioRef = createRef();
+      this._audioRef = React.createRef();
     }
 
     componentDidMount() {
@@ -62,12 +78,6 @@ const withAudio = (Component) => {
       );
     }
   }
-
-  WithAudio.propTypes = {
-    src: PropTypes.string.isRequired,
-    isPlaying: PropTypes.bool.isRequired,
-    changePlayingState: PropTypes.func.isRequired
-  };
 
   return WithAudio;
 };

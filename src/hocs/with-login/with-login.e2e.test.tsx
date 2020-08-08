@@ -1,11 +1,11 @@
-import React from 'react';
+import * as React from 'react';
 import {configure, shallow} from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
+import * as Adapter from 'enzyme-adapter-react-16';
 import withLogin from "./with-login";
 
 configure({adapter: new Adapter()});
 
-const Component = () => <div/>;
+const Component: React.FunctionComponent = () => <div/>;
 
 const generateMockEvent = (value) => ({
   target: {value}

@@ -12,4 +12,5 @@ module.exports = {
     `json`,
     `node`
   ],
+  "snapshotSerializers": [`enzyme-to-json/serializer`] // important to locate it here, not in package.json
 };

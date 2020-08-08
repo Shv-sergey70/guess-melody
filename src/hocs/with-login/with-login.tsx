@@ -1,4 +1,5 @@
 import * as React from 'react';
+import {Component} from "react";
 
 interface State {
   email: string,
@@ -6,7 +7,9 @@ interface State {
 }
 
 const withLogin = (Component) => {
-  class WithLogin extends React.PureComponent<null, State> {
+  type Props = React.ComponentProps<typeof Component>
+
+  class WithLogin extends React.PureComponent<Props, State> {
     constructor(props) {
       super(props);
 

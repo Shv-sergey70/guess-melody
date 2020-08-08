@@ -1,0 +1,81 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App correctly renders Losing screen 1`] = `
+<App
+  attempts={3}
+  currentStep={1}
+  isNoMoreAttempts={false}
+  isNoMoreTime={true}
+  questions={
+    Array [
+      Object {
+        "answers": Array [
+          Object {
+            "genre": "pop",
+            "src": "./tracks/Anivar_Summer.mp3",
+          },
+          Object {
+            "genre": "jazz",
+            "src": "./tracks/Billie_Eilish_ilomilo.mp3",
+          },
+          Object {
+            "genre": "rock",
+            "src": "./tracks/Cj_L_Black_Rain.mp3",
+          },
+          Object {
+            "genre": "classic",
+            "src": "./tracks/Orquesta_L_rica_de_Barcelona_Las_Cuatro_Estaciones,_Invierno_Allegro_Non_Molto.mp3",
+          },
+        ],
+        "genre": "rock",
+        "type": "genre",
+      },
+      Object {
+        "answers": Array [
+          Object {
+            "artist": "Billie Eilish",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Imagine Dragons",
+            "picture": "/img/default-artist.png",
+          },
+          Object {
+            "artist": "Artur Latte",
+            "picture": "/img/default-artist.png",
+          },
+        ],
+        "song": Object {
+          "artist": "Artur Latte",
+          "src": "./tracks/Raim_Artur_Latte.mp3",
+        },
+        "type": "artist",
+      },
+    ]
+  }
+  user={Object {}}
+>
+  <Switch>
+    <Route
+      computedMatch={
+        Object {
+          "isExact": true,
+          "params": Object {},
+          "path": "/lose",
+          "url": "/lose",
+        }
+      }
+      exact={true}
+      location={
+        Object {
+          "hash": "",
+          "pathname": "/lose",
+          "search": "",
+          "state": undefined,
+        }
+      }
+      path="/lose"
+    />
+  </Switch>
+</App>
+`;
