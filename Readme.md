@@ -1,4 +1,5 @@
-# Проект «Угадай мелодию»
-## React + Redux
+# «Guess Melody» (React + Redux)
 
-* Автор: Сергей Шершнев
+It's a small online game, where player should guess artists and genres of melodies
+
+Author: Sergey Shershev
