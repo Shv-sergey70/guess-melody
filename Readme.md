@@ -7,3 +7,4 @@
 - [О тестировании с Enzyme + jest #2](https://hackernoon.com/testing-react-components-with-jest-and-enzyme-41d592c174f)
 - [О импорте в TypeScript](https://habr.com/ru/company/otus/blog/507104/)
 - [Если Enzyme snapshot возвращает пустую обертку](https://stackoverflow.com/questions/54419342/jest-enzyme-shallowwrapper-is-empty-when-creating-snapshot)
+- [О импорте моковых модулей Jest](https://github.com/kulshekhar/ts-jest/issues/120)

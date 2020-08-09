@@ -1,3 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`MistakesList correctly renders 1`] = `ShallowWrapper {}`;
+exports[`MistakesList correctly renders 1`] = `
+<div
+  className="game__mistakes"
+>
+  <div
+    className="wrong"
+    key="0"
+  />
+  <div
+    className="wrong"
+    key="1"
+  />
+</div>
+`;

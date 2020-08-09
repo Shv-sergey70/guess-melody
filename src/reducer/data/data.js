@@ -38,7 +38,7 @@ const Operations = {
   loadQuestions: () => (dispatch, getState, api) => {
     return api.get(`/questions`)
       .then(({data: questions}) => {
-        dispatch(ActionCreator.loadQuestions(questions.slice(0, 1)));
+        dispatch(ActionCreator.loadQuestions(questions));
       })
       .catch(() => {
 

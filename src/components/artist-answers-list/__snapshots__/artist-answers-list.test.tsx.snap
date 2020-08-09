@@ -1,3 +1,80 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`ArtistAnswersList correctly renders 1`] = `ShallowWrapper {}`;
+exports[`ArtistAnswersList correctly renders 1`] = `
+<form
+  className="game__artist"
+>
+  <div
+    className="artist"
+    key="2 - Billie Eilish"
+  >
+    <input
+      className="artist__input visually-hidden"
+      id="answer-0"
+      name="answer"
+      onClick={[MockFunction]}
+      type="radio"
+      value="Billie Eilish"
+    />
+    <label
+      className="artist__name"
+      htmlFor="answer-0"
+    >
+      <img
+        alt="Billie Eilish"
+        className="artist__picture"
+        src="test/track2.mp3"
+      />
+      Billie Eilish
+    </label>
+  </div>
+  <div
+    className="artist"
+    key="2 - Imagine Dragons"
+  >
+    <input
+      className="artist__input visually-hidden"
+      id="answer-1"
+      name="answer"
+      onClick={[MockFunction]}
+      type="radio"
+      value="Imagine Dragons"
+    />
+    <label
+      className="artist__name"
+      htmlFor="answer-1"
+    >
+      <img
+        alt="Imagine Dragons"
+        className="artist__picture"
+        src="test/track1.mp3"
+      />
+      Imagine Dragons
+    </label>
+  </div>
+  <div
+    className="artist"
+    key="2 - Artur Latte"
+  >
+    <input
+      className="artist__input visually-hidden"
+      id="answer-2"
+      name="answer"
+      onClick={[MockFunction]}
+      type="radio"
+      value="Artur Latte"
+    />
+    <label
+      className="artist__name"
+      htmlFor="answer-2"
+    >
+      <img
+        alt="Artur Latte"
+        className="artist__picture"
+        src="test/track3.mp3"
+      />
+      Artur Latte
+    </label>
+  </div>
+</form>
+`;

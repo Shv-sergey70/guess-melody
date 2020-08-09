@@ -1,9 +1,9 @@
 import * as React from 'react';
-import * as Enzyme from 'enzyme';
+import {configure, shallow} from 'enzyme';
 import * as Adapter from 'enzyme-adapter-react-16';
 import {ArtistQuestionScreen} from "./artist-question-screen";
 
-Enzyme.configure({adapter: new Adapter()});
+configure({adapter: new Adapter()});
 
 const question = {
   type: `artist`,
@@ -33,7 +33,7 @@ test(`ArtistQuestionScreen correct answer response`, () => {
   const renderAudioPlayerMock = jest.fn().mockImplementation((src, id) => <audio src={src} id={id}/>);
   const questionTime = 29;
 
-  const artistQuestionScreen = Enzyme.shallow(
+  const artistQuestionScreen = shallow(
     <ArtistQuestionScreen
       question={question}
       screenIndex={3}
@@ -49,11 +49,11 @@ test(`ArtistQuestionScreen correct answer response`, () => {
   expect(renderAudioPlayerMock).toHaveBeenCalledTimes(1);
   expect(renderAudioPlayerMock.mock.calls[0][0]).toEqual(question.song.src);
   expect(renderAudioPlayerMock.mock.calls[0][1]).toEqual(0);
-  //@todo fix it
 
-  // artistQuestionScreen.find(`ArtistAnswersList`).prop(`onArtistSelect`)({
-  //   target: {value: correctAnswer}
-  // });
+  const onArtistSelectProp: ({}) => void = artistQuestionScreen.find(`ArtistAnswersList`).prop(`onArtistSelect`);
+  onArtistSelectProp({
+    target: {value: correctAnswer}
+  });
 
   expect(onAnswer).toHaveBeenCalledTimes(1);
   expect(onAnswerQuestion).toHaveBeenNthCalledWith(1, correctAnswer, question, questionTime);

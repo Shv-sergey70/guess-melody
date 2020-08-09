@@ -1,3 +1,87 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Authorization screen correctly renders 1`] = `ShallowWrapper {}`;
+exports[`Authorization screen correctly renders 1`] = `
+<section
+  className="login"
+>
+  <div
+    className="login__logo"
+  >
+    <img
+      alt="Угадай мелодию"
+      height="83"
+      src="img/melody-logo.png"
+      width="186"
+    />
+  </div>
+  <h2
+    className="login__title"
+  >
+    Вы настоящий меломан!
+  </h2>
+  <p
+    className="login__total"
+  />
+  <br />
+  <br />
+  <p
+    className="login__text"
+  >
+    Хотите сравнить свой результат с предыдущими попытками? Представтесь!
+  </p>
+  <form
+    action=""
+    className="login__form"
+    onSubmit={[Function]}
+  >
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="email"
+      >
+        E-mail
+      </label>
+      <input
+        className="login__input"
+        id="email"
+        name="email"
+        onChange={[MockFunction]}
+        type="email"
+        value="myEmail@email.com"
+      />
+    </p>
+    <p
+      className="login__field"
+    >
+      <label
+        className="login__label"
+        htmlFor="password"
+      >
+        Пароль
+      </label>
+      <input
+        className="login__input"
+        id="password"
+        name="password"
+        onChange={[MockFunction]}
+        type="text"
+        value="myPassword"
+      />
+      <span
+        className="login__error"
+      >
+        Неверный пароль
+      </span>
+    </p>
+    <button
+      className="login__button button"
+      disabled={true}
+      type="submit"
+    >
+      Войти
+    </button>
+  </form>
+</section>
+`;
