@@ -41,15 +41,16 @@ describe(`WithActivePlayer correctly works`, () => {
     expect(firstButton.prop(`disabled`)).toEqual(true);
     expect(secondButton.prop(`disabled`)).toEqual(true);
 
-    // @todo fix it
+    const firstButtonOnClickFunc: ({}) => void = firstButton.prop(`onClick`);
+    const secondButtonOnClickFunc: ({}) => void = secondButton.prop(`onClick`);
 
-    // firstButton.prop(`onClick`)();
-    // expect(componentWrapped.state(`activePlayer`)).toEqual(5);
+    firstButtonOnClickFunc({});
+    expect(componentWrapped.state(`activePlayer`)).toEqual(5);
 
-    // secondButton.prop(`onClick`)();
-    // expect(componentWrapped.state(`activePlayer`)).toEqual(3);
+    secondButtonOnClickFunc({});
+    expect(componentWrapped.state(`activePlayer`)).toEqual(3);
 
-    // secondButton.prop(`onClick`)();
-    // expect(componentWrapped.state(`activePlayer`)).toEqual(-1);
+    secondButtonOnClickFunc({});
+    expect(componentWrapped.state(`activePlayer`)).toEqual(-1);
   });
 });

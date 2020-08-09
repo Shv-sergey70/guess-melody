@@ -20,6 +20,12 @@ jest.mock(`../losing-screen/losing-screen.tsx`, () => ({
   default: `losing-screen`
 }));
 
+const Route = {
+  AUTH: `/auth`,
+  LOSE: `/lose`,
+  MAIN: `/`
+};
+
 const questions = [
   {
     type: `genre`,
@@ -69,7 +75,7 @@ const questions = [
 describe(`App correctly renders`, () => {
   test(`Welcome screen`, () => {
     const tree = mount(
-        <MemoryRouter initialEntries={[`/`]} keyLength={0} >
+        <MemoryRouter initialEntries={[Route.MAIN]} keyLength={0} >
           <App
             attempts={3}
             questions={questions}
@@ -85,7 +91,7 @@ describe(`App correctly renders`, () => {
 
   test(`Question screen`, () => {
     const tree = mount(
-        <MemoryRouter initialEntries={[`/`]} keyLength={0} >
+        <MemoryRouter initialEntries={[Route.MAIN]} keyLength={0} >
           <App
             attempts={3}
             questions={questions}
@@ -101,7 +107,7 @@ describe(`App correctly renders`, () => {
 
   test(`Losing screen`, () => {
     const tree = mount(
-        <MemoryRouter initialEntries={[`/lose`]} keyLength={0} >
+        <MemoryRouter initialEntries={[Route.LOSE]} keyLength={0} >
           <App
             attempts={3}
             questions={questions}
@@ -114,10 +120,10 @@ describe(`App correctly renders`, () => {
 
     expect(tree.find(`App`)).toMatchSnapshot();
   });
-// @todo path into local Enum
+
   test(`Authorization is required`, () => {
     const tree = mount(
-        <MemoryRouter initialEntries={[`/auth`]} keyLength={0} >
+        <MemoryRouter initialEntries={[Route.AUTH]} keyLength={0} >
           <App
             attempts={3}
             questions={questions}
