@@ -17,3 +17,8 @@ plugins: ['react']
 settings:
   react:
     version: '16'
+
+globals: {
+  process: true,
+  __dirname: true
+}

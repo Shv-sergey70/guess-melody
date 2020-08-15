@@ -11,6 +11,11 @@ const ActionType = {
   LOGIN: `LOGIN`
 };
 
+const ApiRoute = {
+  QUESTIONS: `/questions`,
+  LOGIN: `/login`
+};
+
 const ActionCreator = {
   loadQuestions(questions) {
     return {
@@ -36,28 +41,24 @@ const authUser = (dispatch, userData) => {
 
 const Operations = {
   loadQuestions: () => (dispatch, getState, api) => {
-    return api.get(`/questions`)
+    return api.get(ApiRoute.QUESTIONS)
       .then(({data: questions}) => {
         dispatch(ActionCreator.loadQuestions(questions));
       })
-      .catch(() => {
-
-      });
+      .catch(() => {});
   },
   login: (email, password) => (dispatch, getState, api) => {
-    return api.post(`/login`, {email, password})
+    return api.post(ApiRoute.LOGIN, {email, password})
       .then(({data: userData}) => {
         authUser(dispatch, userData);
       });
   },
   checkLogin: () => (dispatch, getState, api) => {
-    return api.get(`/login`)
+    return api.get(ApiRoute.LOGIN)
       .then(({data: userData}) => {
         authUser(dispatch, userData);
       })
-      .catch(() => {
-        // should add error handling
-      });
+      .catch(() => {});
   }
 };
 

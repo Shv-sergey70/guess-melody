@@ -9,7 +9,7 @@
     "test": "npm run eslint && jest",
     "build": "webpack --mode production",
     "start": "webpack-dev-server",
-    "predeploy": "npm run build",
+    "predeploy": "PUBLIC_URL=guess-melody npm run build",
     "deploy": "gh-pages -d public"
   },
   "devDependencies": {

@@ -66,7 +66,6 @@ exports[`App correctly renders Authorization is required 1`] = `
           "url": "/auth",
         }
       }
-      exact={true}
       location={
         Object {
           "hash": "",
@@ -250,7 +249,6 @@ exports[`App correctly renders Losing screen 1`] = `
           "url": "/lose",
         }
       }
-      exact={true}
       location={
         Object {
           "hash": "",

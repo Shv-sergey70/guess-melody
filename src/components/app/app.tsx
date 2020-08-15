@@ -39,9 +39,9 @@ class App extends React.PureComponent<Props, null> {
 
     return (
       <Switch>
-        <Route path={AppRoute.AUTH} exact component={AuthorizationScreenWrapped} />
-        <Route path={AppRoute.LOSE} exact component={LosingScreen} />
-        <Route path={AppRoute.VICTORY} exact render={() => <VictoryScreenWrapped user={user} />} />
+        <Route path={AppRoute.AUTH} component={AuthorizationScreenWrapped} />
+        <Route path={AppRoute.LOSE} component={LosingScreen} />
+        <Route path={AppRoute.VICTORY} render={() => <VictoryScreenWrapped user={user} />} />
         <Route path={AppRoute.MAIN} render={this._getScreen}/>
         <Route render={() => <div>404</div>}/>
       </Switch>

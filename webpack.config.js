@@ -1,4 +1,5 @@
 const path = require(`path`);
+const webpack = require(`webpack`);
 
 module.exports = {
   entry: `./src/index.tsx`,
@@ -28,6 +29,11 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new webpack.DefinePlugin({
+      'process.env.PUBLIC_URL': JSON.stringify(process.env.PUBLIC_URL)
+    })
+  ],
   resolve: {
     extensions: [`.ts`, `.tsx`, `.js`, `.jsx`, `json`],
   },

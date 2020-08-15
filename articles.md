@@ -5,3 +5,6 @@
 - [О импорте в TypeScript](https://habr.com/ru/company/otus/blog/507104/)
 - [Если Enzyme snapshot возвращает пустую обертку](https://stackoverflow.com/questions/54419342/jest-enzyme-shallowwrapper-is-empty-when-creating-snapshot)
 - [О импорте моковых модулей Jest](https://github.com/kulshekhar/ts-jest/issues/120)
+- [Использование Route при хостинге на gh-pages](https://github.com/facebook/create-react-app/issues/1765)
+- [Routing in gh-pages](https://itnext.io/so-you-want-to-host-your-single-age-react-app-on-github-pages-a826ab01e48)
+- [Repo with fixing method of gh-page routing](https://github.com/rafgraph/spa-github-pages)
