@@ -13,19 +13,23 @@ import createAPI from './api';
 import Route from './routes';
 import {attempts} from './init-data';
 
-declare const __REDUX_DEVTOOLS_EXTENSION__: ({trace: boolean}) => any;
+declare global {
+  interface Window {
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__: ({trace: boolean}) => any;
+  }
+}
 
 const init = () => {
   const api = createAPI(() => {
     history.push(Route.AUTH);
   });
 
+  const composeEnhancer = (typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({trace: true})
+    : compose;
   const store = createStore(
       reducer,
-      compose(
-          applyMiddleware(thunk.withExtraArgument(api)),
-          __REDUX_DEVTOOLS_EXTENSION__ && __REDUX_DEVTOOLS_EXTENSION__({trace: true})
-      )
+    composeEnhancer(applyMiddleware(thunk.withExtraArgument(api)))
   );
 
   store.dispatch(Operations.checkLogin());
